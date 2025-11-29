@@ -158,7 +158,7 @@ const PlayersBenefits = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         /* Left to Right animation */
         @keyframes flowLeftToRight {
           0% {
