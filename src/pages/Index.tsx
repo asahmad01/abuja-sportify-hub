@@ -42,7 +42,7 @@ const Index = () => {
                   <span className="italic">Anytime</span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-300 max-w-2xl">
-                  Book sports facilities across Abuja instantly. From football fields to tennis courts, find and reserve your perfect venue in seconds. Play when you want, where you want.
+                  Book sports facilities instantly. From football fields to tennis courts, find and reserve your perfect venue in seconds. Launching soon in Abuja.
                 </p>
               </div>
 
@@ -93,17 +93,53 @@ const Index = () => {
                 Explore Our <span className="text-primary italic">Sports</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Swipe or drag to browse through all available sports categories
+                <span className="hidden md:inline">Swipe or drag to browse through all available sports categories</span>
+                <span className="md:hidden">Browse through all available sports categories</span>
               </p>
             </div>
           </div>
-          <div style={{ height: '600px', position: 'relative' }}>
+          {/* Desktop: 3D Circular Gallery */}
+          <div className="hidden md:block" style={{ height: '600px', position: 'relative' }}>
             <CircularGallery
               bend={3}
               textColor="#ffffff"
               borderRadius={0.05}
               scrollEase={0.02}
             />
+          </div>
+          {/* Mobile: Simple Responsive Grid */}
+          <div className="md:hidden container mx-auto px-4">
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { image: '/carousel-pics/basketball.jpeg', text: 'Basketball' },
+                { image: '/carousel-pics/Tennis.jpeg', text: 'Tennis' },
+                { image: '/carousel-pics/Badminton.jpeg', text: 'Badminton' },
+                { image: '/carousel-pics/swimming.jpeg', text: 'Swimming' },
+                { image: '/carousel-pics/paddle.jpeg', text: 'Paddle' },
+                { image: '/carousel-pics/Squash - The Sport.jpeg', text: 'Squash' },
+                { image: '/carousel-pics/table tennis.jpeg', text: 'Table Tennis' },
+                { image: '/carousel-pics/gym.jpeg', text: 'Gym' },
+                { image: '/carousel-pics/boxing.jpeg', text: 'Boxing' },
+                { image: '/carousel-pics/run.jpeg', text: 'Running' },
+                { image: '/carousel-pics/cyclin.jpg', text: 'Cycling' },
+                { image: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=800&q=80', text: 'Football' }
+              ].map((sport, index) => (
+                <div key={index} className="relative rounded-xl overflow-hidden aspect-[3/4] group">
+                  <img
+                    src={sport.image}
+                    alt={sport.text}
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <h3 className="text-white font-bold text-lg">{sport.text}</h3>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p className="text-center text-muted-foreground mt-8 text-lg">
+              ...and many more sports!
+            </p>
           </div>
         </section>
 

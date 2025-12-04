@@ -35,7 +35,6 @@ const StaticPhoneScreen: React.FC<PhoneScreenProps> = ({ screenshot, title, desc
           src={screenshot}
           alt={title}
           className="w-full h-auto object-cover block"
-          loading="lazy"
         />
       </div>
     </div>
