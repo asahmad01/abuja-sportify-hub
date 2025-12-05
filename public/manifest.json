@@ -1,0 +1,22 @@
+{
+  "name": "Spotts - Book Sports Facilities & Gyms in Abuja",
+  "short_name": "Spotts",
+  "description": "Find and book sports facilities, gyms, and fitness centers across Abuja instantly",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1a1a1a",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["health", "fitness", "sports", "lifestyle"],
+  "lang": "en-NG",
+  "dir": "ltr",
+  "scope": "/"
+}
