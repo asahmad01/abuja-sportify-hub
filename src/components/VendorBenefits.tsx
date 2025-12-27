@@ -1,44 +1,46 @@
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
-import CardSwap, { Card } from "./CardSwap";
+// COMMENTED OUT FOR WAITLIST PERIOD - WILL BE RESTORED AFTER LAUNCH
+// import CardSwap, { Card } from "./CardSwap";
 
-const dashboardViews = [
-  {
-    title: "Revenue Analytics",
-    description: "Monitor your earnings, growth trends, and financial performance at a glance",
-    color: "from-green-500 to-teal-600",
-    hasScreenshot: true,
-    screenshot: "/dashboard-screenshots/Revenue copy.png",
-  },
-  {
-    title: "Booking Management",
-    description: "Track and manage all your bookings in real-time with an intuitive interface",
-    color: "from-blue-500 to-purple-600",
-    hasScreenshot: true,
-    screenshot: "/dashboard-screenshots/Bookings copy.png",
-  },
-  {
-    title: "Customer Insights",
-    description: "Understand your customer base with detailed analytics and booking patterns",
-    color: "from-orange-500 to-red-600",
-    hasScreenshot: true,
-    screenshot: "/dashboard-screenshots/Insights2 copy.png",
-  },
-  {
-    title: "Membership Management",
-    description: "Manage member profiles, subscriptions, and access levels effortlessly",
-    color: "from-purple-500 to-pink-600",
-    hasScreenshot: true,
-    screenshot: "/dashboard-screenshots/Membership  copy.png",
-  },
-  {
-    title: "Courts & Fields Management",
-    description: "Configure and manage your sports facilities, schedules, and availability",
-    color: "from-cyan-500 to-blue-600",
-    hasScreenshot: true,
-    screenshot: "/dashboard-screenshots/Courts:Fields copy.png",
-  },
-];
+// COMMENTED OUT FOR WAITLIST PERIOD - WILL BE RESTORED AFTER LAUNCH
+// const dashboardViews = [
+//   {
+//     title: "Revenue Analytics",
+//     description: "Monitor your earnings, growth trends, and financial performance at a glance",
+//     color: "from-green-500 to-teal-600",
+//     hasScreenshot: true,
+//     screenshot: "/dashboard-screenshots/Revenue copy.png",
+//   },
+//   {
+//     title: "Booking Management",
+//     description: "Track and manage all your bookings in real-time with an intuitive interface",
+//     color: "from-blue-500 to-purple-600",
+//     hasScreenshot: true,
+//     screenshot: "/dashboard-screenshots/Bookings copy.png",
+//   },
+//   {
+//     title: "Customer Insights",
+//     description: "Understand your customer base with detailed analytics and booking patterns",
+//     color: "from-orange-500 to-red-600",
+//     hasScreenshot: true,
+//     screenshot: "/dashboard-screenshots/Insights2 copy.png",
+//   },
+//   {
+//     title: "Membership Management",
+//     description: "Manage member profiles, subscriptions, and access levels effortlessly",
+//     color: "from-purple-500 to-pink-600",
+//     hasScreenshot: true,
+//     screenshot: "/dashboard-screenshots/Membership  copy.png",
+//   },
+//   {
+//     title: "Courts & Fields Management",
+//     description: "Configure and manage your sports facilities, schedules, and availability",
+//     color: "from-cyan-500 to-blue-600",
+//     hasScreenshot: true,
+//     screenshot: "/dashboard-screenshots/Courts:Fields copy.png",
+//   },
+// ];
 
 const VendorBenefits = () => {
   const scrollToWaitlist = () => {
@@ -118,10 +120,24 @@ const VendorBenefits = () => {
             </Button>
           </div>
 
+          {/* Right Content - Dashboard Preview (Waitlist Version) */}
+          <div className="relative min-h-[500px] lg:min-h-[550px] flex items-center justify-center">
+            {/* Single Dashboard Preview Image */}
+            <div className="relative w-full max-w-[650px] mx-auto">
+              {/* Dashboard Image */}
+              <img
+                src="/dashboard-screenshots/Spotts-002.jpg"
+                alt="Spotts Dashboard Preview"
+                className="w-full h-auto object-contain rounded-2xl shadow-2xl"
+              />
+            </div>
+          </div>
+
+          {/* COMMENTED OUT FOR WAITLIST PERIOD - WILL BE RESTORED AFTER LAUNCH */}
           {/* Right Content - Animated Dashboard Cards (Desktop) / Static Cards (Mobile) */}
-          <div className="relative min-h-[500px] lg:min-h-[550px]">
+          {/* <div className="relative min-h-[500px] lg:min-h-[550px]"> */}
             {/* Desktop: Animated Card Stack */}
-            <div className="hidden lg:block">
+            {/* <div className="hidden lg:block">
               <CardSwap
                 width={650}
                 height={450}
@@ -152,16 +168,16 @@ const VendorBenefits = () => {
                       // Placeholder Card
                       <div className={`w-full h-full bg-gradient-to-br ${view.color} p-8 flex flex-col`}>
                         {/* Dashboard Header */}
-                        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-4">
+                        {/* <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-4">
                           <div className="flex items-center justify-between mb-2">
                             <div className="w-24 h-3 bg-white/30 rounded"></div>
                             <div className="w-8 h-8 bg-white/20 rounded-full"></div>
                           </div>
                           <div className="w-32 h-2 bg-white/20 rounded"></div>
-                        </div>
+                        </div> */}
 
                         {/* Dashboard Content */}
-                        <div className="flex-1 space-y-3">
+                        {/* <div className="flex-1 space-y-3">
                           <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
                             <div className="w-20 h-2 bg-white/30 rounded mb-2"></div>
                             <div className="w-full h-12 bg-white/20 rounded mb-2"></div>
@@ -181,10 +197,10 @@ const VendorBenefits = () => {
                               <div className="w-16 h-5 bg-white/40 rounded"></div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
 
                         {/* Dashboard Footer - Title */}
-                        <div className="mt-4 text-center">
+                        {/* <div className="mt-4 text-center">
                           <h3 className="text-xl font-bold text-white mb-1">{view.title}</h3>
                           <p className="text-white/80 text-sm">{view.description}</p>
                         </div>
@@ -193,10 +209,10 @@ const VendorBenefits = () => {
                   </Card>
                 ))}
               </CardSwap>
-            </div>
+            </div> */}
 
             {/* Mobile: Horizontal Swipeable Carousel */}
-            <div className="lg:hidden">
+            {/* <div className="lg:hidden">
               <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide pb-4 -mx-4 px-4">
                 {dashboardViews.map((view, index) => (
                   <div key={index} className="flex-shrink-0 w-[90vw] snap-center">
@@ -219,16 +235,16 @@ const VendorBenefits = () => {
                         // Placeholder Card
                         <div className={`bg-gradient-to-br ${view.color} p-6 flex flex-col h-96`}>
                           {/* Dashboard Header */}
-                          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-4">
+                          {/* <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 mb-4">
                             <div className="flex items-center justify-between mb-2">
                               <div className="w-24 h-3 bg-white/30 rounded"></div>
                               <div className="w-8 h-8 bg-white/20 rounded-full"></div>
                             </div>
                             <div className="w-32 h-2 bg-white/20 rounded"></div>
-                          </div>
+                          </div> */}
 
                           {/* Dashboard Content */}
-                          <div className="flex-1 space-y-3">
+                          {/* <div className="flex-1 space-y-3">
                             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
                               <div className="w-20 h-2 bg-white/30 rounded mb-2"></div>
                               <div className="w-full h-12 bg-white/20 rounded mb-2"></div>
@@ -248,10 +264,10 @@ const VendorBenefits = () => {
                                 <div className="w-16 h-5 bg-white/40 rounded"></div>
                               </div>
                             </div>
-                          </div>
+                          </div> */}
 
                           {/* Dashboard Footer - Title */}
-                          <div className="mt-4 text-center">
+                          {/* <div className="mt-4 text-center">
                             <h3 className="text-xl font-bold text-white mb-1">{view.title}</h3>
                             <p className="text-white/80 text-sm">{view.description}</p>
                           </div>
@@ -260,15 +276,15 @@ const VendorBenefits = () => {
                     </div>
                   </div>
                 ))}
-              </div>
+              </div> */}
               {/* Scroll Indicator Dots */}
-              <div className="flex justify-center gap-2 mt-4">
+              {/* <div className="flex justify-center gap-2 mt-4">
                 {dashboardViews.map((_, index) => (
                   <div key={index} className="w-2 h-2 rounded-full bg-gray-300"></div>
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>

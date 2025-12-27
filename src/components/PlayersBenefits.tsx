@@ -16,8 +16,8 @@ const benefits = [
   },
   {
     number: 4,
-    title: "Membership Management",
-    description: "Manage your facility memberships all in one place. Track benefits, renewals, and exclusive member perks.",
+    title: "Exclusive Member Benefits",
+    description: "Access special discounts, priority bookings, and member-only perks at your favorite sports venues.",
   },
 ];
 

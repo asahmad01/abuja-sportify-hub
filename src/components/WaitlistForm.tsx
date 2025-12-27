@@ -116,13 +116,18 @@ const WaitlistForm = () => {
                   {/* Phone Field */}
                   <div className="space-y-2">
                     <label htmlFor="phone" className="text-sm font-semibold text-gray-700">
-                      Phone Number <span className="text-gray-400 font-normal">(Optional)</span>
+                      Phone Number *
                     </label>
                     <Input
                       id="phone"
                       type="tel"
+                      required
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={(e) => {
+                        // Only allow numbers, spaces, +, -, and ()
+                        const value = e.target.value.replace(/[^0-9+\-() ]/g, '');
+                        setFormData({ ...formData, phone: value });
+                      }}
                       placeholder="+234 800 000 0000"
                       className="h-12 border-gray-200 focus:border-primary focus:ring-primary rounded-xl"
                     />

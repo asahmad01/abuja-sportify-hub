@@ -147,9 +147,14 @@ const DownloadSection = () => {
                     <Input
                       id="phone"
                       type="tel"
+                      required
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder={userType === "individual" ? "Phone Number (Optional)" : "Contact Number"}
+                      onChange={(e) => {
+                        // Only allow numbers, spaces, +, -, and ()
+                        const value = e.target.value.replace(/[^0-9+\-() ]/g, '');
+                        setFormData({ ...formData, phone: value });
+                      }}
+                      placeholder={userType === "individual" ? "Phone Number" : "Contact Number"}
                       className="h-12 bg-white/20 border-white/20 placeholder:text-white/60 text-white rounded-xl focus:bg-white/30 focus:border-white/40"
                     />
                   </div>
