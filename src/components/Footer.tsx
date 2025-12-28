@@ -95,8 +95,19 @@ const Footer = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/10 text-center">
+        <div className="pt-8 border-t border-white/10 text-center space-y-2">
           <p className="text-sm text-white/40">© 2025 Spotts. All rights reserved.</p>
+          <p className="text-sm text-white/30">
+            Powered by{' '}
+            <a
+              href="https://bleumeridiantech.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/50 hover:text-primary transition-colors underline"
+            >
+              Bleu Meridian Technologies
+            </a>
+          </p>
         </div>
       </div>
     </footer>
