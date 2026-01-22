@@ -1,25 +1,50 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const scrollToSection = (sectionId: string) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      section.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
+    if (location.pathname !== "/") {
+      navigate("/");
+      // Use setTimeout to allow navigation to complete before scrolling
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+    setMobileMenuOpen(false);
   };
 
+
   const scrollToWaitlist = () => {
-    const waitlistSection = document.getElementById('waitlist-section');
-    if (waitlistSection) {
-      waitlistSection.scrollIntoView({ behavior: 'smooth' });
-      setMobileMenuOpen(false);
+    if (location.pathname !== "/") {
+      navigate("/");
+      setTimeout(() => {
+        const waitlistSection = document.getElementById('waitlist-section');
+        if (waitlistSection) {
+          waitlistSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const waitlistSection = document.getElementById('waitlist-section');
+      if (waitlistSection) {
+        waitlistSection.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+    setMobileMenuOpen(false);
   };
 
   // Single-page navigation items
@@ -29,19 +54,27 @@ const Navigation = () => {
     { name: "For Vendors", sectionId: "vendor-benefits" },
     { name: "Features", sectionId: "features" },
     { name: "Sports", sectionId: "sports" },
+    { name: "FAQs", path: "/faq" },
     { name: "Join Waitlist", action: scrollToWaitlist },
-    // Commented out for future multi-page structure
-    // { name: "About Us", path: "/about" },
-    // { name: "Our Categories", path: "/categories" },
-    // { name: "Blogs", path: "/blog" },
   ];
+
+  const handleNavClick = (item: any) => {
+    if (item.action) {
+      item.action();
+    } else if (item.path) {
+      navigate(item.path);
+      setMobileMenuOpen(false);
+    } else if (item.sectionId) {
+      scrollToSection(item.sectionId);
+    }
+  };
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/40 backdrop-blur-md border-b border-white/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center group">
+          <button onClick={() => navigate("/")} className="flex items-center group">
             <Logo className="h-7 w-auto transition-transform duration-300 group-hover:scale-110" />
           </button>
 
@@ -50,7 +83,7 @@ const Navigation = () => {
             {navItems.map((item, index) => (
               <button
                 key={index}
-                onClick={() => item.action ? item.action() : item.sectionId && scrollToSection(item.sectionId)}
+                onClick={() => handleNavClick(item)}
                 className="text-sm font-medium transition-colors hover:text-white text-gray-300"
               >
                 {item.name}
@@ -67,8 +100,6 @@ const Navigation = () => {
             >
               Join Waitlist
             </Button>
-            {/* Commented out for future multi-page structure */}
-            {/* <Link to="/register">Contact Us</Link> */}
           </div>
 
           {/* Mobile Menu Button */}
@@ -86,7 +117,7 @@ const Navigation = () => {
             {navItems.map((item, index) => (
               <button
                 key={index}
-                onClick={() => item.action ? item.action() : item.sectionId && scrollToSection(item.sectionId)}
+                onClick={() => handleNavClick(item)}
                 className="block w-full text-left py-2 text-sm font-medium transition-colors text-gray-300 hover:text-white"
               >
                 {item.name}
@@ -99,8 +130,6 @@ const Navigation = () => {
             >
               Join Waitlist
             </Button>
-            {/* Commented out for future multi-page structure */}
-            {/* <Link to="/register">Contact Us</Link> */}
           </div>
         )}
       </div>
