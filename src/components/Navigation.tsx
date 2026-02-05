@@ -55,6 +55,7 @@ const Navigation = () => {
     { name: "Features", sectionId: "features" },
     { name: "Sports", sectionId: "sports" },
     { name: "FAQs", path: "/faq" },
+    { name: "API", path: "/api" },
     { name: "Join Waitlist", action: scrollToWaitlist },
   ];
 
