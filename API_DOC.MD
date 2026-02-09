@@ -11,10 +11,10 @@ The SPOTTS Partner API allows approved third-party platforms to integrate with o
 ### Base URL
 
 ```
-https://YOUR_BACKEND_DOMAIN/api/v1/partner
+https://api.spotts.ng/v1/partner
 ```
 
-> **Note:** Replace `YOUR_BACKEND_DOMAIN` with your actual production API domain (e.g., `spotts-api-production.up.railway.app` or your custom domain).
+> **Note:** The URL above is a placeholder for illustration purposes. Actual production API base URL will be provided during partner onboarding.
 
 ### Key Concepts
 
@@ -230,7 +230,7 @@ GET /v1/partner/courts
 #### Example Request
 
 ```bash
-curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/courts?sport=tennis" \
+curl -X GET "https://api.spotts.ng/v1/partner/courts?sport=tennis" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -321,7 +321,7 @@ GET /v1/partner/courts/{courtId}/availability
 #### Example Request
 
 ```bash
-curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/courts/15/availability?date=2026-02-10" \
+curl -X GET "https://api.spotts.ng/v1/partner/courts/15/availability?date=2026-02-10" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -461,7 +461,7 @@ POST /v1/partner/blocks
 #### Example Request
 
 ```bash
-curl -X POST "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks" \
+curl -X POST "https://api.spotts.ng/v1/partner/blocks" \
   -H "Authorization: Bearer spk_your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -569,7 +569,7 @@ GET /v1/partner/blocks
 #### Example Request
 
 ```bash
-curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks?status=active&date_from=2026-02-01&per_page=50" \
+curl -X GET "https://api.spotts.ng/v1/partner/blocks?status=active&date_from=2026-02-01&per_page=50" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -648,7 +648,7 @@ GET /v1/partner/blocks/{blockReference}
 #### Example Request
 
 ```bash
-curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks/EXT-A1B2" \
+curl -X GET "https://api.spotts.ng/v1/partner/blocks/EXT-A1B2" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -713,7 +713,7 @@ PUT /v1/partner/blocks/{blockReference}/reschedule
 #### Example Request
 
 ```bash
-curl -X PUT "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks/EXT-A1B2/reschedule" \
+curl -X PUT "https://api.spotts.ng/v1/partner/blocks/EXT-A1B2/reschedule" \
   -H "Authorization: Bearer spk_your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -808,7 +808,7 @@ DELETE /v1/partner/blocks/{blockReference}
 #### Example Request
 
 ```bash
-curl -X DELETE "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks/EXT-A1B2?reason=completed" \
+curl -X DELETE "https://api.spotts.ng/v1/partner/blocks/EXT-A1B2?reason=completed" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -880,7 +880,7 @@ GET /v1/partner/webhooks/deliveries
 #### Example Request
 
 ```bash
-curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/webhooks/deliveries?status=failed&per_page=20" \
+curl -X GET "https://api.spotts.ng/v1/partner/webhooks/deliveries?status=failed&per_page=20" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -944,7 +944,7 @@ POST /v1/partner/webhooks/test
 #### Example Request
 
 ```bash
-curl -X POST "https://YOUR_BACKEND_DOMAIN/api/v1/partner/webhooks/test" \
+curl -X POST "https://api.spotts.ng/v1/partner/webhooks/test" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -1150,21 +1150,21 @@ Contact the SPOTTS team to get onboarded as a partner. You'll receive:
 ### Step 2: List Available Courts
 
 ```bash
-curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/courts" \
+curl -X GET "https://api.spotts.ng/v1/partner/courts" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
 ### Step 3: Check Availability
 
 ```bash
-curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/courts/15/availability?date=2026-02-10" \
+curl -X GET "https://api.spotts.ng/v1/partner/courts/15/availability?date=2026-02-10" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
 ### Step 4: Create a Block
 
 ```bash
-curl -X POST "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks" \
+curl -X POST "https://api.spotts.ng/v1/partner/blocks" \
   -H "Authorization: Bearer spk_your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1182,11 +1182,11 @@ curl -X POST "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks" \
 
 ```bash
 # When a booking is cancelled (REQUIRED - frees the slot for others)
-curl -X DELETE "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks/EXT-A1B2?reason=cancelled" \
+curl -X DELETE "https://api.spotts.ng/v1/partner/blocks/EXT-A1B2?reason=cancelled" \
   -H "Authorization: Bearer spk_your_api_key_here"
 
 # When a booking is completed (OPTIONAL - for tracking only)
-curl -X DELETE "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks/EXT-A1B2?reason=completed" \
+curl -X DELETE "https://api.spotts.ng/v1/partner/blocks/EXT-A1B2?reason=completed" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 

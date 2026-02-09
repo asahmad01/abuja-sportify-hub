@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { AlertTriangle } from "lucide-react";
 
-const BASE_URL = "https://YOUR_BACKEND_DOMAIN/api/v1/partner";
+const BASE_URL = "https://api.spotts.ng/v1/partner";
 
 const CodeBlock = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <pre className={`rounded-lg bg-zinc-900 text-zinc-100 p-4 text-sm overflow-x-auto font-mono border border-zinc-800 ${className}`}>
@@ -113,7 +113,7 @@ const Api = () => {
               <h3 className="text-lg font-semibold mt-6 mb-2">Base URL</h3>
               <CodeBlock>{BASE_URL}</CodeBlock>
               <p className="text-muted-foreground text-sm mt-2">
-                <strong>Note:</strong> Replace <code className="rounded bg-muted px-1.5 py-0.5 text-sm">YOUR_BACKEND_DOMAIN</code> with your actual production API domain (e.g., <code className="rounded bg-muted px-1.5 py-0.5 text-sm">spotts-api-production.up.railway.app</code> or your custom domain).
+                <strong>Note:</strong> The URL above is a placeholder for illustration purposes. Actual production API base URL will be provided during partner onboarding.
               </p>
               <h3 className="text-lg font-semibold mt-6 mb-2">Key Concepts</h3>
               <Table className="mb-4">
