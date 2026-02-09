@@ -11,8 +11,10 @@ The SPOTTS Partner API allows approved third-party platforms to integrate with o
 ### Base URL
 
 ```
-https://api.spotts.ng/api/v1/partner
+https://YOUR_BACKEND_DOMAIN/api/v1/partner
 ```
+
+> **Note:** Replace `YOUR_BACKEND_DOMAIN` with your actual production API domain (e.g., `spotts-api-production.up.railway.app` or your custom domain).
 
 ### Key Concepts
 
@@ -25,9 +27,66 @@ https://api.spotts.ng/api/v1/partner
 
 ### Important: Cancellation Responsibility
 
-> **⚠️ CRITICAL:** When a booking is **cancelled** on your platform (and the slot is still in the future), you **MUST** release the block on SPOTTS immediately using the [Release Block](#6-release-block) endpoint. Failure to do so will leave the slot blocked, preventing other customers from booking.
+> **⚠️ CRITICAL:** When a booking is **cancelled** on your platform (and the slot is still in the future), you **MUST** release the block on SPOTTS immediately using the [Release Block](#7-release-block) endpoint. Failure to do so will leave the slot blocked, preventing other customers from booking.
 
 Note: Releasing blocks for **completed** or **no_show** bookings is optional — these slots are already in the past and don't affect availability. However, releasing them helps with tracking and keeping your block list clean.
+
+---
+
+## Court Relationships & Blocking Behavior
+
+Understanding how courts relate to each other is essential for managing availability correctly.
+
+### Parent/Child Courts
+
+Some venues have courts that can be divided into smaller sections (e.g., a full football field can be split into two half-fields).
+
+| Court Type | Description | Blocking Behavior |
+|------------|-------------|-------------------|
+| **Parent Court** | Full-size court (e.g., "Full Field") | Booking blocks **ALL child courts** of the same sport |
+| **Child Court** | Sub-section of a parent (e.g., "Half 1", "Half 2") | Booking blocks the **parent only** (sibling courts remain available) |
+| **Standalone Court** | Independent court with no parent/children | Booking only blocks itself |
+
+**Example Scenario:**
+- "Football Full Field" (parent) has two children: "Half 1" and "Half 2"
+- If you block **"Football Full Field"** → both "Half 1" and "Half 2" become unavailable
+- If you block **"Half 1"** → "Football Full Field" becomes unavailable, but "Half 2" is still bookable
+
+**How to Identify:**
+Check the `is_parent_court`, `is_child_court`, and `parent_court_id` fields in the court object:
+- `is_parent_court: true` = This court has children (booking blocks all children)
+- `is_child_court: true` = This court is part of a parent (booking blocks the parent)
+- `parent_court_id: null` and `is_parent_court: false` = Standalone court
+
+### Cross-Sport Physical Space Sharing
+
+Multiple sports can share the same physical court space. For example, a multipurpose hall might be configured for Basketball, Tennis, or Badminton at different times.
+
+**Blocking Rules:**
+When you book a court on a shared physical space:
+
+| You Book | What Gets Blocked |
+|----------|-------------------|
+| **Full Court** | Entire physical space (all sports, all configurations) |
+| **Half Court** | • Parent court (same sport)<br>• All full courts (other sports)<br>• Corresponding half courts (other sports with same number)<br>• **Does NOT block** the other half (different number) |
+
+**Example Scenario:**
+Basketball, Tennis, and Football all share "Multipurpose Hall A":
+- Each sport has: Full Court, Half 1, Half 2
+- If you block **Basketball Half 1**:
+  - ✅ Basketball Full → blocked
+  - ✅ Tennis Half 1 → blocked (same physical half)
+  - ✅ Football Half 1 → blocked (same physical half)
+  - ✅ All Full Courts → blocked (can't book full if half is taken)
+  - ❌ Basketball Half 2 → **available** (different physical half)
+  - ❌ Tennis Half 2 → **available** (different physical half)
+  - ❌ Football Half 2 → **available** (different physical half)
+
+**How It Works:**
+The API automatically handles all blocking logic. When you create a block, related courts are blocked accordingly. When you check availability, slots marked as `unavailable` are blocked due to parent/child or cross-sport relationships.
+
+**Best Practice:**
+Always check availability before attempting to create a block. The API will reject blocks on unavailable slots with a `SLOT_UNAVAILABLE` error.
 
 ---
 
@@ -171,7 +230,7 @@ GET /v1/partner/courts
 #### Example Request
 
 ```bash
-curl -X GET "https://api.spotts.ng/api/v1/partner/courts?sport=tennis" \
+curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/courts?sport=tennis" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -262,7 +321,7 @@ GET /v1/partner/courts/{courtId}/availability
 #### Example Request
 
 ```bash
-curl -X GET "https://api.spotts.ng/api/v1/partner/courts/15/availability?date=2026-02-10" \
+curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/courts/15/availability?date=2026-02-10" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -402,7 +461,7 @@ POST /v1/partner/blocks
 #### Example Request
 
 ```bash
-curl -X POST "https://api.spotts.ng/api/v1/partner/blocks" \
+curl -X POST "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks" \
   -H "Authorization: Bearer spk_your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -410,7 +469,7 @@ curl -X POST "https://api.spotts.ng/api/v1/partner/blocks" \
     "date": "2026-02-10",
     "start_time": "10:00",
     "end_time": "11:00",
-    "partner_reference": "MATCHI-BK-12345"
+    "partner_reference": "BLEU-BK-12345"
   }'
 ```
 
@@ -422,7 +481,7 @@ curl -X POST "https://api.spotts.ng/api/v1/partner/blocks" \
   "message": "Block created successfully.",
   "data": {
     "block_reference": "EXT-A1B2",
-    "partner_reference": "MATCHI-BK-12345",
+    "partner_reference": "BLEU-BK-12345",
     "court_id": 15,
     "court_name": "Court A",
     "venue_id": 3,
@@ -454,7 +513,7 @@ HTTP 200 OK
   "message": "Block already exists with this reference.",
   "data": {
     "block_reference": "EXT-A1B2",
-    "partner_reference": "MATCHI-BK-12345",
+    "partner_reference": "BLEU-BK-12345",
     ...
   }
 }
@@ -510,7 +569,7 @@ GET /v1/partner/blocks
 #### Example Request
 
 ```bash
-curl -X GET "https://api.spotts.ng/api/v1/partner/blocks?status=active&date_from=2026-02-01&per_page=50" \
+curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks?status=active&date_from=2026-02-01&per_page=50" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -523,7 +582,7 @@ curl -X GET "https://api.spotts.ng/api/v1/partner/blocks?status=active&date_from
     "blocks": [
       {
         "block_reference": "EXT-A1B2",
-        "partner_reference": "MATCHI-BK-12345",
+        "partner_reference": "BLEU-BK-12345",
         "court_id": 15,
         "court_name": "Court A",
         "venue_id": 3,
@@ -542,7 +601,7 @@ curl -X GET "https://api.spotts.ng/api/v1/partner/blocks?status=active&date_from
       },
       {
         "block_reference": "EXT-C3D4",
-        "partner_reference": "MATCHI-BK-12346",
+        "partner_reference": "BLEU-BK-12346",
         "court_id": 16,
         "court_name": "Court B",
         "venue_id": 3,
@@ -589,7 +648,7 @@ GET /v1/partner/blocks/{blockReference}
 #### Example Request
 
 ```bash
-curl -X GET "https://api.spotts.ng/api/v1/partner/blocks/EXT-A1B2" \
+curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks/EXT-A1B2" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -600,7 +659,7 @@ curl -X GET "https://api.spotts.ng/api/v1/partner/blocks/EXT-A1B2" \
   "success": true,
   "data": {
     "block_reference": "EXT-A1B2",
-    "partner_reference": "MATCHI-BK-12345",
+    "partner_reference": "BLEU-BK-12345",
     "court_id": 15,
     "court_name": "Court A",
     "venue_id": 3,
@@ -628,9 +687,105 @@ curl -X GET "https://api.spotts.ng/api/v1/partner/blocks/EXT-A1B2" \
 
 ---
 
-### 6. Release Block
+### 6. Reschedule Block (Atomic)
 
-Release (cancel) a block, making the time slot available again for customers.
+Atomically reschedule a block to a new time slot. This endpoint ensures that either the reschedule succeeds completely (old block released, new block created), or fails completely — **no partial state where the old block is released but the new slot is unavailable**.
+
+```
+PUT /v1/partner/blocks/{blockReference}/reschedule
+```
+
+#### Path Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `blockReference` | string | The SPOTTS-assigned block reference to reschedule |
+
+#### Request Body
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `court_id` | integer | **Yes** | The new court to block |
+| `date` | string | **Yes** | New date in `YYYY-MM-DD` format |
+| `start_time` | string | **Yes** | New start time in `HH:MM` format |
+| `end_time` | string | **Yes** | New end time in `HH:MM` format |
+
+#### Example Request
+
+```bash
+curl -X PUT "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks/EXT-A1B2/reschedule" \
+  -H "Authorization: Bearer spk_your_api_key_here" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "court_id": 15,
+    "date": "2026-02-12",
+    "start_time": "14:00",
+    "end_time": "15:00"
+  }'
+```
+
+#### Success Response `200 OK`
+
+```json
+{
+  "success": true,
+  "message": "Block rescheduled successfully.",
+  "data": {
+    "old_block": {
+      "block_reference": "EXT-A1B2",
+      "court_id": 15,
+      "date": "2026-02-10",
+      "start_time": "10:00",
+      "end_time": "11:00",
+      "status": "released"
+    },
+    "new_block": {
+      "block_reference": "EXT-C3D4",
+      "partner_reference": "BLEU-BK-12345",
+      "court_id": 15,
+      "court_name": "Court A",
+      "venue_id": 3,
+      "venue_name": "Abuja Tennis Club",
+      "date": "2026-02-12",
+      "start_time": "14:00",
+      "end_time": "15:00",
+      "status": "active",
+      "created_at": "2026-02-05T16:00:00+01:00"
+    }
+  }
+}
+```
+
+#### Why Use This Instead of Release + Create?
+
+The `release then create` approach is risky:
+
+1. **Step 1:** Release old block at 10:00 → succeeds
+2. **Step 2:** Create new block at 14:00 → **FAILS** (slot already taken)
+3. **Result:** User has no booking at all!
+
+This endpoint does it atomically — either both operations succeed, or neither does.
+
+#### Error Responses
+
+| Status | Error Code | Condition |
+|--------|------------|-----------|
+| `400` | `DATE_IN_PAST` | Cannot reschedule to a past date |
+| `400` | `DATE_TOO_FAR_AHEAD` | Date exceeds partner's max advance days |
+| `400` | `VENUE_CLOSED` | Venue is closed on the new day |
+| `400` | `OUTSIDE_OPERATING_HOURS` | New slot is outside operating hours |
+| `400` | `INVALID_TIME_RANGE` | End time must be after start time |
+| `400` | `BLACKOUT_DATE` | New date is unavailable |
+| `403` | `VENUE_ACCESS_DENIED` | Partner doesn't have access to the new venue |
+| `404` | `BLOCK_NOT_FOUND` | Active block not found with this reference |
+| `404` | `COURT_NOT_FOUND` | New court ID doesn't exist |
+| `409` | `SLOT_UNAVAILABLE` | New time slot is already booked or blocked |
+
+---
+
+### 7. Release Block
+
+Release (cancel) a block, making the time slot available again for customers. Use this for cancellations — for rescheduling, use the [Reschedule Block](#6-reschedule-block-atomic) endpoint instead.
 
 > **⚠️ IMPORTANT:** You **MUST** call this endpoint when a booking is **cancelled** and the slot is still in the future. This frees up the slot so other customers can book it. Releasing blocks for completed/no_show bookings is optional (the time has passed, so it doesn't affect availability).
 
@@ -648,12 +803,12 @@ DELETE /v1/partner/blocks/{blockReference}
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `reason` | string | No | Release reason: `cancelled`, `completed`, `no_show` |
+| `reason` | string | No | Release reason (optional, but if provided must be one of: `cancelled`, `completed`, `no_show`) |
 
 #### Example Request
 
 ```bash
-curl -X DELETE "https://api.spotts.ng/api/v1/partner/blocks/EXT-A1B2?reason=completed" \
+curl -X DELETE "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks/EXT-A1B2?reason=completed" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -706,7 +861,7 @@ If the block was already released, the API returns success:
 
 ---
 
-### 7. Webhook Deliveries
+### 8. Webhook Deliveries
 
 View the history of webhook deliveries sent to your configured webhook URL.
 
@@ -725,7 +880,7 @@ GET /v1/partner/webhooks/deliveries
 #### Example Request
 
 ```bash
-curl -X GET "https://api.spotts.ng/api/v1/partner/webhooks/deliveries?status=failed&per_page=20" \
+curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/webhooks/deliveries?status=failed&per_page=20" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -776,7 +931,7 @@ curl -X GET "https://api.spotts.ng/api/v1/partner/webhooks/deliveries?status=fai
 
 ---
 
-### 8. Test Webhook
+### 9. Test Webhook
 
 Send a test webhook to verify your endpoint is configured correctly.
 
@@ -789,7 +944,7 @@ POST /v1/partner/webhooks/test
 #### Example Request
 
 ```bash
-curl -X POST "https://api.spotts.ng/api/v1/partner/webhooks/test" \
+curl -X POST "https://YOUR_BACKEND_DOMAIN/api/v1/partner/webhooks/test" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
@@ -977,6 +1132,7 @@ Complete list of all error codes returned by the API:
 | `INVALID_TIME_RANGE` | 400 | End time must be after start time |
 | `BLACKOUT_DATE` | 400 | This date is unavailable |
 | `INVALID_REASON` | 422 | Invalid release reason provided |
+| `RESCHEDULE_FAILED` | 500 | Atomic reschedule operation failed |
 | `NO_WEBHOOK_URL` | 400 | No webhook URL configured |
 | `NO_WEBHOOK_SECRET` | 400 | No webhook secret configured |
 | `VALIDATION_ERROR` | 422 | Request validation failed |
@@ -994,21 +1150,21 @@ Contact the SPOTTS team to get onboarded as a partner. You'll receive:
 ### Step 2: List Available Courts
 
 ```bash
-curl -X GET "https://api.spotts.ng/api/v1/partner/courts" \
+curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/courts" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
 ### Step 3: Check Availability
 
 ```bash
-curl -X GET "https://api.spotts.ng/api/v1/partner/courts/15/availability?date=2026-02-10" \
+curl -X GET "https://YOUR_BACKEND_DOMAIN/api/v1/partner/courts/15/availability?date=2026-02-10" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 
 ### Step 4: Create a Block
 
 ```bash
-curl -X POST "https://api.spotts.ng/api/v1/partner/blocks" \
+curl -X POST "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks" \
   -H "Authorization: Bearer spk_your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{
@@ -1026,11 +1182,11 @@ curl -X POST "https://api.spotts.ng/api/v1/partner/blocks" \
 
 ```bash
 # When a booking is cancelled (REQUIRED - frees the slot for others)
-curl -X DELETE "https://api.spotts.ng/api/v1/partner/blocks/EXT-A1B2?reason=cancelled" \
+curl -X DELETE "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks/EXT-A1B2?reason=cancelled" \
   -H "Authorization: Bearer spk_your_api_key_here"
 
 # When a booking is completed (OPTIONAL - for tracking only)
-curl -X DELETE "https://api.spotts.ng/api/v1/partner/blocks/EXT-A1B2?reason=completed" \
+curl -X DELETE "https://YOUR_BACKEND_DOMAIN/api/v1/partner/blocks/EXT-A1B2?reason=completed" \
   -H "Authorization: Bearer spk_your_api_key_here"
 ```
 

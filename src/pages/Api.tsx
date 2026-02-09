@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { AlertTriangle } from "lucide-react";
 
-const BASE_URL = "https://api.spotts.ng/api/v1/partner";
+const BASE_URL = "https://YOUR_BACKEND_DOMAIN/api/v1/partner";
 
 const CodeBlock = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <pre className={`rounded-lg bg-zinc-900 text-zinc-100 p-4 text-sm overflow-x-auto font-mono border border-zinc-800 ${className}`}>
@@ -53,6 +53,7 @@ const WarningBox = ({ children }: { children: React.ReactNode }) => (
 const Api = () => {
   const navSections = [
     { id: "overview", label: "Overview" },
+    { id: "court-relationships", label: "Court Relationships" },
     { id: "authentication", label: "Authentication" },
     { id: "rate-limiting", label: "Rate Limiting" },
     { id: "response-format", label: "Response Format" },
@@ -111,6 +112,9 @@ const Api = () => {
               </p>
               <h3 className="text-lg font-semibold mt-6 mb-2">Base URL</h3>
               <CodeBlock>{BASE_URL}</CodeBlock>
+              <p className="text-muted-foreground text-sm mt-2">
+                <strong>Note:</strong> Replace <code className="rounded bg-muted px-1.5 py-0.5 text-sm">YOUR_BACKEND_DOMAIN</code> with your actual production API domain (e.g., <code className="rounded bg-muted px-1.5 py-0.5 text-sm">spotts-api-production.up.railway.app</code> or your custom domain).
+              </p>
               <h3 className="text-lg font-semibold mt-6 mb-2">Key Concepts</h3>
               <Table className="mb-4">
                 <TableHeader>
@@ -134,6 +138,96 @@ const Api = () => {
                   When a booking is <strong>cancelled</strong> on your platform (and the slot is still in the future), you <strong>MUST</strong> release the block on SPOTTS immediately using the Release Block endpoint. Failure to do so will leave the slot blocked, preventing other customers from booking.
                 </p>
               </WarningBox>
+              <p className="text-muted-foreground text-sm mt-2">
+                Note: Releasing blocks for <strong>completed</strong> or <strong>no_show</strong> bookings is optional — these slots are already in the past and don&apos;t affect availability. However, releasing them helps with tracking and keeping your block list clean.
+              </p>
+            </ApiSection>
+
+            <ApiSection id="court-relationships" title="Court Relationships & Blocking Behavior">
+              <p className="text-muted-foreground mb-4">
+                Understanding how courts relate to each other is essential for managing availability correctly.
+              </p>
+
+              <h3 className="text-lg font-semibold mt-6 mb-2">Parent/Child Courts</h3>
+              <p className="text-muted-foreground mb-4">
+                Some venues have courts that can be divided into smaller sections (e.g., a full football field can be split into two half-fields).
+              </p>
+              <Table className="mb-4">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Court Type</TableHead>
+                    <TableHead>Description</TableHead>
+                    <TableHead>Blocking Behavior</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow><TableCell className="font-semibold">Parent Court</TableCell><TableCell>Full-size court (e.g., &quot;Full Field&quot;)</TableCell><TableCell>Booking blocks <strong>ALL child courts</strong> of the same sport</TableCell></TableRow>
+                  <TableRow><TableCell className="font-semibold">Child Court</TableCell><TableCell>Sub-section of a parent (e.g., &quot;Half 1&quot;, &quot;Half 2&quot;)</TableCell><TableCell>Booking blocks the <strong>parent only</strong> (sibling courts remain available)</TableCell></TableRow>
+                  <TableRow><TableCell className="font-semibold">Standalone Court</TableCell><TableCell>Independent court with no parent/children</TableCell><TableCell>Booking only blocks itself</TableCell></TableRow>
+                </TableBody>
+              </Table>
+
+              <h4 className="text-md font-semibold mt-4 mb-2">Example Scenario</h4>
+              <ul className="list-disc pl-6 space-y-1 text-muted-foreground text-sm mb-4">
+                <li>&quot;Football Full Field&quot; (parent) has two children: &quot;Half 1&quot; and &quot;Half 2&quot;</li>
+                <li>If you block <strong>&quot;Football Full Field&quot;</strong> → both &quot;Half 1&quot; and &quot;Half 2&quot; become unavailable</li>
+                <li>If you block <strong>&quot;Half 1&quot;</strong> → &quot;Football Full Field&quot; becomes unavailable, but &quot;Half 2&quot; is still bookable</li>
+              </ul>
+
+              <h4 className="text-md font-semibold mt-4 mb-2">How to Identify</h4>
+              <p className="text-muted-foreground mb-2 text-sm">
+                Check the <code className="rounded bg-muted px-1.5 py-0.5 text-sm">is_parent_court</code>, <code className="rounded bg-muted px-1.5 py-0.5 text-sm">is_child_court</code>, and <code className="rounded bg-muted px-1.5 py-0.5 text-sm">parent_court_id</code> fields in the court object:
+              </p>
+              <ul className="list-disc pl-6 space-y-1 text-muted-foreground text-sm mb-4">
+                <li><code className="rounded bg-muted px-1">is_parent_court: true</code> = This court has children (booking blocks all children)</li>
+                <li><code className="rounded bg-muted px-1">is_child_court: true</code> = This court is part of a parent (booking blocks the parent)</li>
+                <li><code className="rounded bg-muted px-1">parent_court_id: null</code> and <code className="rounded bg-muted px-1">is_parent_court: false</code> = Standalone court</li>
+              </ul>
+
+              <h3 className="text-lg font-semibold mt-6 mb-2">Cross-Sport Physical Space Sharing</h3>
+              <p className="text-muted-foreground mb-4">
+                Multiple sports can share the same physical court space. For example, a multipurpose hall might be configured for Basketball, Tennis, or Badminton at different times.
+              </p>
+
+              <h4 className="text-md font-semibold mt-4 mb-2">Blocking Rules</h4>
+              <p className="text-muted-foreground mb-2 text-sm">When you book a court on a shared physical space:</p>
+              <Table className="mb-4">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>You Book</TableHead>
+                    <TableHead>What Gets Blocked</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow><TableCell className="font-semibold">Full Court</TableCell><TableCell>Entire physical space (all sports, all configurations)</TableCell></TableRow>
+                  <TableRow><TableCell className="font-semibold">Half Court</TableCell><TableCell>Parent court (same sport), all full courts (other sports), corresponding half courts (other sports with same number). <strong>Does NOT block</strong> the other half (different number).</TableCell></TableRow>
+                </TableBody>
+              </Table>
+
+              <h4 className="text-md font-semibold mt-4 mb-2">Example Scenario</h4>
+              <p className="text-muted-foreground mb-2 text-sm">
+                Basketball, Tennis, and Football all share &quot;Multipurpose Hall A&quot;. Each sport has: Full Court, Half 1, Half 2.
+              </p>
+              <p className="text-muted-foreground mb-2 text-sm">If you block <strong>Basketball Half 1</strong>:</p>
+              <ul className="list-none pl-6 space-y-1 text-sm mb-4">
+                <li className="text-emerald-600">Basketball Full → blocked</li>
+                <li className="text-emerald-600">Tennis Half 1 → blocked (same physical half)</li>
+                <li className="text-emerald-600">Football Half 1 → blocked (same physical half)</li>
+                <li className="text-emerald-600">All Full Courts → blocked (can&apos;t book full if half is taken)</li>
+                <li className="text-red-500">Basketball Half 2 → <strong>available</strong> (different physical half)</li>
+                <li className="text-red-500">Tennis Half 2 → <strong>available</strong> (different physical half)</li>
+                <li className="text-red-500">Football Half 2 → <strong>available</strong> (different physical half)</li>
+              </ul>
+
+              <h4 className="text-md font-semibold mt-4 mb-2">How It Works</h4>
+              <p className="text-muted-foreground mb-4 text-sm">
+                The API automatically handles all blocking logic. When you create a block, related courts are blocked accordingly. When you check availability, slots marked as <code className="rounded bg-muted px-1">unavailable</code> are blocked due to parent/child or cross-sport relationships.
+              </p>
+
+              <h4 className="text-md font-semibold mt-4 mb-2">Best Practice</h4>
+              <p className="text-muted-foreground text-sm">
+                Always check availability before attempting to create a block. The API will reject blocks on unavailable slots with a <code className="rounded bg-muted px-1">SLOT_UNAVAILABLE</code> error.
+              </p>
             </ApiSection>
 
             <ApiSection id="authentication" title="Authentication">
@@ -462,6 +556,22 @@ Retry-After: 60`}</CodeBlock>
                   </TableBody>
                 </Table>
 
+                <p className="text-sm font-medium mt-4 mb-1">Slot Object Fields</p>
+                <Table className="mb-4">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Field</TableHead>
+                      <TableHead>Type</TableHead>
+                      <TableHead>Description</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow><TableCell>start_time</TableCell><TableCell>string</TableCell><TableCell>Slot start time in HH:MM format</TableCell></TableRow>
+                    <TableRow><TableCell>end_time</TableCell><TableCell>string</TableCell><TableCell>Slot end time in HH:MM format</TableCell></TableRow>
+                    <TableRow><TableCell>status</TableCell><TableCell>string</TableCell><TableCell>One of: available, booked, blocked, unavailable</TableCell></TableRow>
+                  </TableBody>
+                </Table>
+
                 <p className="text-sm font-medium mt-4 mb-1">Error Responses</p>
                 <Table>
                   <TableHeader>
@@ -518,7 +628,7 @@ Retry-After: 60`}</CodeBlock>
     "date": "2026-02-10",
     "start_time": "10:00",
     "end_time": "11:00",
-    "partner_reference": "MATCHI-BK-12345"
+    "partner_reference": "BLEU-BK-12345"
   }'`}</CodeBlock>
 
                 <p className="text-sm font-medium mt-4 mb-1">Success Response <code className="text-emerald-600">201 Created</code></p>
@@ -527,7 +637,7 @@ Retry-After: 60`}</CodeBlock>
   "message": "Block created successfully.",
   "data": {
     "block_reference": "EXT-A1B2",
-    "partner_reference": "MATCHI-BK-12345",
+    "partner_reference": "BLEU-BK-12345",
     "court_id": 15,
     "court_name": "Court A",
     "venue_id": 3,
@@ -557,7 +667,7 @@ Retry-After: 60`}</CodeBlock>
   "message": "Block already exists with this reference.",
   "data": {
     "block_reference": "EXT-A1B2",
-    "partner_reference": "MATCHI-BK-12345",
+    "partner_reference": "BLEU-BK-12345",
     ...
   }
 }`}</CodeBlock>
@@ -634,7 +744,7 @@ Retry-After: 60`}</CodeBlock>
     "blocks": [
       {
         "block_reference": "EXT-A1B2",
-        "partner_reference": "MATCHI-BK-12345",
+        "partner_reference": "BLEU-BK-12345",
         "court_id": 15,
         "court_name": "Court A",
         "venue_id": 3,
@@ -646,12 +756,27 @@ Retry-After: 60`}</CodeBlock>
         "status": "active",
         "created_at": "2026-02-05T14:30:00+01:00",
         "released_at": null
+      },
+      {
+        "block_reference": "EXT-C3D4",
+        "partner_reference": "BLEU-BK-12346",
+        "court_id": 16,
+        "court_name": "Court B",
+        "venue_id": 3,
+        "venue_name": "Abuja Tennis Club",
+        "sport": { "id": 4, "name": "Tennis", "slug": "tennis" },
+        "date": "2026-02-10",
+        "start_time": "14:00",
+        "end_time": "15:00",
+        "status": "active",
+        "created_at": "2026-02-05T15:00:00+01:00",
+        "released_at": null
       }
     ],
     "pagination": {
       "current_page": 1,
       "per_page": 50,
-      "total": 1,
+      "total": 2,
       "last_page": 1
     }
   }
@@ -690,7 +815,7 @@ Retry-After: 60`}</CodeBlock>
   "success": true,
   "data": {
     "block_reference": "EXT-A1B2",
-    "partner_reference": "MATCHI-BK-12345",
+    "partner_reference": "BLEU-BK-12345",
     "court_id": 15,
     "court_name": "Court A",
     "venue_id": 3,
@@ -720,14 +845,132 @@ Retry-After: 60`}</CodeBlock>
                 </Table>
               </div>
 
-              {/* 6. Release Block */}
+              {/* 6. Reschedule Block (Atomic) */}
+              <div className="mb-12">
+                <div className="flex items-center gap-2 mb-2">
+                  <MethodBadge method="PUT" />
+                  <code className="text-sm font-mono text-muted-foreground">/v1/partner/blocks/{`{blockReference}`}/reschedule</code>
+                </div>
+                <h3 className="text-xl font-semibold mb-2">6. Reschedule Block (Atomic)</h3>
+                <p className="text-muted-foreground mb-4">Atomically reschedule a block to a new time slot. This endpoint ensures that either the reschedule succeeds completely (old block released, new block created), or fails completely — <strong>no partial state where the old block is released but the new slot is unavailable</strong>.</p>
+
+                <p className="text-sm font-medium mb-1">Path Parameters</p>
+                <Table className="mb-4">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Parameter</TableHead>
+                      <TableHead>Type</TableHead>
+                      <TableHead>Description</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow><TableCell>blockReference</TableCell><TableCell>string</TableCell><TableCell>The SPOTTS-assigned block reference to reschedule</TableCell></TableRow>
+                  </TableBody>
+                </Table>
+
+                <p className="text-sm font-medium mb-1">Request Body</p>
+                <Table className="mb-4">
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Field</TableHead>
+                      <TableHead>Type</TableHead>
+                      <TableHead>Required</TableHead>
+                      <TableHead>Description</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow><TableCell>court_id</TableCell><TableCell>integer</TableCell><TableCell><strong>Yes</strong></TableCell><TableCell>The new court to block</TableCell></TableRow>
+                    <TableRow><TableCell>date</TableCell><TableCell>string</TableCell><TableCell><strong>Yes</strong></TableCell><TableCell>New date in YYYY-MM-DD format</TableCell></TableRow>
+                    <TableRow><TableCell>start_time</TableCell><TableCell>string</TableCell><TableCell><strong>Yes</strong></TableCell><TableCell>New start time in HH:MM format</TableCell></TableRow>
+                    <TableRow><TableCell>end_time</TableCell><TableCell>string</TableCell><TableCell><strong>Yes</strong></TableCell><TableCell>New end time in HH:MM format</TableCell></TableRow>
+                  </TableBody>
+                </Table>
+
+                <p className="text-sm font-medium mb-1">Example Request</p>
+                <CodeBlock>{`curl -X PUT "${BASE_URL}/blocks/EXT-A1B2/reschedule" \\
+  -H "Authorization: Bearer spk_your_api_key_here" \\
+  -H "Content-Type: application/json" \\
+  -d '{
+    "court_id": 15,
+    "date": "2026-02-12",
+    "start_time": "14:00",
+    "end_time": "15:00"
+  }'`}</CodeBlock>
+
+                <p className="text-sm font-medium mt-4 mb-1">Success Response <code className="text-emerald-600">200 OK</code></p>
+                <CodeBlock>{`{
+  "success": true,
+  "message": "Block rescheduled successfully.",
+  "data": {
+    "old_block": {
+      "block_reference": "EXT-A1B2",
+      "court_id": 15,
+      "date": "2026-02-10",
+      "start_time": "10:00",
+      "end_time": "11:00",
+      "status": "released"
+    },
+    "new_block": {
+      "block_reference": "EXT-C3D4",
+      "partner_reference": "BLEU-BK-12345",
+      "court_id": 15,
+      "court_name": "Court A",
+      "venue_id": 3,
+      "venue_name": "Abuja Tennis Club",
+      "date": "2026-02-12",
+      "start_time": "14:00",
+      "end_time": "15:00",
+      "status": "active",
+      "created_at": "2026-02-05T16:00:00+01:00"
+    }
+  }
+}`}</CodeBlock>
+
+                <h4 className="text-md font-semibold mt-6 mb-2">Why Use This Instead of Release + Create?</h4>
+                <p className="text-muted-foreground mb-2 text-sm">
+                  The <code className="rounded bg-muted px-1">release then create</code> approach is risky:
+                </p>
+                <ol className="list-decimal pl-6 space-y-1 text-muted-foreground text-sm mb-2">
+                  <li><strong>Step 1:</strong> Release old block at 10:00 → succeeds</li>
+                  <li><strong>Step 2:</strong> Create new block at 14:00 → <strong>FAILS</strong> (slot already taken)</li>
+                  <li><strong>Result:</strong> User has no booking at all!</li>
+                </ol>
+                <p className="text-muted-foreground text-sm">
+                  This endpoint does it atomically — either both operations succeed, or neither does.
+                </p>
+
+                <p className="text-sm font-medium mt-4 mb-1">Error Responses</p>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Status</TableHead>
+                      <TableHead>Error Code</TableHead>
+                      <TableHead>Condition</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    <TableRow><TableCell>400</TableCell><TableCell>DATE_IN_PAST</TableCell><TableCell>Cannot reschedule to a past date</TableCell></TableRow>
+                    <TableRow><TableCell>400</TableCell><TableCell>DATE_TOO_FAR_AHEAD</TableCell><TableCell>Date exceeds partner&apos;s max advance days</TableCell></TableRow>
+                    <TableRow><TableCell>400</TableCell><TableCell>VENUE_CLOSED</TableCell><TableCell>Venue is closed on the new day</TableCell></TableRow>
+                    <TableRow><TableCell>400</TableCell><TableCell>OUTSIDE_OPERATING_HOURS</TableCell><TableCell>New slot is outside operating hours</TableCell></TableRow>
+                    <TableRow><TableCell>400</TableCell><TableCell>INVALID_TIME_RANGE</TableCell><TableCell>End time must be after start time</TableCell></TableRow>
+                    <TableRow><TableCell>400</TableCell><TableCell>BLACKOUT_DATE</TableCell><TableCell>New date is unavailable</TableCell></TableRow>
+                    <TableRow><TableCell>403</TableCell><TableCell>VENUE_ACCESS_DENIED</TableCell><TableCell>Partner doesn&apos;t have access to the new venue</TableCell></TableRow>
+                    <TableRow><TableCell>404</TableCell><TableCell>BLOCK_NOT_FOUND</TableCell><TableCell>Active block not found with this reference</TableCell></TableRow>
+                    <TableRow><TableCell>404</TableCell><TableCell>COURT_NOT_FOUND</TableCell><TableCell>New court ID doesn&apos;t exist</TableCell></TableRow>
+                    <TableRow><TableCell>409</TableCell><TableCell>SLOT_UNAVAILABLE</TableCell><TableCell>New time slot is already booked or blocked</TableCell></TableRow>
+                  </TableBody>
+                </Table>
+              </div>
+
+              {/* 7. Release Block */}
               <div className="mb-12">
                 <div className="flex items-center gap-2 mb-2">
                   <MethodBadge method="DELETE" />
                   <code className="text-sm font-mono text-muted-foreground">/v1/partner/blocks/{`{blockReference}`}</code>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">6. Release Block</h3>
-                <p className="text-muted-foreground mb-2">Release (cancel) a block, making the time slot available again for customers.</p>
+                <h3 className="text-xl font-semibold mb-2">7. Release Block</h3>
+                <p className="text-muted-foreground mb-2">Release (cancel) a block, making the time slot available again for customers. Use this for cancellations — for rescheduling, use the Reschedule Block endpoint instead.</p>
 
                 <WarningBox>
                   <strong>IMPORTANT:</strong> You <strong>MUST</strong> call this endpoint when a booking is <strong>cancelled</strong> and the slot is still in the future. This frees up the slot so other customers can book it.
@@ -815,13 +1058,13 @@ Retry-After: 60`}</CodeBlock>
                 </Table>
               </div>
 
-              {/* 7. Webhook Deliveries */}
+              {/* 8. Webhook Deliveries */}
               <div className="mb-12">
                 <div className="flex items-center gap-2 mb-2">
                   <MethodBadge method="GET" />
                   <code className="text-sm font-mono text-muted-foreground">/v1/partner/webhooks/deliveries</code>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">7. Webhook Deliveries</h3>
+                <h3 className="text-xl font-semibold mb-2">8. Webhook Deliveries</h3>
                 <p className="text-muted-foreground mb-4">View the history of webhook deliveries sent to your configured webhook URL.</p>
 
                 <p className="text-sm font-medium mb-1">Query Parameters</p>
@@ -883,13 +1126,13 @@ Retry-After: 60`}</CodeBlock>
 }`}</CodeBlock>
               </div>
 
-              {/* 8. Test Webhook */}
+              {/* 9. Test Webhook */}
               <div className="mb-12">
                 <div className="flex items-center gap-2 mb-2">
                   <MethodBadge method="POST" />
                   <code className="text-sm font-mono text-muted-foreground">/v1/partner/webhooks/test</code>
                 </div>
-                <h3 className="text-xl font-semibold mb-2">8. Test Webhook</h3>
+                <h3 className="text-xl font-semibold mb-2">9. Test Webhook</h3>
                 <p className="text-muted-foreground mb-4">Send a test webhook to verify your endpoint is configured correctly.</p>
                 <p className="text-muted-foreground text-sm mb-4">
                   <strong>Prerequisite:</strong> Webhook URL and secret must be configured by the SPOTTS admin team first.
@@ -1086,6 +1329,7 @@ def verify_webhook(timestamp: str, payload: dict, signature: str, secret: str) -
                   <TableRow><TableCell>INVALID_TIME_RANGE</TableCell><TableCell>400</TableCell><TableCell>End time must be after start time</TableCell></TableRow>
                   <TableRow><TableCell>BLACKOUT_DATE</TableCell><TableCell>400</TableCell><TableCell>This date is unavailable</TableCell></TableRow>
                   <TableRow><TableCell>INVALID_REASON</TableCell><TableCell>422</TableCell><TableCell>Invalid release reason provided</TableCell></TableRow>
+                  <TableRow><TableCell>RESCHEDULE_FAILED</TableCell><TableCell>500</TableCell><TableCell>Atomic reschedule operation failed</TableCell></TableRow>
                   <TableRow><TableCell>NO_WEBHOOK_URL</TableCell><TableCell>400</TableCell><TableCell>No webhook URL configured</TableCell></TableRow>
                   <TableRow><TableCell>NO_WEBHOOK_SECRET</TableCell><TableCell>400</TableCell><TableCell>No webhook secret configured</TableCell></TableRow>
                   <TableRow><TableCell>VALIDATION_ERROR</TableCell><TableCell>422</TableCell><TableCell>Request validation failed</TableCell></TableRow>
@@ -1136,6 +1380,9 @@ curl -X DELETE "${BASE_URL}/blocks/EXT-A1B2?reason=completed" \\
               <h3 className="text-lg font-semibold mb-2">1. Always Release Cancelled Blocks (Future Slots)</h3>
               <p className="text-muted-foreground mb-6">
                 When a booking is <strong>cancelled</strong> on your platform and the slot is still in the future, immediately call the Release Block endpoint with <code className="rounded bg-muted px-1">reason=cancelled</code>. This is critical for maintaining accurate availability across platforms.
+              </p>
+              <p className="text-muted-foreground mb-6">
+                Releasing blocks for <code className="rounded bg-muted px-1">completed</code> or <code className="rounded bg-muted px-1">no_show</code> bookings is optional — the time has already passed, so it doesn&apos;t affect availability. However, doing so keeps your block list clean and helps with reporting.
               </p>
 
               <h3 className="text-lg font-semibold mb-2">2. Use Idempotency Keys</h3>
