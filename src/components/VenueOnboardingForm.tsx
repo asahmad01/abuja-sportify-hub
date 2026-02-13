@@ -267,58 +267,72 @@ const VenueOnboardingForm = () => {
   };
 
   const buildPayload = () => {
-    const operatingHours = DAYS.map((day) => ({
-      day,
-      ...(hours[day]?.closed
-        ? { status: "CLOSED" }
-        : { opening: hours[day]?.open || "—", closing: hours[day]?.close || "—" }),
-    }));
+    // Build a flat, human-readable payload so Formspree emails look clean
+    const lines: string[] = [];
+
+    lines.push("=== VENUE DETAILS ===");
+    lines.push(`Venue Name: ${venueName}`);
+    lines.push(`Address: ${address}`);
+    lines.push(`Phone: ${phone}`);
+    lines.push(`Email: ${email}`);
+
+    lines.push("");
+    lines.push("=== SPORTS OFFERED ===");
+    lines.push(sportsOffered.trim() || "(not provided)");
+
+    lines.push("");
+    lines.push("=== COURTS & FIELDS ===");
+    sportCourtsBlocks.forEach((block, bi) => {
+      lines.push(`\nSport ${bi + 1}: ${block.sport || "(not specified)"}`);
+      block.courts.forEach((c, ci) => {
+        lines.push(`  Court ${ci + 1}: ${c.courtName || "(unnamed)"} — ₦${c.pricePerHour || "?"}/hr — ${c.indoorOutdoor || "?"}`);
+        if (c.isDivisible) {
+          lines.push(`    ↳ Divisible: Yes`);
+          c.childFields.forEach((cf) => {
+            lines.push(`      • ${cf.name || "(unnamed)"} — ₦${cf.pricePerHour || "?"}/hr`);
+          });
+          lines.push(`      Can book remaining sub-fields separately: ${c.canBookChildrenSeparately ? "Yes" : "No"}`);
+        }
+        if (c.isMultiSport) {
+          lines.push(`    ↳ Multi-sport: Yes`);
+          c.additionalSports.forEach((s) => {
+            lines.push(`      • ${s.sport || "(unnamed)"} — ₦${s.pricePerHour || "?"}/hr`);
+          });
+        }
+      });
+    });
+
+    if (offersMemberships && memberships.length > 0) {
+      lines.push("");
+      lines.push("=== MEMBERSHIPS ===");
+      memberships.forEach((m, i) => {
+        lines.push(`  Plan ${i + 1}: ${m.name || "(unnamed)"} — ${m.duration || "?"} — ₦${m.price || "?"}`);
+        if (m.description) lines.push(`    Includes: ${m.description}`);
+      });
+    }
+
+    lines.push("");
+    lines.push("=== OPERATING HOURS ===");
+    DAYS.forEach((day) => {
+      if (hours[day]?.closed) {
+        lines.push(`  ${day}: CLOSED`);
+      } else {
+        lines.push(`  ${day}: ${hours[day]?.open || "—"} – ${hours[day]?.close || "—"}`);
+      }
+    });
+
+    if (additionalNotes.trim()) {
+      lines.push("");
+      lines.push("=== ADDITIONAL NOTES ===");
+      lines.push(additionalNotes.trim());
+    }
 
     return {
-      formType: "Venue Onboarding",
-      basicInfo: {
-        venueName,
-        address,
-        phone,
-        email,
-        description,
-      },
-      sportsOffered: sportsOffered.trim() || "(not provided)",
-      courtsAndFields: sportCourtsBlocks.map((block) => ({
-        sport: block.sport || "(not specified)",
-        courts: block.courts.map((c) => ({
-          courtName: c.courtName,
-          pricePerHourNaira: c.pricePerHour,
-          indoorOrOutdoor: c.indoorOutdoor,
-          divisible: c.isDivisible
-            ? {
-                childFields: c.childFields.map((cf) => ({
-                  name: cf.name,
-                  pricePerHourNaira: cf.pricePerHour,
-                })),
-                canBookChildrenSeparately: c.canBookChildrenSeparately,
-              }
-            : null,
-          multiSport: c.isMultiSport
-            ? {
-                additionalSports: c.additionalSports.map((s) => ({
-                  sport: s.sport,
-                  pricePerHourNaira: s.pricePerHour,
-                })),
-              }
-            : null,
-        })),
-      })),
-      memberships: offersMemberships && memberships.length > 0
-        ? memberships.map((m) => ({
-            name: m.name,
-            duration: m.duration,
-            priceNaira: m.price,
-            description: m.description || "(not provided)",
-          }))
-        : null,
-      operatingHours,
-      additionalNotes: additionalNotes.trim() || null,
+      _subject: `SPOTTS Venue Onboarding: ${venueName}`,
+      "Venue Name": venueName,
+      "Email": email,
+      "Phone": phone,
+      message: lines.join("\n"),
     };
   };
 
