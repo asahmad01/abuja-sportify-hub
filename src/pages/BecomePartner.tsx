@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -25,14 +26,23 @@ const BecomePartner = () => {
                 Join Spotts and transform how you manage your sports facility. Increase bookings, streamline operations, and grow your revenue with our all-in-one platform.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button size="lg" className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 gap-2">
-                  Join Us Today
-                  <ArrowRight className="h-5 w-5" />
+                <Button asChild size="lg" className="bg-accent hover:bg-accent/90 text-white rounded-full px-8 gap-2">
+                  <Link to="/venue-onboarding">
+                    Fill Venue Onboarding Form
+                    <ArrowRight className="h-5 w-5" />
+                  </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="rounded-full px-8">
                   Schedule a Demo
                 </Button>
               </div>
+              <p className="text-sm text-muted-foreground mt-3">
+                Have a venue?{" "}
+                <Link to="/venue-onboarding" className="text-accent font-medium hover:underline">
+                  Submit the onboarding form
+                </Link>{" "}
+                and we’ll get you on SPOTTS.
+              </p>
             </div>
           </div>
         </section>
@@ -592,9 +602,11 @@ const BecomePartner = () => {
                 Join hundreds of sports facilities already using Spotts to grow their business. No setup fees, no long-term contracts.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button size="lg" className="bg-white text-accent hover:bg-white/90 rounded-full px-8 gap-2">
-                  Join Us Today
-                  <ArrowRight className="h-5 w-5" />
+                <Button asChild size="lg" className="bg-white text-accent hover:bg-white/90 rounded-full px-8 gap-2">
+                  <Link to="/venue-onboarding">
+                    Fill Venue Onboarding Form
+                    <ArrowRight className="h-5 w-5" />
+                  </Link>
                 </Button>
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 rounded-full px-8">
                   Contact Sales

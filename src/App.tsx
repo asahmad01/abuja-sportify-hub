@@ -13,6 +13,7 @@ import Register from "./pages/Register";
 import Categories from "./pages/Categories";
 import VipAccess from "./pages/VipAccess";
 import BecomePartner from "./pages/BecomePartner";
+import VenueOnboarding from "./pages/VenueOnboarding";
 import MobileApp from "./pages/MobileApp";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/categories" element={<Categories />} />
           <Route path="/vip-access" element={<VipAccess />} />
           <Route path="/become-partner" element={<BecomePartner />} />
+          <Route path="/venue-onboarding" element={<VenueOnboarding />} />
           <Route path="/mobile-app" element={<MobileApp />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
