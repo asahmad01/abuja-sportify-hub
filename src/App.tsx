@@ -20,6 +20,8 @@ import Privacy from "./pages/Privacy";
 import Refund from "./pages/Refund";
 import FAQ from "./pages/FAQ";
 import Api from "./pages/Api";
+import Support from "./pages/Support";
+import DeleteAccount from "./pages/DeleteAccount";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -48,6 +50,8 @@ const App = () => (
           <Route path="/refund" element={<Refund />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/api" element={<Api />} />
+          <Route path="/support" element={<Support />} />
+          <Route path="/delete-account" element={<DeleteAccount />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

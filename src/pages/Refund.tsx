@@ -184,7 +184,6 @@ const Refund = () => {
                       </p>
                       <ul className="list-disc pl-6 mt-2 space-y-1">
                         <li>Email: <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a></li>
-                        <li>WhatsApp: <a href="https://wa.me/2349160244454" className="text-blue-400 hover:text-blue-300 hover:underline">+234 916 024 4454</a></li>
                       </ul>
                     </div>
 
@@ -210,8 +209,7 @@ const Refund = () => {
                       <h2 className="text-2xl font-bold text-white mb-4">13. Contact Information</h2>
                       <p>For refund assistance or questions, please contact us:</p>
                       <p className="mt-4">
-                        Email: <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a><br />
-                        WhatsApp: <a href="https://wa.me/2349160244454" className="text-blue-400 hover:text-blue-300 hover:underline">+234 916 024 4454</a>
+                        Email: <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a>
                       </p>
                     </div>
 

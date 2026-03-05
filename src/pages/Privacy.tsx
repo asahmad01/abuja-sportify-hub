@@ -169,7 +169,7 @@ const Privacy = () => {
 
                       <h3 className="text-xl font-bold text-white mt-4 mb-2">Partial Deletion:</h3>
                       <p>
-                        You can request deletion of specific data (e.g., old bookings, certain preferences) without deleting your entire account by contacting <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a> or via WhatsApp. Requests are processed within 7 business days.
+                        You can request deletion of specific data (e.g., old bookings, certain preferences) without deleting your entire account by contacting <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a>. Requests are processed within 7 business days.
                       </p>
                     </div>
 
@@ -262,8 +262,7 @@ const Privacy = () => {
                       <h2 className="text-2xl font-bold text-white mb-4">14. Contact Information</h2>
                       <p>For privacy-related inquiries or to exercise your rights:</p>
                       <p className="mt-4">
-                        Email: <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a><br />
-                        WhatsApp: <a href="https://wa.me/2349160244454" className="text-blue-400 hover:text-blue-300 hover:underline">+234 916 024 4454</a>
+                        Email: <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a>
                       </p>
                     </div>
 

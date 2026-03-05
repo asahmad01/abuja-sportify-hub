@@ -119,7 +119,7 @@ const Terms = () => {
                       <h2 className="text-2xl font-bold text-white mb-4">8. Cancellations & Refunds</h2>
                       <ul className="list-disc pl-6 mt-4 space-y-2">
                         <li>Cancellations and refunds are subject to the individual venue's cancellation policy, which is displayed at the time of booking.</li>
-                        <li>Users may contact Spotts support (<a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a> or WhatsApp) for assistance with booking issues.</li>
+                        <li>Users may contact Spotts support (<a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a>) for assistance with booking issues.</li>
                         <li>Some issues may require users to liaise directly with the venue.</li>
                         <li>Approved refunds will be processed back to the original payment method within 3-10 working days, depending on your bank or payment provider.</li>
                       </ul>
@@ -185,8 +185,7 @@ const Terms = () => {
                       <h2 className="text-2xl font-bold text-white mb-4">16. Contact Information</h2>
                       <p>For questions, support, or concerns, please contact us:</p>
                       <p className="mt-4">
-                        Email: <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a><br />
-                        WhatsApp: <a href="https://wa.me/2349160244454" className="text-blue-400 hover:text-blue-300 hover:underline">+234 916 024 4454</a>
+                        Email: <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a>
                       </p>
                     </div>
 

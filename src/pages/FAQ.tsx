@@ -175,7 +175,6 @@ const FAQ = () => {
               <p>Contact Spotts support first at:</p>
               <ul className="list-disc pl-4 mt-2 space-y-1">
                 <li>Email: <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a></li>
-                <li>WhatsApp: <a href="https://wa.me/2349160244454" className="text-blue-400 hover:text-blue-300 hover:underline">+234 916 024 4454</a></li>
               </ul>
               <p className="mt-2">We'll assist you in resolving the issue. Some matters may require direct communication with the venue, and we'll help facilitate that.</p>
             </>
@@ -214,7 +213,6 @@ const FAQ = () => {
               <p>Venues interested in partnering can contact us at:</p>
               <ul className="list-disc pl-4 mt-2 space-y-1">
                 <li>Email: <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a></li>
-                <li>WhatsApp: <a href="https://wa.me/2349160244454" className="text-blue-400 hover:text-blue-300 hover:underline">+234 916 024 4454</a></li>
               </ul>
               <p className="mt-2">We'll guide you through the onboarding process, including venue verification and listing setup.</p>
             </>
@@ -292,15 +290,6 @@ const FAQ = () => {
                         className="text-blue-400 hover:text-blue-300 hover:underline font-medium"
                       >
                         info@spottsapp.com
-                      </a>
-                      <span className="hidden sm:inline text-white/40">•</span>
-                      <a
-                        href="https://wa.me/2349160244454"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-400 hover:text-blue-300 hover:underline font-medium"
-                      >
-                        +234 916 024 4454
                       </a>
                     </div>
                   </div>
