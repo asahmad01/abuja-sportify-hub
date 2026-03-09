@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ShootingStars from "@/components/ShootingStars";
+import { Link } from "react-router-dom";
 
 const Terms = () => {
   return (
@@ -53,7 +54,7 @@ const Terms = () => {
                     <div>
                       <h2 className="text-2xl font-bold text-white mb-4">2. Eligibility & Use of the Platform</h2>
                       <ul className="list-disc pl-6 mt-4 space-y-2">
-                        <li><strong>Age Requirements:</strong> Users must be at least 13 years old to use Spotts. Users aged 13-17 must obtain permission from a parent or legal guardian before creating an account or making payments. By creating an account, minors confirm they have obtained the necessary parental consent.</li>
+                        <li><strong>Age Requirements:</strong> You must be at least <strong>18 years old</strong> to create an account or use Spotts. By creating an account, you confirm you meet this age requirement.</li>
                         <li>You agree to provide accurate, current, and complete information when using the Platform.</li>
                         <li>You agree to use Spotts only for lawful purposes and in accordance with these Terms.</li>
                         <li>Spotts reserves the right to suspend or terminate user access in cases of abuse, fraud, misuse, or violation of these Terms.</li>
@@ -70,6 +71,9 @@ const Terms = () => {
                         <li>Interfere with bookings or attempt to manipulate the Platform</li>
                         <li>Use the Platform for any illegal activities</li>
                       </ul>
+                      <p className="mt-4">
+                        Users may report reviews, messages, or content that violates these Terms using the in-app reporting feature. Reported content may be reviewed by Spotts staff and removed if found to be in violation of our policies.
+                      </p>
                     </div>
 
                     <div>
@@ -100,7 +104,7 @@ const Terms = () => {
                     <div>
                       <h2 className="text-2xl font-bold text-white mb-4">6. Sharing Your Information with Venues</h2>
                       <p>
-                        When you make a booking, we share your name, email address, and phone number with the venue to enable them to fulfill your booking and communicate with you about booking-related matters (confirmations, changes, cancellations, or late-minute updates). This is necessary to complete your booking. Venues are responsible for handling your information in accordance with applicable data protection laws.
+                        When you make a booking, we share your name, email address, and phone number with the venue to enable them to fulfill your booking and communicate with you about booking-related matters (confirmations, changes, cancellations, or last-minute updates). This is necessary to complete your booking. Venues are responsible for handling your information in accordance with applicable data protection laws.
                       </p>
                     </div>
 
@@ -119,7 +123,7 @@ const Terms = () => {
                       <h2 className="text-2xl font-bold text-white mb-4">8. Cancellations & Refunds</h2>
                       <ul className="list-disc pl-6 mt-4 space-y-2">
                         <li>Cancellations and refunds are subject to the individual venue's cancellation policy, which is displayed at the time of booking.</li>
-                        <li>Users may contact Spotts support (<a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a>) for assistance with booking issues.</li>
+                        <li>Users may contact Spotts support (<a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a> or <Link to="/support" className="text-blue-400 hover:text-blue-300 hover:underline">spottsapp.com/support</Link>) for assistance with booking issues.</li>
                         <li>Some issues may require users to liaise directly with the venue.</li>
                         <li>Approved refunds will be processed back to the original payment method within 3-10 working days, depending on your bank or payment provider.</li>
                       </ul>
@@ -183,15 +187,16 @@ const Terms = () => {
 
                     <div>
                       <h2 className="text-2xl font-bold text-white mb-4">16. Contact Information</h2>
-                      <p>For questions, support, or concerns, please contact us:</p>
-                      <p className="mt-4">
-                        Email: <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a>
-                      </p>
+                      <p>For questions, support, or concerns:</p>
+                      <div className="mt-4 space-y-1">
+                        <p><strong className="text-white">Email:</strong> <a href="mailto:info@spottsapp.com" className="text-blue-400 hover:text-blue-300 hover:underline">info@spottsapp.com</a></p>
+                        <p><strong className="text-white">Support:</strong> <Link to="/support" className="text-blue-400 hover:text-blue-300 hover:underline">spottsapp.com/support</Link></p>
+                      </div>
                     </div>
 
                     <div className="pt-8 border-t border-white/20">
                       <p className="text-sm text-white/60">
-                        Effective Date: January 20, 2026
+                        Last Updated: 9 March 2026
                       </p>
                     </div>
                   </div>
