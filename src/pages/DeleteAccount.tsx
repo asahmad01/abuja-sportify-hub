@@ -119,18 +119,19 @@ const DeleteAccount = () => {
                       </h3>
                       <ul className="text-white/70 space-y-1.5 text-sm list-disc pl-4">
                         <li>
-                          Your personal information will be permanently deleted
-                        </li>
-                        <li>All active bookings will be cancelled</li>
-                        <li>
-                          You will lose access to your booking history and
-                          preferences
+                          Your personal information (name, email, phone number) will be permanently deleted
                         </li>
                         <li>
-                          Transaction records will be anonymized and retained for
-                          7 years as required by law
+                          All active bookings will be cancelled — refunds will be processed in line with the venue's cancellation policy where applicable
+                        </li>
+                        <li>
+                          You will lose access to your booking history and preferences
+                        </li>
+                        <li>
+                          Transaction records will be anonymized and retained for 7 years as required by Nigerian financial regulations, then securely deleted
                         </li>
                         <li>This action cannot be undone</li>
+                        <li>You will receive a confirmation email once deletion is complete</li>
                       </ul>
                     </div>
                   </div>
