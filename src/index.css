@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 220 20% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 10%;
+
+    --primary: 234 89% 57%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 15% 95%;
+    --secondary-foreground: 220 20% 10%;
+
+    --muted: 220 15% 95%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: 234 89% 57%;
+
+    --radius: 0.75rem;
+
+    --dark-bg: 220 25% 6%;
+    --dark-card: 220 22% 9%;
+    --dark-foreground: 220 5% 95%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(234 89% 57%), hsl(210 100% 65%));
+    --gradient-hero: linear-gradient(180deg, hsl(0 0% 100%), hsl(220 15% 98%));
+
+    --shadow-subtle: 0 2px 8px -2px hsl(220 20% 10% / 0.08);
+    --shadow-card: 0 4px 16px -4px hsl(220 20% 10% / 0.12);
+    --shadow-glow: 0 0 40px hsl(234 89% 57% / 0.15);
+  }
+
+  .dark {
+    --background: 220 25% 6%;
+    --foreground: 220 5% 95%;
+
+    --card: 220 22% 9%;
+    --card-foreground: 220 5% 95%;
+
+    --popover: 220 22% 9%;
+    --popover-foreground: 220 5% 95%;
+
+    --primary: 234 89% 57%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 20% 15%;
+    --secondary-foreground: 220 5% 95%;
+
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 211 100% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 15%;
+    --input: 220 20% 15%;
+    --ring: 234 89% 57%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold;
+  }
+
+  .dark-section {
+    @apply bg-[hsl(var(--dark-bg))] text-[hsl(var(--dark-foreground))];
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-blue-400;
+  }
+
+  /* Hide scrollbar for horizontal carousel */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

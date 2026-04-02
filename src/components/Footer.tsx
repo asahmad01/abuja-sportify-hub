@@ -1,0 +1,149 @@
+import Logo from "@/components/Logo";
+import { Link } from "react-router-dom";
+
+const Footer = () => {
+  return (
+    <footer className="relative bg-black overflow-hidden">
+      {/* Blue Glow Effect */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-blue-600/30 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-12 mb-12">
+          {/* Left Side - Brand & Form */}
+          <div>
+            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center mb-4 group w-fit">
+              <Logo className="h-8 w-auto transition-transform duration-300 group-hover:scale-110" />
+            </button>
+            <p className="text-sm text-white/50 leading-relaxed mb-4 max-w-md">
+              Book sports facilities instantly. Play when you want, where you want. Now live in Abuja.
+            </p>
+            <a
+              href="https://apps.apple.com/app/6758109546"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white px-4 py-2.5 rounded-xl transition-all w-fit"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              <div className="text-left">
+                <div className="text-xs text-white/50 leading-none">Download on the</div>
+                <div className="text-sm font-semibold leading-none mt-0.5">App Store</div>
+              </div>
+            </a>
+          </div>
+
+          {/* Right Side - Footer Columns */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            <div>
+              <h4 className="text-base font-semibold mb-4 text-white">Quick Links</h4>
+              <ul className="space-y-3">
+                <li>
+                  <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="text-white/50 hover:text-primary transition-colors text-sm">
+                    Home
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })} className="text-white/50 hover:text-primary transition-colors text-sm">
+                    Features
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => document.getElementById('sports')?.scrollIntoView({ behavior: 'smooth' })} className="text-white/50 hover:text-primary transition-colors text-sm">
+                    Sports
+                  </button>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-base font-semibold mb-4 text-white">Product</h4>
+              <ul className="space-y-3">
+                <li>
+                  <button onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })} className="text-white/50 hover:text-primary transition-colors text-sm">
+                    For Players
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })} className="text-white/50 hover:text-primary transition-colors text-sm">
+                    For Venue Owners
+                  </button>
+                </li>
+                <li>
+                  <a href="https://apps.apple.com/app/6758109546" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary transition-colors text-sm">
+                    Download App
+                  </a>
+                </li>
+                {/* Commented out for future multi-page structure */}
+                {/* <Link to="/careers">Careers</Link> */}
+                {/* <Link to="/press">Press</Link> */}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-base font-semibold mb-4 text-white">Contact Us</h4>
+              <ul className="space-y-3">
+                <li>
+                  <a href="mailto:info@spottsapp.com" className="text-white/50 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    info@spottsapp.com
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.instagram.com/spottsapp/" target="_blank" rel="noopener noreferrer" className="text-white/50 hover:text-primary transition-colors text-sm flex items-center gap-2">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                    </svg>
+                    @spottsapp
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-white/40">© 2026 Spotts. All rights reserved.</p>
+            <div className="flex flex-wrap justify-center gap-4 md:gap-6 text-sm">
+              <Link to="/terms" className="text-white/50 hover:text-primary transition-colors">
+                Terms & Conditions
+              </Link>
+              <Link to="/privacy" className="text-white/50 hover:text-primary transition-colors">
+                Privacy Policy
+              </Link>
+              <Link to="/refund" className="text-white/50 hover:text-primary transition-colors">
+                Refund Policy
+              </Link>
+              <Link to="/faq" className="text-white/50 hover:text-primary transition-colors">
+                FAQs
+              </Link>
+              <Link to="/support" className="text-white/50 hover:text-primary transition-colors">
+                Support
+              </Link>
+              <Link to="/delete-account" className="text-white/50 hover:text-primary transition-colors">
+                Delete Account
+              </Link>
+            </div>
+          </div>
+          <p className="text-sm text-white/30 text-center mt-4">
+            Powered by{' '}
+            <a
+              href="https://bleumeridiantech.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white/50 hover:text-primary transition-colors underline"
+            >
+              Bleu Meridian Technologies
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;
