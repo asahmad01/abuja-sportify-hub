@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.bleumeridian.spotts",
+      "sha256_cert_fingerprints": [
+        "48:C0:3D:16:10:E2:7D:E0:61:92:68:9B:E3:D7:B2:A8:F7:0F:47:B0:91:35:E5:2A:7E:5C:D4:0F:64:6A:2E:67"
+      ]
+    }
+  }
+]

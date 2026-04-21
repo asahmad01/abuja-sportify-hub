@@ -22,6 +22,7 @@ import FAQ from "./pages/FAQ";
 import Api from "./pages/Api";
 import Support from "./pages/Support";
 import DeleteAccount from "./pages/DeleteAccount";
+import SessionDeepLink from "./pages/SessionDeepLink";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +53,7 @@ const App = () => (
           <Route path="/api" element={<Api />} />
           <Route path="/support" element={<Support />} />
           <Route path="/delete-account" element={<DeleteAccount />} />
+          <Route path="/sessions/:id" element={<SessionDeepLink />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
