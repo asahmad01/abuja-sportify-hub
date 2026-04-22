@@ -58,17 +58,17 @@ const VendorBenefits = () => {
           {/* Left Content - Text */}
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20">
-              <span className="text-sm font-semibold text-primary">Court Owner Benefits</span>
+              <span className="text-sm font-semibold text-primary">Spotts Manager</span>
             </div>
 
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 italic leading-tight">
-              Simplify Court
+              Run Your Venue
               <br />
-              Management
+              Smarter
             </h2>
 
             <p className="text-lg text-gray-600 leading-relaxed">
-              Be among the first venue owners to transform your sports facility management. Manage bookings, track earnings, and grow your business - all in one powerful dashboard. No setup fees, no long-term contracts.
+              Spotts Manager is the all-in-one sports venue management platform built for Nigerian facilities. Handle bookings, track revenue, manage courts, and grow your customer base — all from one powerful dashboard. No setup fees, no long-term contracts.
             </p>
 
             {/* Features List */}

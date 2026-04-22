@@ -38,7 +38,7 @@ const Navigation = () => {
   const navItems = [
     { name: "Home", sectionId: "home" },
     { name: "Mobile App", sectionId: "mobile-app" },
-    { name: "For Vendors", sectionId: "vendor-benefits" },
+    { name: "Spotts Manager", sectionId: "vendor-benefits" },
     { name: "Features", sectionId: "features" },
     { name: "Sports", sectionId: "sports" },
     { name: "FAQs", path: "/faq" },
