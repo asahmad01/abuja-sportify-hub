@@ -29,8 +29,8 @@ const Navigation = () => {
   };
 
 
-  const openAppStore = () => {
-    window.open("https://apps.apple.com/app/6758109546", "_blank", "noopener,noreferrer");
+  const openDownloadSection = () => {
+    scrollToSection("download-section");
     setMobileMenuOpen(false);
   };
 
@@ -83,7 +83,7 @@ const Navigation = () => {
             <Button
               size="default"
               className="bg-accent hover:bg-accent/90 text-white rounded-full px-6"
-              onClick={openAppStore}
+              onClick={openDownloadSection}
             >
               Download App
             </Button>
@@ -113,7 +113,7 @@ const Navigation = () => {
             <Button
               size="default"
               className="w-full bg-accent hover:bg-accent/90 text-white rounded-full"
-              onClick={openAppStore}
+              onClick={openDownloadSection}
             >
               Download App
             </Button>

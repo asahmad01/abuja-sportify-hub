@@ -62,7 +62,7 @@ const DownloadSection = () => {
             <div className="space-y-6 text-white">
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/20">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                <span className="text-sm font-semibold">Available Now on iOS</span>
+                <span className="text-sm font-semibold">Available on iOS & Android</span>
               </div>
 
               <h2 className="text-4xl md:text-5xl font-bold leading-tight">
@@ -78,7 +78,7 @@ const DownloadSection = () => {
 
               {/* App Store Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
-                {/* iOS - Live */}
+                {/* iOS */}
                 <a
                   href="https://apps.apple.com/app/6758109546"
                   target="_blank"
@@ -92,14 +92,19 @@ const DownloadSection = () => {
                   </div>
                 </a>
 
-                {/* Android - Coming Soon */}
-                <div className="flex items-center gap-3 bg-white/10 border border-white/20 text-white/60 px-5 py-3.5 rounded-2xl cursor-not-allowed w-fit">
+                {/* Android */}
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.bleumeridiantech.spotts"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-white text-black px-5 py-3.5 rounded-2xl hover:bg-white/90 transition-all group w-fit"
+                >
                   <GooglePlay className="h-7 w-7 shrink-0" />
                   <div className="text-left">
-                    <div className="text-xs leading-none mb-0.5">Coming Soon to</div>
+                    <div className="text-xs text-black/60 leading-none mb-0.5">Get it on</div>
                     <div className="text-base font-bold leading-none">Google Play</div>
                   </div>
-                </div>
+                </a>
               </div>
             </div>
 

@@ -7,7 +7,7 @@ import FeaturesSection from "@/components/FeaturesSection";
 import DownloadSection from "@/components/DownloadSection";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Apple, Play as GooglePlay } from "lucide-react";
 
 const Index = () => {
   const scrollToVendor = () => {
@@ -38,7 +38,7 @@ const Index = () => {
               <div className="space-y-6">
                 <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/15 backdrop-blur-sm border border-white/20">
                   <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-                  <span className="text-sm font-semibold text-white">Now Live on iOS</span>
+                  <span className="text-sm font-semibold text-white">Now on iOS & Android</span>
                 </div>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight text-white">
                   <span className="italic">Game On</span>
@@ -46,7 +46,7 @@ const Index = () => {
                   <span className="italic">Anytime</span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-300 max-w-2xl">
-                  Book sports facilities instantly. From football fields to tennis courts, find and reserve your perfect venue in seconds. Now available in Abuja.
+                  Book sports facilities instantly. From football fields to tennis courts, find and reserve your perfect venue in seconds. Now available in Abuja on iOS and Android.
                 </p>
               </div>
 
@@ -55,14 +55,19 @@ const Index = () => {
                   href="https://apps.apple.com/app/6758109546"
                   target="_blank"
                   rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full hover:bg-white/90 transition-all font-semibold text-sm"
                 >
-                  <Button
-                    size="default"
-                    className="bg-primary hover:bg-primary/90 text-white rounded-full px-6 gap-2"
-                  >
-                    Download on App Store
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
+                  <Apple className="h-4 w-4 shrink-0" />
+                  App Store
+                </a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.bleumeridiantech.spotts"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 bg-white text-black px-5 py-2.5 rounded-full hover:bg-white/90 transition-all font-semibold text-sm"
+                >
+                  <GooglePlay className="h-4 w-4 shrink-0" />
+                  Google Play
                 </a>
                 <Button
                   size="default"
