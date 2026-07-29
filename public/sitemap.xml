@@ -5,7 +5,7 @@
   <!-- Homepage -->
   <url>
     <loc>https://spottsapp.com/</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -14,42 +14,50 @@
     </image:image>
   </url>
 
-  <!-- Mobile App Page -->
+  <!-- Events -->
   <url>
-    <loc>https://spottsapp.com/mobile-app</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>monthly</changefreq>
+    <loc>https://spottsapp.com/events</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
 
-  <!-- Become a Partner -->
+  <!-- Gollazo -->
   <url>
-    <loc>https://spottsapp.com/become-partner</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://spottsapp.com/gollazo</loc>
+    <lastmod>2026-07-11</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Venue Onboarding -->
+  <url>
+    <loc>https://spottsapp.com/venue-onboarding</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
-  <!-- FAQ -->
+  <!-- Partner API -->
   <url>
-    <loc>https://spottsapp.com/faq</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://spottsapp.com/partner-api</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- Features -->
+  <!-- Contact -->
   <url>
-    <loc>https://spottsapp.com/features</loc>
-    <lastmod>2026-04-03</lastmod>
+    <loc>https://spottsapp.com/contact</loc>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
 
   <!-- Support -->
   <url>
     <loc>https://spottsapp.com/support</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -57,7 +65,7 @@
   <!-- Privacy Policy -->
   <url>
     <loc>https://spottsapp.com/privacy</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -65,7 +73,7 @@
   <!-- Terms & Conditions -->
   <url>
     <loc>https://spottsapp.com/terms</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
   </url>
@@ -73,17 +81,9 @@
   <!-- Refund Policy -->
   <url>
     <loc>https://spottsapp.com/refund</loc>
-    <lastmod>2026-04-03</lastmod>
+    <lastmod>2026-07-11</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.5</priority>
-  </url>
-
-  <!-- Delete Account -->
-  <url>
-    <loc>https://spottsapp.com/delete-account</loc>
-    <lastmod>2026-04-03</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.4</priority>
   </url>
 
 </urlset>
