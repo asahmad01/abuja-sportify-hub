@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /api
 
 # Sitemap
 Sitemap: https://spottsapp.com/sitemap.xml
@@ -10,9 +11,11 @@ Crawl-delay: 1
 # Specific bot configurations
 User-agent: Googlebot
 Allow: /
+Disallow: /api
 
 User-agent: Bingbot
 Allow: /
+Disallow: /api
 
 User-agent: Twitterbot
 Allow: /

@@ -1,0 +1,372 @@
+<div style="font-family: 'Inter Display', 'Helvetica Neue', sans-serif; color: #0A1220; background: #FAFBFD; overflow-x: clip;">
+
+  <!-- ============ NAV ============ -->
+  <header data-screen-label="Nav" style="position: sticky; top: 0; z-index: 60; background: rgba(250,251,253,.88); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(10,18,32,.07);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 clamp(20px,4vw,48px); height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <img src="/premium/logo-blue-black.svg" alt="Spotts" style="height: 26px; display: block;">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #007AFF; border: 1px solid rgba(0,122,255,.3); padding: 4px 10px; border-radius: 999px;">Developers</span>
+      </a>
+      <nav aria-label="Primary" data-mm="nav" style="display: flex; align-items: center; gap: clamp(16px,2.5vw,32px); font-size: 14.5px; font-weight: 500;">
+        <a href="/" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Home</a>
+        <a href="/book" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Book a court</a>
+        <a href="/events" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Events</a>
+      </nav>
+      <div data-mm="cta" style="display: flex; align-items: center; gap: 10px;">
+        <a href="/#bot" style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: #1FA855; border: 1px solid rgba(31,168,85,.35); text-decoration: none; padding: 9px 16px; border-radius: 999px; white-space: nowrap;" style-hover="background: #F3FBF5;"><svg width="15" height="15" viewBox="0 0 24 24" fill="#1FA855" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5 13.9c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9 0-1.4.7-2 .9-2.3.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5s.8 1.9.8 2c.1.1.1.3 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.7-.1l1-1.2c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3 0 .2 0 .7-.2 1.2z"></path></svg>WhatsApp bot</a>
+        <a href="/#cta" style="font-size: 14px; font-weight: 600; color: #fff; background: #007AFF; text-decoration: none; padding: 10px 18px; border-radius: 999px; white-space: nowrap;" style-hover="background: #0069DE;">Get the app</a>
+      </div>
+      <button type="button" data-mm="burger" aria-label="Open menu" style="display: none; align-items: center; justify-content: center; width: 42px; height: 42px; border: 1px solid rgba(10,18,32,.14); border-radius: 12px; background: #fff; color: #0A1220; font-size: 20px; line-height: 1; cursor: pointer; padding: 0;">☰</button>
+    </div>
+    <div data-mm="panel" style="display: none; border-top: 1px solid rgba(10,18,32,.08); background: rgba(250,251,253,.98); padding: 10px clamp(20px,4vw,48px) 22px;">
+      <nav aria-label="Mobile" style="display: flex; flex-direction: column;">
+        <a href="/" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">Home</a>
+        <a href="/book" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">Book a court</a>
+        <a href="/events" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">Events</a>
+        <a href="/#bot" data-mm-close="1" style="color: #1FA855; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">WhatsApp bot</a>
+        <a href="/#cta" data-mm-close="1" style="text-align: center; font-size: 15px; font-weight: 600; color: #fff; background: #007AFF; text-decoration: none; padding: 14px 16px; border-radius: 12px; margin-top: 14px;">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section data-screen-label="API hero" style="position: relative; overflow: clip; background: #071120; color: #fff;">
+    <div aria-hidden="true" style="position: absolute; right: -30px; bottom: -50px; font-size: clamp(100px,15vw,200px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(90,169,255,.12); user-select: none; pointer-events: none;">API</div>
+    <img src="/premium/icon-white.svg" alt="" aria-hidden="true" style="position: absolute; left: clamp(-140px,-7vw,-60px); top: -50px; width: clamp(200px,20vw,320px); opacity: .05; transform: rotate(-12deg); pointer-events: none; user-select: none;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(56px,8vh,96px) clamp(20px,4vw,48px); position: relative;">
+      <p style="margin: 0 0 16px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #5AA9FF;">Spotts Partner API · v1</p>
+      <h1 style="margin: 0 0 18px; max-width: 22ch; font-size: clamp(36px,4.8vw,64px); font-weight: 800; letter-spacing: -0.045em; line-height: .98; color: #fff; text-wrap: balance;">Sync your platform with Spotts courts.</h1>
+      <p style="margin: 0 0 28px; max-width: 58ch; font-size: clamp(15px,1.3vw,18px); line-height: 1.65; color: rgba(255,255,255,.62); text-wrap: pretty;">A REST API for approved calendar-sync partners: read live court availability, create and release time-slot blocks, and receive webhooks the moment anything changes.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+        <code style="font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 13.5px; background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.14); padding: 10px 18px; border-radius: 12px; color: #9FCBFF;">https://api.spotts.ng/v1/partner</code>
+        <a href="mailto:info@spottsapp.com?subject=Partner%20API%20access" style="font-size: 14px; font-weight: 600; color: #071120; background: #fff; text-decoration: none; padding: 11px 20px; border-radius: 999px;" style-hover="background: #E4EEFC;">Request partner access →</a>
+      </div>
+      <p style="margin: 14px 0 0; font-size: 12.5px; color: rgba(255,255,255,.4);">Base URL shown for illustration — production URL is issued during onboarding.</p>
+    </div>
+  </section>
+
+  <!-- ============ DOCS LAYOUT ============ -->
+  <section data-screen-label="API docs" style="max-width: 1280px; margin: 0 auto; padding: clamp(40px,6vh,64px) clamp(20px,4vw,48px) clamp(64px,9vh,110px); display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: clamp(28px,4vw,64px); align-items: start;">
+
+    <!-- Sidebar -->
+    <nav aria-label="API sections" style="position: sticky; top: 92px; display: flex; flex-direction: column; gap: 2px; font-size: 13.5px;">
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: #8794A8; padding: 8px 12px 6px;">Getting started</span>
+      <a href="#concepts" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Key concepts</a>
+      <a href="#auth" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Authentication</a>
+      <a href="#rate-limits" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Rate limiting</a>
+      <a href="#court-relationships" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Court relationships</a>
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: #8794A8; padding: 16px 12px 6px;">Endpoints</span>
+      <a href="#list-courts" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">List courts</a>
+      <a href="#availability" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Get availability</a>
+      <a href="#create-block" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Create block</a>
+      <a href="#list-blocks" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">List blocks</a>
+      <a href="#block-details" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Get block details</a>
+      <a href="#reschedule" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Reschedule block</a>
+      <a href="#release" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Release block</a>
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: #8794A8; padding: 16px 12px 6px;">Webhooks</span>
+      <a href="#webhooks" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Events &amp; signatures</a>
+      <a href="#webhook-endpoints" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Deliveries &amp; testing</a>
+      <span style="font-size: 11px; font-weight: 700; letter-spacing: .13em; text-transform: uppercase; color: #8794A8; padding: 16px 12px 6px;">Reference</span>
+      <a href="#errors" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Error codes</a>
+      <a href="#best-practices" style="color: #51607A; text-decoration: none; font-weight: 500; padding: 7px 12px; border-radius: 8px;" style-hover="background: #EFF3F9; color: #0A1220;">Best practices</a>
+    </nav>
+
+    <!-- Content -->
+    <div style="display: flex; flex-direction: column; gap: clamp(44px,6vh,64px); font-size: 15px; line-height: 1.7; color: #38465C; min-width: 0;">
+
+      <!-- Key concepts -->
+      <div id="concepts">
+        <h2 style="margin: 0 0 14px; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; color: #0A1220;">Key concepts</h2>
+        <p style="margin: 0 0 18px;">The Partner API lets approved third-party platforms view court availability, create time-slot <b style="color: #0A1220;">blocks</b> (reservations that stop customers from booking), and manage those blocks programmatically.</p>
+        <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; overflow: clip; font-size: 14px;">
+          <div style="display: grid; grid-template-columns: 130px 1fr; gap: 14px; padding: 13px 20px;"><span style="font-weight: 700; color: #0A1220;">Courts</span><span>Individual playing areas within a venue — tennis courts, football pitches, etc.</span></div>
+          <div style="display: grid; grid-template-columns: 130px 1fr; gap: 14px; padding: 13px 20px; border-top: 1px solid rgba(10,18,32,.06);"><span style="font-weight: 700; color: #0A1220;">Venues</span><span>Sports facilities that contain one or more courts.</span></div>
+          <div style="display: grid; grid-template-columns: 130px 1fr; gap: 14px; padding: 13px 20px; border-top: 1px solid rgba(10,18,32,.06);"><span style="font-weight: 700; color: #0A1220;">Blocks</span><span>Time-slot reservations created by partners — prevents customers from booking.</span></div>
+          <div style="display: grid; grid-template-columns: 130px 1fr; gap: 14px; padding: 13px 20px; border-top: 1px solid rgba(10,18,32,.06);"><span style="font-weight: 700; color: #0A1220;">Venue scoping</span><span>Partners may be restricted to specific venues.</span></div>
+        </div>
+        <div style="margin-top: 18px; border: 1px solid rgba(196,54,59,.3); background: #FDF3F3; border-radius: 14px; padding: 16px 20px; font-size: 14px; line-height: 1.65;">
+          <b style="color: #C4363B;">⚠ Critical — cancellation responsibility.</b> When a booking is cancelled on your platform and the slot is still in the future, you <b>must</b> release the block on Spotts immediately via <a href="#release" style="color: #C4363B; font-weight: 700;">Release block</a>. Otherwise the slot stays blocked and no one else can book it. Releasing <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">completed</code> / <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">no_show</code> blocks is optional — those slots are already in the past.
+        </div>
+      </div>
+
+      <!-- Auth -->
+      <div id="auth">
+        <h2 style="margin: 0 0 14px; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; color: #0A1220;">Authentication</h2>
+        <p style="margin: 0 0 14px;">Every request carries a Bearer token. Keys use the format <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">spk_</code> + 48 random characters, are shown <b style="color: #0A1220;">once</b> at onboarding, and can only be rotated — never retrieved.</p>
+        <pre style="margin: 0 0 16px; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 1.7; background: #0A1728; color: #C9D7E8; border-radius: 14px; padding: 18px 22px; overflow-x: auto;">Authorization: Bearer spk_a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4</pre>
+        <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; overflow: clip; font-size: 13.5px;">
+          <div style="display: grid; grid-template-columns: 56px 190px 1fr; gap: 12px; padding: 11px 18px; background: #F4F7FC; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8794A8;"><span>Status</span><span>Error code</span><span>Meaning</span></div>
+          <div style="display: grid; grid-template-columns: 56px 190px 1fr; gap: 12px; padding: 11px 18px; border-top: 1px solid rgba(10,18,32,.06); font-family: inherit;"><span style="font-weight: 700;">401</span><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">MISSING_API_KEY</code><span>No Authorization header or missing Bearer prefix</span></div>
+          <div style="display: grid; grid-template-columns: 56px 190px 1fr; gap: 12px; padding: 11px 18px; border-top: 1px solid rgba(10,18,32,.06);"><span style="font-weight: 700;">401</span><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">INVALID_API_KEY</code><span>Key doesn't match any active partner</span></div>
+          <div style="display: grid; grid-template-columns: 56px 190px 1fr; gap: 12px; padding: 11px 18px; border-top: 1px solid rgba(10,18,32,.06);"><span style="font-weight: 700;">401</span><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">API_KEY_REVOKED</code><span>Key has been permanently revoked</span></div>
+          <div style="display: grid; grid-template-columns: 56px 190px 1fr; gap: 12px; padding: 11px 18px; border-top: 1px solid rgba(10,18,32,.06);"><span style="font-weight: 700;">403</span><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">PARTNER_SUSPENDED</code><span>Your partner account is suspended</span></div>
+        </div>
+      </div>
+
+      <!-- Rate limits -->
+      <div id="rate-limits">
+        <h2 style="margin: 0 0 14px; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; color: #0A1220;">Rate limiting</h2>
+        <p style="margin: 0 0 16px;">Limits apply per partner, per minute — <b style="color: #0A1220;">60 reads</b> (GET) and <b style="color: #0A1220;">30 writes</b> (POST / PUT / PATCH / DELETE). Every response includes <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">X-RateLimit-Limit</code> and <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">X-RateLimit-Remaining</code>; a 429 also carries <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">Retry-After</code>.</p>
+        <pre style="margin: 0; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 1.7; background: #0A1728; color: #C9D7E8; border-radius: 14px; padding: 18px 22px; overflow-x: auto;"><span style="color: #FF9A9E;">HTTP 429 Too Many Requests</span>
+Retry-After: 60
+
+{ "success": false, "error": <span style="color: #FFD28A;">"RATE_LIMIT_EXCEEDED"</span>,
+  "message": "Rate limit exceeded. Maximum 60 read requests per minute." }</pre>
+      </div>
+
+      <!-- Court relationships -->
+      <div id="court-relationships">
+        <h2 style="margin: 0 0 14px; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; color: #0A1220;">Court relationships &amp; blocking</h2>
+        <p style="margin: 0 0 16px;">Some venues split courts into sections (a full field → two half-fields), and multiple sports can share one physical space. The API handles all of the cascade logic — you just need to understand what gets blocked.</p>
+        <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; overflow: clip; font-size: 13.5px; margin-bottom: 16px;">
+          <div style="display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 12px 18px; background: #F4F7FC; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8794A8;"><span>You block</span><span>What happens</span></div>
+          <div style="display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 12px 18px; border-top: 1px solid rgba(10,18,32,.06);"><span style="font-weight: 700; color: #0A1220;">Parent court</span><span>All child courts of the same sport become unavailable (e.g. Full Field blocks Half 1 + Half 2)</span></div>
+          <div style="display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 12px 18px; border-top: 1px solid rgba(10,18,32,.06);"><span style="font-weight: 700; color: #0A1220;">Child court</span><span>The parent is blocked; sibling halves stay bookable</span></div>
+          <div style="display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 12px 18px; border-top: 1px solid rgba(10,18,32,.06);"><span style="font-weight: 700; color: #0A1220;">Shared space, full</span><span>The entire physical space is blocked across all sports and configurations</span></div>
+          <div style="display: grid; grid-template-columns: 150px 1fr; gap: 12px; padding: 12px 18px; border-top: 1px solid rgba(10,18,32,.06);"><span style="font-weight: 700; color: #0A1220;">Shared space, half</span><span>Blocks the same-sport parent, all full courts of other sports, and the same-numbered half of other sports — the other half stays available</span></div>
+        </div>
+        <p style="margin: 0;">Identify each court via <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">is_parent_court</code>, <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">is_child_court</code> and <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">parent_court_id</code>. Always check availability before creating a block — unavailable slots are rejected with <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #C4363B;">SLOT_UNAVAILABLE</code>.</p>
+      </div>
+
+      <!-- 1. List courts -->
+      <div id="list-courts">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+          <span style="font-size: 12px; font-weight: 800; letter-spacing: .08em; color: #007AFF; background: #F0F6FF; border: 1px solid rgba(0,122,255,.25); padding: 5px 12px; border-radius: 8px;">GET</span>
+          <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 15px; font-weight: 600; color: #0A1220;">/courts</code>
+        </div>
+        <h2 style="margin: 0 0 12px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #0A1220;">List courts</h2>
+        <p style="margin: 0 0 14px;">All courts your partner account can access. Filter with <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">venue_id</code> or <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">sport</code> (slug, e.g. <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">football</code>).</p>
+        <pre style="margin: 0; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 1.7; background: #0A1728; color: #C9D7E8; border-radius: 14px; padding: 18px 22px; overflow-x: auto;"><span style="color: #7FE0A7;">curl</span> -X GET "https://api.spotts.ng/v1/partner/courts?sport=tennis" \
+  -H <span style="color: #FFD28A;">"Authorization: Bearer spk_your_api_key_here"</span>
+
+<span style="color: #6B7C93;">// 200 OK</span>
+{ "success": true, "data": { "courts": [ {
+    "court_id": 15, "court_name": "Court A",
+    "venue_id": 3, "venue_name": "Abuja Tennis Club",
+    "sport": { "id": 4, "name": "Tennis", "slug": "tennis" },
+    "is_parent_court": false, "is_child_court": false,
+    "parent_court_id": null } ], "total": 1 } }</pre>
+      </div>
+
+      <!-- 2. Availability -->
+      <div id="availability">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+          <span style="font-size: 12px; font-weight: 800; letter-spacing: .08em; color: #007AFF; background: #F0F6FF; border: 1px solid rgba(0,122,255,.25); padding: 5px 12px; border-radius: 8px;">GET</span>
+          <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 15px; font-weight: 600; color: #0A1220;">/courts/{courtId}/availability</code>
+        </div>
+        <h2 style="margin: 0 0 12px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #0A1220;">Get court availability</h2>
+        <p style="margin: 0 0 14px;">Slots for one court on one date (<code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">date=YYYY-MM-DD</code>, required). The date must be today or later, within your <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">max_advance_days</code> (default 90). Closed days and blackout dates return <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">is_open: false</code> with a reason.</p>
+        <pre style="margin: 0 0 14px; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 1.7; background: #0A1728; color: #C9D7E8; border-radius: 14px; padding: 18px 22px; overflow-x: auto;"><span style="color: #7FE0A7;">curl</span> -X GET "https://api.spotts.ng/v1/partner/courts/15/availability?date=2026-07-10" \
+  -H <span style="color: #FFD28A;">"Authorization: Bearer spk_your_api_key_here"</span>
+
+<span style="color: #6B7C93;">// 200 OK</span>
+{ "success": true, "data": {
+    "court_id": 15, "date": "2026-07-10", "is_open": true,
+    "operating_hours": { "opening_time": "06:00", "closing_time": "22:00" },
+    "slots": [
+      { "start_time": "06:00", "end_time": "06:30", "status": <span style="color: #7FE0A7;">"available"</span> },
+      { "start_time": "07:00", "end_time": "07:30", "status": <span style="color: #FF9A9E;">"booked"</span> },
+      { "start_time": "08:00", "end_time": "08:30", "status": <span style="color: #FFD28A;">"blocked"</span> },
+      { "start_time": "08:30", "end_time": "09:00", "status": <span style="color: #B8A9F5;">"unavailable"</span> } ] } }</pre>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px; font-size: 13px;">
+          <span style="border: 1px solid rgba(31,168,85,.3); color: #1FA855; font-weight: 700; padding: 6px 13px; border-radius: 999px;">available — free to block</span>
+          <span style="border: 1px solid rgba(196,54,59,.3); color: #C4363B; font-weight: 700; padding: 6px 13px; border-radius: 999px;">booked — customer booking</span>
+          <span style="border: 1px solid rgba(176,122,31,.35); color: #B07A1F; font-weight: 700; padding: 6px 13px; border-radius: 999px;">blocked — partner or venue staff</span>
+          <span style="border: 1px solid rgba(108,86,214,.35); color: #6C56D6; font-weight: 700; padding: 6px 13px; border-radius: 999px;">unavailable — parent/child cascade</span>
+        </div>
+      </div>
+
+      <!-- 3. Create block -->
+      <div id="create-block">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+          <span style="font-size: 12px; font-weight: 800; letter-spacing: .08em; color: #1FA855; background: #F3FBF5; border: 1px solid rgba(31,168,85,.3); padding: 5px 12px; border-radius: 8px;">POST</span>
+          <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 15px; font-weight: 600; color: #0A1220;">/blocks</code>
+        </div>
+        <h2 style="margin: 0 0 12px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #0A1220;">Create block</h2>
+        <p style="margin: 0 0 14px;">Reserve a slot so customers can't book it. Requires <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">court_id</code>, <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">date</code>, <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">start_time</code>, <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">end_time</code> and a unique <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">partner_reference</code>. <b style="color: #0A1220;">Idempotent:</b> re-sending the same reference returns the existing block (200) instead of a duplicate — safe to retry.</p>
+        <pre style="margin: 0; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 1.7; background: #0A1728; color: #C9D7E8; border-radius: 14px; padding: 18px 22px; overflow-x: auto;"><span style="color: #7FE0A7;">curl</span> -X POST "https://api.spotts.ng/v1/partner/blocks" \
+  -H <span style="color: #FFD28A;">"Authorization: Bearer spk_your_api_key_here"</span> \
+  -H "Content-Type: application/json" \
+  -d '{ "court_id": 15, "date": "2026-07-10",
+        "start_time": "10:00", "end_time": "11:00",
+        "partner_reference": "YOUR-BK-12345" }'
+
+<span style="color: #6B7C93;">// 201 Created</span>
+{ "success": true, "message": "Block created successfully.",
+  "data": { "block_reference": <span style="color: #7FE0A7;">"EXT-A1B2"</span>,
+    "partner_reference": "YOUR-BK-12345",
+    "court_id": 15, "date": "2026-07-10",
+    "start_time": "10:00", "end_time": "11:00",
+    "status": "active", "released_at": null } }
+
+<span style="color: #6B7C93;">// 409 Conflict — slot taken</span>
+{ "success": false, "error": <span style="color: #FF9A9E;">"SLOT_UNAVAILABLE"</span>,
+  "message": "This time slot is not available." }</pre>
+      </div>
+
+      <!-- 4. List blocks -->
+      <div id="list-blocks">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+          <span style="font-size: 12px; font-weight: 800; letter-spacing: .08em; color: #007AFF; background: #F0F6FF; border: 1px solid rgba(0,122,255,.25); padding: 5px 12px; border-radius: 8px;">GET</span>
+          <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 15px; font-weight: 600; color: #0A1220;">/blocks</code>
+        </div>
+        <h2 style="margin: 0 0 12px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #0A1220;">List blocks</h2>
+        <p style="margin: 0;">All blocks created by your account. Filter with <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">court_id</code>, <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">date_from</code> / <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">date_to</code>, <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">status</code> (<code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px;">active</code> | <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px;">released</code>) and <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">per_page</code> (max 100, default 50). Responses are paginated.</p>
+      </div>
+
+      <!-- 5. Block details -->
+      <div id="block-details">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+          <span style="font-size: 12px; font-weight: 800; letter-spacing: .08em; color: #007AFF; background: #F0F6FF; border: 1px solid rgba(0,122,255,.25); padding: 5px 12px; border-radius: 8px;">GET</span>
+          <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 15px; font-weight: 600; color: #0A1220;">/blocks/{blockReference}</code>
+        </div>
+        <h2 style="margin: 0 0 12px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #0A1220;">Get block details</h2>
+        <p style="margin: 0;">Fetch one block by its Spotts-assigned reference (e.g. <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">EXT-A1B2</code>). Returns <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #C4363B;">BLOCK_NOT_FOUND</code> if it doesn't exist or belongs to another partner.</p>
+      </div>
+
+      <!-- 6. Reschedule -->
+      <div id="reschedule">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+          <span style="font-size: 12px; font-weight: 800; letter-spacing: .08em; color: #B07A1F; background: #FDF8EE; border: 1px solid rgba(176,122,31,.35); padding: 5px 12px; border-radius: 8px;">PUT</span>
+          <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 15px; font-weight: 600; color: #0A1220;">/blocks/{blockReference}/reschedule</code>
+        </div>
+        <h2 style="margin: 0 0 12px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #0A1220;">Reschedule block — atomic</h2>
+        <p style="margin: 0 0 14px;">Moves a block to a new court/date/time in one atomic operation: either the old block is released <i>and</i> the new one created, or nothing changes. Never release-then-create manually — if the create fails, your user ends up with no booking at all.</p>
+        <pre style="margin: 0; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 1.7; background: #0A1728; color: #C9D7E8; border-radius: 14px; padding: 18px 22px; overflow-x: auto;"><span style="color: #7FE0A7;">curl</span> -X PUT "https://api.spotts.ng/v1/partner/blocks/EXT-A1B2/reschedule" \
+  -H <span style="color: #FFD28A;">"Authorization: Bearer spk_your_api_key_here"</span> \
+  -H "Content-Type: application/json" \
+  -d '{ "court_id": 15, "date": "2026-07-12",
+        "start_time": "14:00", "end_time": "15:00" }'
+
+<span style="color: #6B7C93;">// 200 OK — old released, new active</span>
+{ "success": true, "data": {
+    "old_block": { "block_reference": "EXT-A1B2", "status": <span style="color: #FF9A9E;">"released"</span> },
+    "new_block": { "block_reference": "EXT-C3D4", "status": <span style="color: #7FE0A7;">"active"</span>,
+                   "date": "2026-07-12", "start_time": "14:00" } } }</pre>
+      </div>
+
+      <!-- 7. Release -->
+      <div id="release">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 12px;">
+          <span style="font-size: 12px; font-weight: 800; letter-spacing: .08em; color: #C4363B; background: #FDF3F3; border: 1px solid rgba(196,54,59,.3); padding: 5px 12px; border-radius: 8px;">DELETE</span>
+          <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 15px; font-weight: 600; color: #0A1220;">/blocks/{blockReference}</code>
+        </div>
+        <h2 style="margin: 0 0 12px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #0A1220;">Release block</h2>
+        <p style="margin: 0 0 14px;">Frees the slot for customers again. Optional <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">reason</code>: <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px;">cancelled</code> (required behaviour for future slots), <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px;">completed</code> or <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px;">no_show</code> (both tracking-only). Idempotent — releasing an already-released block still returns success.</p>
+        <pre style="margin: 0; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 1.7; background: #0A1728; color: #C9D7E8; border-radius: 14px; padding: 18px 22px; overflow-x: auto;"><span style="color: #6B7C93;"># Booking cancelled — REQUIRED, frees the slot</span>
+<span style="color: #7FE0A7;">curl</span> -X DELETE ".../blocks/EXT-A1B2?reason=cancelled" \
+  -H <span style="color: #FFD28A;">"Authorization: Bearer spk_your_api_key_here"</span>
+
+{ "success": true, "message": "Block released successfully." }</pre>
+      </div>
+
+      <!-- Webhooks -->
+      <div id="webhooks">
+        <h2 style="margin: 0 0 14px; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; color: #0A1220;">Webhooks — events &amp; signatures</h2>
+        <p style="margin: 0 0 16px;">Spotts pushes availability changes to your configured URL, so you don't have to poll. Every delivery is signed with HMAC-SHA256 over <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">{timestamp}.{json_payload}</code> — always verify <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">X-Spotts-Signature</code>.</p>
+        <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; overflow: clip; font-size: 13.5px; margin-bottom: 16px;">
+          <div style="display: grid; grid-template-columns: 170px 1fr; gap: 12px; padding: 12px 18px; background: #F4F7FC; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8794A8;"><span>Event</span><span>Fires when</span></div>
+          <div style="display: grid; grid-template-columns: 170px 1fr; gap: 12px; padding: 11px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #007AFF;">slot.booked</code><span>A customer books a slot through the app</span></div>
+          <div style="display: grid; grid-template-columns: 170px 1fr; gap: 12px; padding: 11px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #007AFF;">slot.freed</code><span>A booking is cancelled — slot available again</span></div>
+          <div style="display: grid; grid-template-columns: 170px 1fr; gap: 12px; padding: 11px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #007AFF;">slot.blocked</code><span>A slot is blocked by a partner or venue staff</span></div>
+          <div style="display: grid; grid-template-columns: 170px 1fr; gap: 12px; padding: 11px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #007AFF;">slot.unblocked</code><span>A block is released — slot available again</span></div>
+          <div style="display: grid; grid-template-columns: 170px 1fr; gap: 12px; padding: 11px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #007AFF;">webhook.test</code><span>Triggered via the test endpoint</span></div>
+        </div>
+        <pre style="margin: 0 0 16px; font-family: 'SF Mono', Menlo, Consolas, monospace; font-size: 13px; line-height: 1.7; background: #0A1728; color: #C9D7E8; border-radius: 14px; padding: 18px 22px; overflow-x: auto;"><span style="color: #6B7C93;">// Node.js signature verification</span>
+<span style="color: #B8A9F5;">const</span> expected = crypto.createHmac(<span style="color: #FFD28A;">'sha256'</span>, secret)
+  .update(<span style="color: #FFD28A;">`${timestamp}.${JSON.stringify(payload)}`</span>)
+  .digest(<span style="color: #FFD28A;">'hex'</span>);
+
+crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected));</pre>
+        <p style="margin: 0;">Your endpoint must accept JSON POSTs, respond <b style="color: #0A1220;">2xx within 10 seconds</b>, and be idempotent (dedupe on <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 13px; background: #EFF3F9; padding: 2px 7px; border-radius: 6px; color: #0A1220;">event_id</code>). Failed deliveries retry automatically; after ~10 consecutive failures the webhook is paused (circuit breaker).</p>
+      </div>
+
+      <!-- Webhook endpoints -->
+      <div id="webhook-endpoints">
+        <h2 style="margin: 0 0 14px; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; color: #0A1220;">Webhook deliveries &amp; testing</h2>
+        <div style="display: flex; flex-direction: column; gap: 12px;">
+          <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; padding: 16px 20px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+            <span style="font-size: 11.5px; font-weight: 800; letter-spacing: .08em; color: #007AFF; background: #F0F6FF; border: 1px solid rgba(0,122,255,.25); padding: 4px 10px; border-radius: 7px;">GET</span>
+            <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 14px; font-weight: 600; color: #0A1220;">/webhooks/deliveries</code>
+            <span style="font-size: 13.5px; color: #51607A;">Delivery history — filter by <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">status</code> (success / failed / pending) or <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">event_type</code>; includes attempts and full payloads.</span>
+          </div>
+          <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; padding: 16px 20px; display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;">
+            <span style="font-size: 11.5px; font-weight: 800; letter-spacing: .08em; color: #1FA855; background: #F3FBF5; border: 1px solid rgba(31,168,85,.3); padding: 4px 10px; border-radius: 7px;">POST</span>
+            <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 14px; font-weight: 600; color: #0A1220;">/webhooks/test</code>
+            <span style="font-size: 13.5px; color: #51607A;">Sends a test event to your URL. Requires webhook URL + secret configured by the Spotts admin team first.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Errors -->
+      <div id="errors">
+        <h2 style="margin: 0 0 14px; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; color: #0A1220;">Error codes reference</h2>
+        <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; overflow: clip; font-size: 13.5px;">
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 12px 18px; background: #F4F7FC; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #8794A8;"><span>Code</span><span>HTTP</span><span>Meaning</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">MISSING_API_KEY</code><span style="font-weight: 700;">401</span><span>No Authorization header provided</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">INVALID_API_KEY</code><span style="font-weight: 700;">401</span><span>API key doesn't match any partner</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">API_KEY_REVOKED</code><span style="font-weight: 700;">401</span><span>Key permanently revoked</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">PARTNER_SUSPENDED</code><span style="font-weight: 700;">403</span><span>Partner account temporarily suspended</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">VENUE_ACCESS_DENIED</code><span style="font-weight: 700;">403</span><span>No access to the requested venue</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">RATE_LIMIT_EXCEEDED</code><span style="font-weight: 700;">429</span><span>Too many requests in the window</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">COURT_NOT_FOUND</code><span style="font-weight: 700;">404</span><span>Court ID does not exist</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">BLOCK_NOT_FOUND</code><span style="font-weight: 700;">404</span><span>Block missing or owned by another partner</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">SLOT_UNAVAILABLE</code><span style="font-weight: 700;">409</span><span>Slot already booked or blocked</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">DATE_IN_PAST</code><span style="font-weight: 700;">400</span><span>Requested date is in the past</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">DATE_TOO_FAR_AHEAD</code><span style="font-weight: 700;">400</span><span>Beyond your max advance days limit</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">VENUE_CLOSED</code><span style="font-weight: 700;">400</span><span>Venue closed on this day</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">OUTSIDE_OPERATING_HOURS</code><span style="font-weight: 700;">400</span><span>Slot outside operating hours</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">INVALID_TIME_RANGE</code><span style="font-weight: 700;">400</span><span>End time must be after start time</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">BLACKOUT_DATE</code><span style="font-weight: 700;">400</span><span>Date is unavailable (e.g. tournament)</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">INVALID_REASON</code><span style="font-weight: 700;">422</span><span>Invalid release reason</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">RESCHEDULE_FAILED</code><span style="font-weight: 700;">500</span><span>Atomic reschedule operation failed</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">NO_WEBHOOK_URL</code><span style="font-weight: 700;">400</span><span>No webhook URL configured</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">NO_WEBHOOK_SECRET</code><span style="font-weight: 700;">400</span><span>No webhook secret configured</span></div>
+          <div style="display: grid; grid-template-columns: 220px 56px 1fr; gap: 12px; padding: 10px 18px; border-top: 1px solid rgba(10,18,32,.06);"><code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px; color: #C4363B;">VALIDATION_ERROR</code><span style="font-weight: 700;">422</span><span>Request validation failed</span></div>
+        </div>
+      </div>
+
+      <!-- Best practices -->
+      <div id="best-practices">
+        <h2 style="margin: 0 0 14px; font-size: 26px; font-weight: 800; letter-spacing: -0.025em; color: #0A1220;">Integration best practices</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 14px;">
+          <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; padding: 18px 22px;"><div style="font-size: 15px; font-weight: 700; color: #0A1220; margin-bottom: 6px;">Release cancelled blocks, always</div><div style="font-size: 14px; line-height: 1.6; color: #51607A;">Future-slot cancellations must release the block immediately with <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">reason=cancelled</code> — it keeps availability accurate across platforms.</div></div>
+          <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; padding: 18px 22px;"><div style="font-size: 15px; font-weight: 700; color: #0A1220; margin-bottom: 6px;">Use idempotency keys</div><div style="font-size: 14px; line-height: 1.6; color: #51607A;">A unique <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">partner_reference</code> per block makes retries safe — no duplicates on network failures.</div></div>
+          <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; padding: 18px 22px;"><div style="font-size: 15px; font-weight: 700; color: #0A1220; margin-bottom: 6px;">Cache court lists</div><div style="font-size: 14px; line-height: 1.6; color: #51607A;">Courts rarely change. Cache <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">GET /courts</code> and refresh every few hours, not per request.</div></div>
+          <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; padding: 18px 22px;"><div style="font-size: 15px; font-weight: 700; color: #0A1220; margin-bottom: 6px;">Respect rate limits</div><div style="font-size: 14px; line-height: 1.6; color: #51607A;">Watch <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">X-RateLimit-Remaining</code>; on a 429, honour <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">Retry-After</code>.</div></div>
+          <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; padding: 18px 22px;"><div style="font-size: 15px; font-weight: 700; color: #0A1220; margin-bottom: 6px;">Prefer webhooks over polling</div><div style="font-size: 14px; line-height: 1.6; color: #51607A;">Real-time notifications are cheaper and faster than polling availability — and always verify signatures.</div></div>
+          <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 16px; background: #fff; padding: 18px 22px;"><div style="font-size: 15px; font-weight: 700; color: #0A1220; margin-bottom: 6px;">Timezones</div><div style="font-size: 14px; line-height: 1.6; color: #51607A;">All times are West Africa Time (WAT, UTC+1). Dates are <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">YYYY-MM-DD</code>, times 24-hour <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 12.5px;">HH:MM</code>.</div></div>
+        </div>
+        <div style="margin-top: 24px; border: 1px solid rgba(0,122,255,.2); background: #F0F6FF; border-radius: 16px; padding: 22px 26px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px;">
+          <div>
+            <div style="font-size: 17px; font-weight: 800; color: #0A1220; margin-bottom: 4px;">Ready to integrate?</div>
+            <div style="font-size: 14px; color: #51607A;">Get onboarded as a partner — API key, venue access and webhook setup.</div>
+          </div>
+          <a href="mailto:info@spottsapp.com?subject=Partner%20API%20access" style="font-size: 14.5px; font-weight: 600; color: #fff; background: #007AFF; text-decoration: none; padding: 12px 24px; border-radius: 999px; white-space: nowrap;" style-hover="background: #0069DE;">info@spottsapp.com →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer data-screen-label="Footer" style="background: #071120; color: #fff;">
+    <div style="max-width: 1280px; margin: 0 auto; padding: clamp(40px,6vh,64px) clamp(20px,4vw,48px) 36px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 32px; justify-content: space-between; align-items: center; padding-bottom: 28px; border-bottom: 1px solid rgba(255,255,255,.1);">
+        <img src="/premium/logo-blue-white.svg" alt="Spotts" style="height: 24px; display: block;">
+        <div style="display: flex; flex-wrap: wrap; gap: clamp(16px,3vw,32px); font-size: 14px;">
+          <a href="/" style="color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Home</a>
+          <a href="/book" style="color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Book a court</a>
+          <a href="/events" style="color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Events</a>
+          <a href="/support" style="color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Support</a>
+          <a href="/terms" style="color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Terms</a>
+        </div>
+      </div>
+      <div style="padding-top: 22px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,.4);">
+        <span>© 2026 Spotts. Made in Abuja.</span>
+        <span>Partner API v1 · Last updated February 2026 · All times WAT (UTC+1)</span>
+      </div>
+    </div>
+  </footer>
+
+</div>

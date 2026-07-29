@@ -1,0 +1,266 @@
+<div style="font-family: 'Inter Display', 'Helvetica Neue', sans-serif; color: #0A1220; background: #FAFBFD; overflow-x: clip;">
+
+  <!-- ============ NAV ============ -->
+  <header data-screen-label="Nav" style="position: sticky; top: 0; z-index: 60; background: rgba(250,251,253,.88); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(10,18,32,.07);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,4vw,48px); height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <img src="/premium/logo-blue-black.svg" alt="Spotts" style="height: 26px; display: block;">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #007AFF; border: 1px solid rgba(0,122,255,.3); padding: 4px 10px; border-radius: 999px;">Events</span>
+      </a>
+      <nav aria-label="Primary" data-mm="nav" style="display: flex; align-items: center; gap: clamp(16px,2.5vw,32px); font-size: 14.5px; font-weight: 500;">
+        <a href="#tickets" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Tickets</a>
+        <a href="#organisers" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">For organisers</a>
+        <a href="/book" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Book a court</a>
+      </nav>
+      <div data-mm="cta" style="display: flex; align-items: center; gap: 10px;">
+        <a href="#organisers" data-magnetic="1" style="font-size: 14px; font-weight: 600; color: #0A1220; text-decoration: none; padding: 9px 16px; border: 1px solid rgba(10,18,32,.14); border-radius: 999px; white-space: nowrap;" style-hover="border-color: rgba(10,18,32,.4);">I run an event</a>
+        <a href="/#cta" data-magnetic="1" style="font-size: 14px; font-weight: 600; color: #fff; background: #007AFF; text-decoration: none; padding: 10px 18px; border-radius: 999px; white-space: nowrap;" style-hover="background: #0069DE;">Get the app</a>
+      </div>
+      <button type="button" data-mm="burger" aria-label="Open menu" style="display: none; align-items: center; justify-content: center; width: 42px; height: 42px; border: 1px solid rgba(10,18,32,.14); border-radius: 12px; background: #fff; color: #0A1220; font-size: 20px; line-height: 1; cursor: pointer; padding: 0;">☰</button>
+    </div>
+    <div data-mm="panel" style="display: none; border-top: 1px solid rgba(10,18,32,.08); background: rgba(250,251,253,.98); padding: 10px clamp(20px,4vw,48px) 22px;">
+      <nav aria-label="Mobile" style="display: flex; flex-direction: column;">
+        <a href="#tickets" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">Tickets</a>
+        <a href="#organisers" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">For organisers</a>
+        <a href="/book" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">Book a court</a>
+        <a href="#organisers" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">I run an event</a>
+        <a href="/#cta" data-mm-close="1" style="text-align: center; font-size: 15px; font-weight: 600; color: #fff; background: #007AFF; text-decoration: none; padding: 14px 16px; border-radius: 12px; margin-top: 14px;">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" data-screen-label="Events hero" style="position: relative; overflow: clip;">
+    <div aria-hidden="true" style="position: absolute; left: -30px; bottom: -40px; font-size: clamp(120px,18vw,260px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(0,122,255,.09); user-select: none; pointer-events: none;">EVENTS</div>
+    <!-- Sports ball line art -->
+    <svg aria-hidden="true" viewBox="0 0 400 400" style="position: absolute; right: -80px; top: 40px; width: clamp(220px,26vw,400px); pointer-events: none;">
+      <g fill="none" stroke="#007AFF" stroke-opacity=".11" stroke-width="2">
+        <circle cx="200" cy="200" r="170"></circle>
+        <path d="M78 80 Q 200 200 78 320"></path>
+        <path d="M322 80 Q 200 200 322 320"></path>
+      </g>
+    </svg>
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px,8vh,96px) clamp(20px,4vw,48px) clamp(64px,9vh,110px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: clamp(36px,5vw,72px); align-items: center; position: relative;">
+      <div>
+        <div data-reveal="1" style="display: inline-flex; align-items: center; gap: 12px; margin: 0 0 28px; padding: 8px 18px; border: 1px solid rgba(10,18,32,.1); border-radius: 999px; background: #fff; font-size: 11.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #51607A; box-shadow: 0 2px 8px rgba(10,18,32,.05);">
+          <span style="display: inline-flex; align-items: center; gap: 8px; color: #007AFF; white-space: nowrap;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #007AFF; animation: spotts-pulse 2.4s ease-in-out infinite;"></span>Spotts Events</span>
+          <span aria-hidden="true" style="width: 1px; height: 12px; background: rgba(10,18,32,.15);"></span>
+          <span style="white-space: nowrap;">Ticketing, powered by Spotts</span>
+        </div>
+        <h1 style="margin: 0 0 24px; font-size: clamp(42px,6vw,84px); line-height: .96; font-weight: 800; letter-spacing: -0.05em; text-wrap: balance;">
+          <span data-split="1" style="display: block;">Tournaments, finals,</span>
+          <span data-split="1" style="display: block; color: #007AFF;">game nights. Ticketed.</span>
+        </h1>
+        <p data-reveal="1" style="margin: 0 0 36px; max-width: 48ch; font-size: clamp(16px,1.4vw,19px); line-height: 1.6; color: #51607A; text-wrap: pretty;">Spotts hosts and powers tickets for sports events across Abuja. Find them right on the app's home screen, pay in seconds, and your QR ticket lands instantly — no printouts, no gate lists, no waiting.</p>
+        <div data-reveal="1" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center;">
+          <a href="/#cta" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; background: #0A1220; color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; padding: 14px 26px; border-radius: 14px;" style-hover="background: #1A2536;">Get tickets in the app</a>
+          <a href="#organisers" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; color: #0A1220; text-decoration: none; font-size: 15px; font-weight: 600; padding: 14px 26px; border-radius: 14px; border: 1px solid rgba(10,18,32,.14);" style-hover="border-color: rgba(10,18,32,.4);">Host your event →</a>
+        </div>
+      </div>
+
+      <!-- Ticket visual -->
+      <div style="position: relative; display: flex; justify-content: center; padding: 24px 0;">
+        <div data-reveal="1" style="position: relative; width: min(400px, 100%); background: #0A1220; color: #fff; border-radius: 22px; box-shadow: 0 40px 90px -34px rgba(10,18,32,.55); animation: spotts-float 6s ease-in-out infinite;">
+          <div style="padding: 26px 28px 22px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px;">
+              <img src="/premium/logo-blue-white.svg" alt="Spotts" style="height: 18px;">
+              <span style="font-size: 10.5px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.5);">E-Ticket</span>
+            </div>
+            <div style="font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: #5AA9FF; font-weight: 700; margin-bottom: 8px;">Padel · Tournament final</div>
+            <div style="font-size: 24px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; margin-bottom: 16px;">Abuja Padel Open — Finals Night</div>
+            <div style="display: flex; gap: 24px; flex-wrap: wrap; font-size: 13px;">
+              <div><div style="color: rgba(255,255,255,.45); font-size: 11px; margin-bottom: 3px;">Date</div><div style="font-weight: 600;">Sat, 18 July</div></div>
+              <div><div style="color: rgba(255,255,255,.45); font-size: 11px; margin-bottom: 3px;">Doors</div><div style="font-weight: 600;">5:00 PM</div></div>
+              <div><div style="color: rgba(255,255,255,.45); font-size: 11px; margin-bottom: 3px;">Venue</div><div style="font-weight: 600;">Padel Republic, Wuse</div></div>
+            </div>
+          </div>
+          <!-- perforation -->
+          <div style="position: relative; display: flex; align-items: center; padding: 0 8px;">
+            <span aria-hidden="true" style="position: absolute; left: -11px; width: 22px; height: 22px; border-radius: 50%; background: #FAFBFD;"></span>
+            <span aria-hidden="true" style="flex: 1; border-top: 2px dashed rgba(255,255,255,.22); margin: 0 16px;"></span>
+            <span aria-hidden="true" style="position: absolute; right: -11px; width: 22px; height: 22px; border-radius: 50%; background: #FAFBFD;"></span>
+          </div>
+          <div style="padding: 22px 28px 26px; display: flex; align-items: center; gap: 20px;">
+            <div style="background: #fff; border-radius: 12px; padding: 10px;">
+              <div style="display: grid; grid-template-columns: repeat(7, 8px); grid-auto-rows: 8px; gap: 3px;">
+                <span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span>
+                <span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span>
+                <span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span>
+                <span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span>
+                <span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span>
+                <span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span>
+                <span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span>
+              </div>
+            </div>
+            <div>
+              <div style="font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 6px;">Admit one</div>
+              <div style="font-size: 17px; font-weight: 700;">₦7,500 · Paid ✓</div>
+              <div style="font-size: 12px; color: #9FE870; margin-top: 6px; display: flex; align-items: center; gap: 7px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #9FE870; animation: spotts-pulse 2s ease-in-out infinite;"></span>Delivered instantly</div>
+            </div>
+          </div>
+        </div>
+        <div data-reveal="1" style="position: absolute; right: 0; bottom: 0; z-index: 3; background: #fff; border: 1px solid rgba(10,18,32,.08); box-shadow: 0 16px 36px -14px rgba(10,18,32,.3); border-radius: 14px; padding: 11px 15px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 9px;">
+          <span style="width: 26px; height: 26px; border-radius: 50%; background: #F0F6FF; display: grid; place-items: center; font-size: 12px;">✓</span> Scanned at the gate · 5:02 PM
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW TICKETS WORK ============ -->
+  <section id="tickets" data-screen-label="How tickets work" style="border-top: 1px solid rgba(10,18,32,.07); background: #fff;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(72px,10vh,130px) clamp(20px,4vw,48px);">
+      <p data-reveal="1" style="margin: 0 0 18px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #007AFF;">For fans · How it works</p>
+      <h2 data-split="1" style="margin: 0 0 12px; max-width: 20ch; font-size: clamp(32px,4.4vw,56px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; text-wrap: balance;">Home screen to front row.</h2>
+      <p data-reveal="1" style="margin: 0 0 64px; max-width: 54ch; font-size: 17px; line-height: 1.6; color: #51607A; text-wrap: pretty;">Events live right on the Spotts home screen, next to the courts you already book. Your ticket is a QR code — it can't get lost, and it scans in a second.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 20px;">
+        <div data-reveal="1" style="border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #FAFBFD; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 14px;">
+          <span style="color: #007AFF; font-size: 13px; font-weight: 800; letter-spacing: .08em;">01</span>
+          <h3 style="margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.02em;">Spot it on the home screen</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #51607A;">Tournaments, finals and featured game nights appear alongside venues — no separate app, no ticket site.</p>
+        </div>
+        <div data-reveal="1" style="border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #FAFBFD; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 14px;">
+          <span style="color: #007AFF; font-size: 13px; font-weight: 800; letter-spacing: .08em;">02</span>
+          <h3 style="margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.02em;">Pay in seconds</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #51607A;">The same secure checkout you use for court bookings. Pay, and the ticket is yours — no confirmation emails to dig for.</p>
+        </div>
+        <div data-reveal="1" style="border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #FAFBFD; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 14px;">
+          <span style="color: #007AFF; font-size: 13px; font-weight: 800; letter-spacing: .08em;">03</span>
+          <h3 style="margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.02em;">QR ticket, instantly</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #51607A;">A unique QR code lands in your app the moment payment clears. It's your ticket — nobody else can use it.</p>
+        </div>
+        <div data-reveal="1" style="border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #FAFBFD; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 14px;">
+          <span style="color: #007AFF; font-size: 13px; font-weight: 800; letter-spacing: .08em;">04</span>
+          <h3 style="margin: 0; font-size: 19px; font-weight: 700; letter-spacing: -0.02em;">Scan at the gate</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #51607A;">Staff scan your code and you're in — checked in against the guest list in real time. No printouts, no name-checking.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOR ORGANISERS (DARK) ============ -->
+  <section id="organisers" data-screen-label="For organisers" style="background: #071120; color: #fff; position: relative; overflow: clip;">
+    <div aria-hidden="true" style="position: absolute; right: -40px; top: 50px; font-size: clamp(100px,15vw,220px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(90,169,255,.12); user-select: none; pointer-events: none;">HOST</div>
+    <!-- Basketball half-court line art -->
+    <svg aria-hidden="true" viewBox="0 0 520 420" style="position: absolute; left: -80px; bottom: -60px; width: clamp(280px,32vw,500px); pointer-events: none;">
+      <g fill="none" stroke="#5AA9FF" stroke-opacity=".1" stroke-width="2">
+        <rect x="20" y="20" width="480" height="380"></rect>
+        <rect x="20" y="130" width="190" height="160"></rect>
+        <circle cx="210" cy="210" r="62"></circle>
+        <path d="M20 60 Q 330 60 330 210 Q 330 360 20 360"></path>
+        <circle cx="75" cy="210" r="8"></circle>
+      </g>
+    </svg>
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(80px,11vh,140px) clamp(20px,4vw,48px); position: relative;">
+      <p data-reveal="1" style="margin: 0 0 18px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #5AA9FF;">For event organisers</p>
+      <h2 data-split="1" style="margin: 0 0 16px; max-width: 20ch; font-size: clamp(32px,4.4vw,56px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; color: #fff; text-wrap: balance;">You run the event. Spotts runs the door.</h2>
+      <p data-reveal="1" style="margin: 0 0 56px; max-width: 62ch; font-size: 17px; line-height: 1.65; color: rgba(255,255,255,.62); text-wrap: pretty;">List your event on Spotts and get a dedicated event dashboard — sales, revenue and live check-ins in one place. Tickets are paid upfront and every entry is scanned, so the numbers at the gate always match the numbers in the bank.</p>
+
+      <!-- Event dashboard mock -->
+      <div data-reveal="1" style="border: 1px solid rgba(255,255,255,.1); border-radius: 20px; background: #0A1728; overflow: hidden;">
+        <div style="padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <img src="/premium/icon-white.svg" alt="" style="height: 18px;">
+          <span style="font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,.85);">Abuja Padel Open — Event Dashboard</span>
+          <span style="margin-left: auto; display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: #9FE870; border: 1px solid rgba(159,232,112,.3); padding: 4px 12px; border-radius: 999px; white-space: nowrap;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #9FE870; animation: spotts-pulse 2s ease-in-out infinite;"></span>Event live</span>
+        </div>
+        <div style="padding: clamp(16px,2.5vw,28px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+              <div style="border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 14px;"><div style="font-size: 11.5px; color: rgba(255,255,255,.5); margin-bottom: 6px;">Tickets sold</div><div style="font-size: clamp(20px,2vw,26px); font-weight: 800; letter-spacing: -0.02em;"><span data-count-to="418">0</span></div><div style="font-size: 11.5px; color: #6EE7A0; margin-top: 4px;">of 500 capacity</div></div>
+              <div style="border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 14px;"><div style="font-size: 11.5px; color: rgba(255,255,255,.5); margin-bottom: 6px;">Revenue</div><div style="font-size: clamp(20px,2vw,26px); font-weight: 800; letter-spacing: -0.02em;">₦<span data-count-to="3135" data-count-comma="1">0</span>k</div><div style="font-size: 11.5px; color: #6EE7A0; margin-top: 4px;">All paid upfront</div></div>
+              <div style="border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 14px;"><div style="font-size: 11.5px; color: rgba(255,255,255,.5); margin-bottom: 6px;">Checked in</div><div style="font-size: clamp(20px,2vw,26px); font-weight: 800; letter-spacing: -0.02em;"><span data-count-to="292">0</span></div><div style="font-size: 11.5px; color: rgba(255,255,255,.5); margin-top: 4px;">Live at the gate</div></div>
+            </div>
+            <div style="border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 16px;">
+              <div style="font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,.7); margin-bottom: 14px;">Ticket sales · last 7 days</div>
+              <div style="display: flex; align-items: flex-end; gap: 10px; height: 110px;">
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 22%; background: #87C1FF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Sat</span></div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 30%; background: #5AA9FF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Sun</span></div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 26%; background: #87C1FF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Mon</span></div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 44%; background: #5AA9FF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Tue</span></div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 58%; background: #2E8FFF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Wed</span></div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 74%; background: #2E8FFF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Thu</span></div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 96%; background: #007AFF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Fri</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 16px; display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 10px;">
+              <span style="font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,.7);">Live check-ins · gate scanner</span>
+              <span style="font-size: 11px; color: #5AA9FF; border: 1px solid rgba(90,169,255,.35); padding: 3px 9px; border-radius: 999px; white-space: nowrap;">2 scanners active</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px; font-size: 12.5px;">
+              <div data-cal-block="1" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; border-radius: 9px; background: rgba(159,232,112,.1); padding: 9px 12px;"><span style="font-weight: 600;">Tolu A. · General</span><span style="color: #9FE870; font-weight: 700;">✓ 5:14 PM</span></div>
+              <div data-cal-block="1" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; border-radius: 9px; background: rgba(159,232,112,.1); padding: 9px 12px;"><span style="font-weight: 600;">Kemi O. · VIP</span><span style="color: #9FE870; font-weight: 700;">✓ 5:14 PM</span></div>
+              <div data-cal-block="1" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; border-radius: 9px; background: rgba(159,232,112,.1); padding: 9px 12px;"><span style="font-weight: 600;">Musa I. · General</span><span style="color: #9FE870; font-weight: 700;">✓ 5:13 PM</span></div>
+              <div data-cal-block="1" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; border-radius: 9px; background: rgba(255,255,255,.06); padding: 9px 12px;"><span style="font-weight: 600;">Duplicate scan blocked</span><span style="color: rgba(255,255,255,.5); font-weight: 700;">✕ 5:12 PM</span></div>
+              <div data-cal-block="1" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; border-radius: 9px; background: rgba(159,232,112,.1); padding: 9px 12px;"><span style="font-weight: 600;">Adaeze N. · General</span><span style="color: #9FE870; font-weight: 700;">✓ 5:12 PM</span></div>
+            </div>
+            <div style="margin-top: auto; padding-top: 14px; font-size: 11.5px; color: rgba(255,255,255,.45);">Every ticket is single-use — a scanned QR can't be reused at the gate.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Organiser pillars -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: clamp(24px,3vw,40px); margin-top: 56px;">
+        <div data-reveal="1" style="border-top: 1px solid rgba(255,255,255,.14); padding-top: 22px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em;">Sell to people already playing</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.6);">Your event goes on the home screen of the people booking courts every week — the exact audience that shows up.</p>
+        </div>
+        <div data-reveal="1" style="border-top: 1px solid rgba(255,255,255,.14); padding-top: 22px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em;">Paid upfront, settled to you</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.6);">Every ticket is paid at purchase through secure checkout, with settlement to your account — no cash box, no chasing transfers.</p>
+        </div>
+        <div data-reveal="1" style="border-top: 1px solid rgba(255,255,255,.14); padding-top: 22px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em;">A door that can't be argued with</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.6);">One scan per ticket, live guest list, duplicate scans blocked automatically. Your team manages everything from the dashboard.</p>
+        </div>
+      </div>
+
+      <div data-reveal="1" style="margin-top: 56px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; border: 1px solid rgba(255,255,255,.12); border-radius: 20px; padding: clamp(24px,3vw,36px); background: rgba(255,255,255,.03);">
+        <div>
+          <h3 style="margin: 0 0 8px; font-size: clamp(20px,2.2vw,26px); font-weight: 700; letter-spacing: -0.02em;">Hosting a tournament or game night?</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.6); max-width: 52ch;">Tell us about your event and we'll set up ticketing, the dashboard and gate scanning.</p>
+        </div>
+        <a href="/contact#event" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; background: #007AFF; color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; padding: 14px 26px; border-radius: 999px; white-space: nowrap;" style-hover="background: #0069DE;">Power my event with Spotts →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer data-screen-label="Footer" style="background: #071120; color: #fff; border-top: 1px solid rgba(255,255,255,.08);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(48px,7vh,80px) clamp(20px,4vw,48px) 40px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: flex-start; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1);">
+        <div style="max-width: 320px;">
+          <img src="/premium/logo-blue-white.svg" alt="Spotts" style="height: 26px; display: block; margin-bottom: 16px;">
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.55);">Sports venues, gyms and event tickets, booked in seconds. Live in Abuja on iOS, Android and WhatsApp.</p>
+        </div>
+        <div style="display: flex; gap: clamp(32px,5vw,64px); flex-wrap: wrap;">
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">Product</span>
+            <a href="/#bot" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">WhatsApp bot</a>
+            <a href="/#app" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">The app</a>
+            <a href="/#venues" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">For venues</a>
+            <a href="/events" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Spotts Events</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">Support</span>
+            <a href="/support" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Help &amp; support</a>
+            <a href="/support#delete-account" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Delete account</a>
+            <a href="mailto:info@spottsapp.com" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">info@spottsapp.com</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">Legal</span>
+            <a href="/terms" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Terms &amp; Conditions</a>
+            <a href="/privacy" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Privacy Policy</a>
+            <a href="/refund" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Refund Policy</a>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top: 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,.4);">
+        <span>© 2026 Spotts. Made in Abuja.</span>
+        <span>Football · Padel · Tennis · Gyms · Events — booked in seconds.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>

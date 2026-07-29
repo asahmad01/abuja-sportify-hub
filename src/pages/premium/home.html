@@ -1,0 +1,692 @@
+<div style="font-family: 'Inter Display', 'Helvetica Neue', sans-serif; color: #0A1220; background: #FAFBFD; overflow-x: clip;">
+
+  <!-- ============ NAV ============ -->
+  <header data-screen-label="Nav" style="position: sticky; top: 0; z-index: 60; background: rgba(250,251,253,.88); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(10,18,32,.07);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,4vw,48px); height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="#top" style="display: flex; align-items: center; text-decoration: none;">
+        <img src="/premium/logo-blue-black.svg" alt="Spotts" style="height: 26px; display: block;">
+      </a>
+      <nav aria-label="Primary" data-mm="nav" style="display: flex; align-items: center; gap: clamp(14px,2.2vw,30px); font-size: 14.5px; font-weight: 500;">
+        <a href="#bot" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">WhatsApp bot</a>
+        <a href="#app" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">The app</a>
+        <a href="#venues" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">For venues</a>
+        <a href="/events" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Events</a>
+        <a href="/book" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Book a court</a>
+        <a href="/contact" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Contact</a>
+      </nav>
+      <div data-mm="cta" style="display: flex; align-items: center; gap: 10px;">
+        <a href="/contact#venue" data-magnetic="1" style="font-size: 14px; font-weight: 600; color: #0A1220; text-decoration: none; padding: 9px 16px; border: 1px solid rgba(10,18,32,.14); border-radius: 999px; white-space: nowrap;" style-hover="border-color: rgba(10,18,32,.4);">I run a venue</a>
+        <a href="#cta" data-magnetic="1" style="font-size: 14px; font-weight: 600; color: #fff; background: #007AFF; text-decoration: none; padding: 10px 18px; border-radius: 999px; white-space: nowrap;" style-hover="background: #0069DE;">Get the app</a>
+      </div>
+      <button type="button" data-mm="burger" aria-label="Open menu" style="display: none; align-items: center; justify-content: center; width: 42px; height: 42px; border: 1px solid rgba(10,18,32,.14); border-radius: 12px; background: #fff; color: #0A1220; font-size: 20px; line-height: 1; cursor: pointer; padding: 0;">☰</button>
+    </div>
+    <div data-mm="panel" style="display: none; border-top: 1px solid rgba(10,18,32,.08); background: rgba(250,251,253,.98); padding: 10px clamp(20px,4vw,48px) 22px;">
+      <nav aria-label="Mobile" style="display: flex; flex-direction: column;">
+        <a href="#bot" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">WhatsApp bot</a>
+        <a href="#app" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">The app</a>
+        <a href="#venues" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">For venues</a>
+        <a href="/events" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">Events</a>
+        <a href="/book" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">Book a court</a>
+        <a href="/contact" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0;">Contact</a>
+      </nav>
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 16px;">
+        <a href="/contact#venue" style="text-align: center; font-size: 15px; font-weight: 600; color: #0A1220; text-decoration: none; padding: 13px 16px; border: 1px solid rgba(10,18,32,.16); border-radius: 12px;">I run a venue</a>
+        <a href="#cta" data-mm-close="1" style="text-align: center; font-size: 15px; font-weight: 600; color: #fff; background: #007AFF; text-decoration: none; padding: 14px 16px; border-radius: 12px;">Get the app</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" data-screen-label="Hero" style="position: relative; overflow: clip; background: linear-gradient(175deg, #EDF4FE 0%, #FAFBFD 62%);">
+    <img src="/premium/icon-blue.svg" alt="" aria-hidden="true" style="position: absolute; left: clamp(-160px,-8vw,-70px); top: -50px; width: clamp(260px,28vw,460px); opacity: .1; transform: rotate(-10deg); pointer-events: none; user-select: none;">
+    <img src="/premium/icon-blue.svg" alt="" aria-hidden="true" style="position: absolute; right: clamp(-140px,-7vw,-60px); bottom: -90px; width: clamp(200px,20vw,340px); opacity: .08; transform: rotate(14deg); pointer-events: none; user-select: none;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px,8vh,96px) clamp(20px,4vw,48px) clamp(48px,7vh,88px); position: relative;">
+      <div style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 900px; margin: 0 auto;">
+        <div data-reveal="1" style="display: inline-flex; align-items: center; gap: 12px; margin: 0 0 30px; padding: 8px 18px; border: 1px solid rgba(10,18,32,.1); border-radius: 999px; background: #fff; font-size: 11.5px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #51607A; box-shadow: 0 2px 8px rgba(10,18,32,.05);">
+          <span style="display: inline-flex; align-items: center; gap: 8px; color: #007AFF; white-space: nowrap;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #007AFF; animation: spotts-pulse 2.4s ease-in-out infinite;"></span>Live in Abuja</span>
+          <span aria-hidden="true" style="width: 1px; height: 12px; background: rgba(10,18,32,.15);"></span>
+          <span style="white-space: nowrap;">Booking now</span>
+        </div>
+        <h1 style="margin: 0 0 26px; font-size: clamp(48px,7.4vw,104px); line-height: .94; font-weight: 800; letter-spacing: -0.05em; text-wrap: balance;">
+          <span data-split="1" style="display: block;">One message.</span>
+          <span data-split="1" style="display: block; color: #007AFF;">Court booked.</span>
+        </h1>
+        <p data-reveal="1" style="margin: 0 0 38px; max-width: 46ch; font-size: clamp(16px,1.4vw,19px); line-height: 1.6; color: #51607A; text-wrap: pretty;">Football pitches, padel courts, tennis and gyms across Abuja — paid and confirmed in seconds, from the app or straight from WhatsApp. No calls. No "let me get back to you."</p>
+        <div data-reveal="1" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center;">
+          <a href="https://apps.apple.com/app/id6758109546" target="_blank" rel="noopener noreferrer" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; background: #0A1220; color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; padding: 14px 26px; border-radius: 14px;" style-hover="background: #1A2536;">
+            <svg width="16" height="19" viewBox="0 0 16 19" fill="currentColor" aria-hidden="true"><path d="M13.1 10c0-2.2 1.8-3.2 1.9-3.3-1-1.5-2.6-1.7-3.2-1.7-1.4-.1-2.7.8-3.4.8-.7 0-1.8-.8-2.9-.8C4 5 2.6 5.9 1.9 7.2c-1.6 2.7-.4 6.7 1.1 8.9.7 1.1 1.6 2.3 2.7 2.2 1.1 0 1.5-.7 2.9-.7 1.3 0 1.7.7 2.9.7 1.2 0 2-1.1 2.7-2.2.9-1.2 1.2-2.4 1.2-2.5 0 0-2.3-.9-2.3-3.6zM10.9 3.1c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.6.6-1 1.6-.9 2.6 1 .1 1.9-.5 2.5-1.2z"></path></svg>
+            App Store
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.bleumeridiantech.spotts" target="_blank" rel="noopener noreferrer" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; background: #0A1220; color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; padding: 14px 26px; border-radius: 14px;" style-hover="background: #1A2536;">
+            <svg width="15" height="17" viewBox="0 0 16 17" aria-hidden="true"><path d="M1 1.3v14.4c0 .5.6.9 1 .6l12.4-7.2c.4-.3.4-.9 0-1.2L2 .7c-.4-.3-1 .1-1 .6z" fill="currentColor"></path></svg>
+            Google Play
+          </a>
+          <a href="https://wa.me/2347058888348" target="_blank" rel="noopener noreferrer" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; background: #1FA855; color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; padding: 14px 26px; border-radius: 14px; box-shadow: 0 12px 26px -12px rgba(31,168,85,.6);" style-hover="background: #179047;">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5 13.9c-.2.6-1.2 1.2-1.7 1.2-.4.1-1 .1-1.6-.1-3-.9-5-3-6.3-5.6-.4-.8-.6-1.9.1-2.7.2-.3.6-.4.9-.4h.6c.2 0 .5-.1.7.5l.8 2c.1.2 0 .4-.1.6l-.5.6c-.1.2-.2.3-.1.6.5 1 1.7 2.2 3 2.8.3.1.5.1.6-.1l.7-.9c.2-.2.4-.3.6-.2l2 .9c.3.2.4.3.4.5 0 .1 0 .5-.1.8z"></path></svg>
+            Chat with the bot
+          </a>
+        </div>
+        <p data-reveal="1" style="margin: 22px 0 0; font-size: 13px; color: #8794A8;">Free on iOS &amp; Android — the WhatsApp bot needs no download at all.</p>
+      </div>
+    </div>
+
+    <!-- Sports ticker -->
+    <div style="border-top: 1px solid rgba(10,18,32,.07); border-bottom: 1px solid rgba(10,18,32,.07); overflow: hidden; padding: 14px 0; background: #FAFBFD;">
+      <div style="display: inline-flex; white-space: nowrap; animation: spotts-marquee 28s linear infinite; will-change: transform;">
+        <div style="display: inline-flex; gap: 48px; padding-right: 48px; font-size: 13px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #8794A8;">
+          <span>Football</span><span style="color: #007AFF;">·</span><span>Padel</span><span style="color: #007AFF;">·</span><span>Tennis</span><span style="color: #007AFF;">·</span><span>Gyms</span><span style="color: #007AFF;">·</span><span>Basketball</span><span style="color: #007AFF;">·</span><span>Open sessions</span><span style="color: #007AFF;">·</span>
+        </div>
+        <div aria-hidden="true" style="display: inline-flex; gap: 48px; padding-right: 48px; font-size: 13px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: #8794A8;">
+          <span>Football</span><span style="color: #007AFF;">·</span><span>Padel</span><span style="color: #007AFF;">·</span><span>Tennis</span><span style="color: #007AFF;">·</span><span>Gyms</span><span style="color: #007AFF;">·</span><span>Basketball</span><span style="color: #007AFF;">·</span><span>Open sessions</span><span style="color: #007AFF;">·</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TWO DOORS ============ -->
+  <section data-screen-label="Two doors" style="max-width: 1200px; margin: 0 auto; padding: clamp(72px,10vh,130px) clamp(20px,4vw,48px); position: relative; overflow: clip;">
+    <div aria-hidden="true" style="position: absolute; right: -30px; top: 30px; font-size: clamp(110px,16vw,230px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(0,122,255,.10); user-select: none; pointer-events: none;">BOOK</div>
+    <!-- Padel court corner, bottom-right -->
+    <svg aria-hidden="true" viewBox="0 0 480 320" style="position: absolute; right: -60px; bottom: -50px; width: clamp(240px,26vw,420px); pointer-events: none;">
+      <g fill="none" stroke="#007AFF" stroke-opacity=".1" stroke-width="2">
+        <rect x="20" y="20" width="440" height="280"></rect>
+        <line x1="240" y1="20" x2="240" y2="300"></line>
+        <line x1="20" y1="160" x2="460" y2="160"></line>
+        <line x1="130" y1="20" x2="130" y2="300" stroke-dasharray="7 7"></line>
+        <line x1="350" y1="20" x2="350" y2="300" stroke-dasharray="7 7"></line>
+      </g>
+    </svg>
+    <p data-reveal="1" style="margin: 0 0 18px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #007AFF;">One system, two doors</p>
+    <h2 data-split="1" style="margin: 0 0 16px; max-width: 20ch; font-size: clamp(32px,4.4vw,56px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; text-wrap: balance;">The app is the full experience. WhatsApp is the instant one.</h2>
+    <p data-reveal="1" style="margin: 0 0 56px; max-width: 58ch; font-size: 17px; line-height: 1.6; color: #51607A; text-wrap: pretty;">Same venues, same live availability, same instant confirmation — whichever door you walk through.</p>
+
+    <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 20px;">
+      <!-- center connector badge -->
+      <div data-doors-badge="1" style="position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); z-index: 5; background: #0A1220; color: #fff; border-radius: 999px; padding: 10px 20px; font-size: 12.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; box-shadow: 0 12px 32px -10px rgba(10,18,32,.5); display: flex; align-items: center; gap: 9px;">
+        <span style="width: 7px; height: 7px; border-radius: 50%; background: #9FE870; animation: spotts-pulse 2s ease-in-out infinite;"></span>
+        One live system
+      </div>
+
+      <!-- APP DOOR -->
+      <div data-reveal="1" data-door="1" style="position: relative; overflow: hidden; border-radius: 24px; background: linear-gradient(160deg, #0A5AD4 0%, #007AFF 55%, #2E8FFF 100%); color: #fff; padding: clamp(28px,3.5vw,44px); display: flex; flex-direction: column; gap: 22px; transition: transform .35s cubic-bezier(.2,.8,.2,1);" style-hover="transform: translateY(-6px);">
+        <div aria-hidden="true" style="position: absolute; right: -70px; top: -70px; width: 240px; height: 240px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.14);"></div>
+        <div aria-hidden="true" style="position: absolute; right: -30px; top: -30px; width: 160px; height: 160px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.18);"></div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.75);">Door one</span>
+          <span style="font-size: 12px; font-weight: 700; color: #fff; background: rgba(255,255,255,.16); padding: 5px 12px; border-radius: 999px; white-space: nowrap;">iOS · Android</span>
+        </div>
+        <h3 style="margin: 0; font-size: clamp(26px,2.8vw,36px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;">The app.<br>The full experience.</h3>
+        <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: rgba(255,255,255,.85); max-width: 42ch;">Browse every venue on a map, join open sessions, lock in your weekly slot, hold a gym pass — the whole product in your pocket.</p>
+        <div style="background: #fff; color: #0A1220; border-radius: 16px; overflow: hidden; margin-top: auto; box-shadow: 0 16px 40px -16px rgba(4,30,66,.5);">
+          <div style="padding: 12px 16px; border-bottom: 1px solid rgba(10,18,32,.07); display: flex; justify-content: space-between; align-items: center;"><span style="font-size: 13px; font-weight: 700;">Near you · Today</span><span style="font-size: 12px; color: #007AFF; font-weight: 600;">Map view</span></div>
+          <div style="padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px; border-bottom: 1px solid rgba(10,18,32,.05);"><div><div style="font-size: 14px; font-weight: 600;">Smokey Kickzone</div><div style="font-size: 12px; color: #8794A8;">5-a-side · 1.2km</div></div><span style="font-size: 12px; font-weight: 700; color: #007AFF; background: #F0F6FF; padding: 5px 10px; border-radius: 999px; white-space: nowrap;">6pm free</span></div>
+          <div style="padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; gap: 10px;"><div><div style="font-size: 14px; font-weight: 600;">Padel Republic</div><div style="font-size: 12px; color: #8794A8;">Padel · 2.4km</div></div><span style="font-size: 12px; font-weight: 700; color: #007AFF; background: #F0F6FF; padding: 5px 10px; border-radius: 999px; white-space: nowrap;">7pm free</span></div>
+        </div>
+        <a href="#app" style="display: inline-flex; align-items: center; gap: 8px; color: #fff; font-size: 14.5px; font-weight: 700; text-decoration: none;">Explore the app <span aria-hidden="true" style="transition: transform .25s;">→</span></a>
+      </div>
+
+      <!-- WHATSAPP DOOR -->
+      <div data-reveal="1" data-door="1" style="position: relative; overflow: hidden; border-radius: 24px; background: linear-gradient(160deg, #06231A 0%, #0B3527 60%, #11493A 100%); color: #fff; padding: clamp(28px,3.5vw,44px); display: flex; flex-direction: column; gap: 22px; transition: transform .35s cubic-bezier(.2,.8,.2,1);" style-hover="transform: translateY(-6px);">
+        <div aria-hidden="true" style="position: absolute; left: -70px; bottom: -70px; width: 240px; height: 240px; border-radius: 50%; border: 1.5px solid rgba(159,232,112,.14);"></div>
+        <div aria-hidden="true" style="position: absolute; left: -30px; bottom: -30px; width: 160px; height: 160px; border-radius: 50%; border: 1.5px solid rgba(159,232,112,.18);"></div>
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7);">Door two</span>
+          <span style="font-size: 12px; font-weight: 700; color: #9FE870; background: rgba(159,232,112,.12); padding: 5px 12px; border-radius: 999px; white-space: nowrap;">No app needed</span>
+        </div>
+        <h3 style="margin: 0; font-size: clamp(26px,2.8vw,36px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.05;">WhatsApp.<br>The instant one.</h3>
+        <p style="margin: 0; font-size: 15.5px; line-height: 1.6; color: rgba(255,255,255,.8); max-width: 42ch;">Nigeria runs on WhatsApp — so Spotts does too. Message the bot in plain words and it searches, books and confirms. First of its kind.</p>
+        <div style="background: #ECE5DD; color: #0A1220; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 8px; margin-top: auto; box-shadow: 0 16px 40px -16px rgba(0,0,0,.5);">
+          <div style="align-self: flex-end; max-width: 85%; background: #D9FDD3; border-radius: 12px 12px 4px 12px; padding: 8px 11px; font-size: 13.5px; box-shadow: 0 1px 1px rgba(10,18,32,.06);">Where can I play padel tomorrow?</div>
+          <div style="align-self: flex-start; max-width: 85%; background: #fff; border-radius: 12px 12px 12px 4px; padding: 8px 11px; font-size: 13.5px; box-shadow: 0 1px 1px rgba(10,18,32,.06);">2 courts free tomorrow evening. Want me to book one?</div>
+          <div style="align-self: center; font-size: 11.5px; color: #8794A8; margin-top: 2px;">Answered in 4 seconds · no human involved</div>
+        </div>
+        <a href="#bot" style="display: inline-flex; align-items: center; gap: 8px; color: #9FE870; font-size: 14.5px; font-weight: 700; text-decoration: none;">See the bot in action <span aria-hidden="true" style="transition: transform .25s;">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CUSTOMER BOT (HEADLINE) ============ -->
+  <section id="bot" data-screen-label="WhatsApp bot — customers" style="border-top: 1px solid rgba(10,18,32,.07); background: #fff; position: relative; overflow: clip;">
+    <div aria-hidden="true" style="position: absolute; right: -30px; top: 40px; font-size: clamp(110px,16vw,230px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(31,168,85,.12); user-select: none; pointer-events: none;">CHAT</div>
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(72px,10vh,130px) clamp(20px,4vw,48px); position: relative;">
+      <p data-reveal="1" style="margin: 0 0 18px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #007AFF;">The WhatsApp bot · For players</p>
+      <h2 data-split="1" style="margin: 0 0 16px; max-width: 18ch; font-size: clamp(32px,4.4vw,56px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; text-wrap: balance;">Text it like you'd text a friend.</h2>
+      <p data-reveal="1" style="margin: 0; max-width: 60ch; font-size: 17px; line-height: 1.6; color: #51607A; text-wrap: pretty;">Venues already take bookings on WhatsApp — a person reads the message, checks a book, replies when they can. Spotts replaced that with a fully automated bot that answers in seconds, every hour of the day. No app download required.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: clamp(32px,6vw,96px); align-items: start; margin-top: clamp(40px,6vh,72px);">
+        <div style="display: flex; flex-direction: column;">
+          <div data-bot-step="0" style="min-height: 28vh; display: flex; flex-direction: column; justify-content: center; gap: 12px; border-left: 2px solid rgba(10,18,32,.08); padding-left: 24px; padding-top: 24px; padding-bottom: 24px;">
+            <span style="font-size: 13px; font-weight: 700; color: #007AFF;">01 — Ask anything</span>
+            <h3 style="margin: 0; font-size: clamp(22px,2.4vw,30px); font-weight: 700; letter-spacing: -0.02em;">"Where can I play football today?"</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #51607A;">The bot searches live venue availability across Abuja and replies with real options and real prices — not "we'll get back to you."</p>
+          </div>
+          <div data-bot-step="1" style="min-height: 28vh; display: flex; flex-direction: column; justify-content: center; gap: 12px; border-left: 2px solid rgba(10,18,32,.08); padding-left: 24px; padding-top: 24px; padding-bottom: 24px;">
+            <span style="font-size: 13px; font-weight: 700; color: #007AFF;">02 — Book in plain words</span>
+            <h3 style="margin: 0; font-size: clamp(22px,2.4vw,30px); font-weight: 700; letter-spacing: -0.02em;">"Book me Smokey Kickzone, 7–8pm."</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #51607A;">It checks the slot there and then, holds it, and sends a secure payment link — no forms, no account setup, no phone call.</p>
+          </div>
+          <div data-bot-step="2" style="min-height: 28vh; display: flex; flex-direction: column; justify-content: center; gap: 12px; border-left: 2px solid rgba(10,18,32,.08); padding-left: 24px; padding-top: 24px; padding-bottom: 24px;">
+            <span style="font-size: 13px; font-weight: 700; color: #007AFF;">03 — Paid means confirmed</span>
+            <h3 style="margin: 0; font-size: clamp(22px,2.4vw,30px); font-weight: 700; letter-spacing: -0.02em;">Confirmed the moment you pay.</h3>
+            <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #51607A;">Start to finish in under a minute, at 6am or midnight. No booking lost to a missed call or a message that arrived mid-shift.</p>
+          </div>
+        </div>
+
+        <!-- Sticky bot phone -->
+        <div style="position: sticky; top: 90px; display: flex; justify-content: center;">
+          <div style="width: min(380px, 100%); background: #020305; border-radius: 56px; padding: 10px; box-shadow: 0 0 0 2px #43464E, 0 0 1px 3px rgba(255,255,255,.18), 0 30px 70px -28px rgba(10,18,32,.45);">
+            <div style="background-color: #ECE5DD; background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http%3A//www.w3.org/2000/svg%27 width=%27160%27 height=%27160%27 viewBox=%270 0 160 160%27%3E%3Cg fill=%27none%27 stroke=%27%23A69C8E%27 stroke-opacity=%27.3%27 stroke-width=%271.5%27 stroke-linecap=%27round%27%3E%3Ccircle cx=%2728%27 cy=%2726%27 r=%279%27/%3E%3Cpath d=%27M28 17v18M19 26h18%27/%3E%3Cpath d=%27M100 22l5 10m-10-5l10-5%27/%3E%3Ccircle cx=%27128%27 cy=%27106%27 r=%278%27/%3E%3Cpath d=%27M28 112q9-11 18 0t18 0%27/%3E%3Cpath d=%27M78 64l2.7 5.4 6 .9-4.4 4.2 1 6-5.3-2.8-5.3 2.8 1-6-4.4-4.2 6-.9z%27/%3E%3Cpath d=%27M136 40a7 7 0 1 1-7-7%27/%3E%3Cpath d=%27M60 140l4 4m0-4l-4 4%27/%3E%3C/g%3E%3C/svg%3E'); background-size: 160px 160px; border-radius: 46px; overflow: hidden; display: flex; flex-direction: column; height: min(620px, 76vh);">
+              <div style="background: #F6F5F2; color: #0A1220; padding: 14px 28px 6px; display: flex; justify-content: space-between; align-items: center; position: relative;">
+                <span style="font-size: 13.5px; font-weight: 600; letter-spacing: .02em;">9:41</span>
+                <span aria-hidden="true" style="position: absolute; left: 50%; transform: translateX(-50%); top: 11px; width: 90px; height: 25px; background: #000; border-radius: 999px;"></span>
+                <span style="display: inline-flex; gap: 5px; align-items: center;">
+                  <svg width="16" height="11" viewBox="0 0 16 11" fill="#0A1220" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.3" y="4.7" width="3" height="6.3" rx="1"></rect><rect x="8.6" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="12.9" y="0" width="3" height="11" rx="1" opacity=".35"></rect></svg>
+                  <svg width="15" height="11" viewBox="0 0 15 11" fill="#0A1220" aria-hidden="true"><path d="M7.5 8.6a1.5 1.5 0 0 1 1.5 1.5L7.5 11 6 10.1a1.5 1.5 0 0 1 1.5-1.5z"></path><path d="M4.4 7.4a4.4 4.4 0 0 1 6.2 0L9.4 8.9a2.7 2.7 0 0 0-3.8 0L4.4 7.4z" opacity=".85"></path><path d="M1.6 4.9a8.3 8.3 0 0 1 11.8 0l-1.3 1.4a6.4 6.4 0 0 0-9.2 0L1.6 4.9z" opacity=".7"></path></svg>
+                  <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#0A1220" opacity=".4" fill="none"></rect><rect x="2" y="2" width="18" height="8" rx="2" fill="#0A1220"></rect><path d="M23 4v4c1.1-.2 1.7-1 1.7-2S24.1 4.2 23 4z" fill="#0A1220" opacity=".4"></path></svg>
+                </span>
+              </div>
+              <div style="background: #F6F5F2; border-bottom: 1px solid rgba(10,18,32,.08); color: #0A1220; padding: 6px 12px 10px; display: flex; align-items: center; gap: 9px;">
+                <svg width="10" height="17" viewBox="0 0 10 17" fill="none" aria-hidden="true"><path d="M8.5 1.5 1.5 8.5l7 7" stroke="#007AFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <div style="width: 34px; height: 34px; border-radius: 50%; background: #007AFF; display: grid; place-items: center;"><img src="/premium/icon-white.svg" alt="" style="width: 20px; height: 20px;"></div>
+                <div style="line-height: 1.2;">
+                  <div style="display: flex; align-items: center; gap: 5px; font-size: 15px; font-weight: 700;">Spotts <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><circle cx="7" cy="7" r="7" fill="#25D366"></circle><path d="M4 7.2 6.1 9.3 10 5" stroke="#fff" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+                  <div style="font-size: 12px; color: #667781;">online</div>
+                </div>
+                <div style="margin-left: auto; display: inline-flex; gap: 18px; align-items: center;">
+                  <svg width="23" height="14" viewBox="0 0 23 14" fill="none" aria-hidden="true"><rect x="1" y="1" width="14.5" height="12" rx="3.2" stroke="#007AFF" stroke-width="1.6"></rect><path d="M15.5 5.5 22 2v10l-6.5-3.5" stroke="#007AFF" stroke-width="1.6" stroke-linejoin="round"></path></svg>
+                  <svg width="17" height="17" viewBox="0 0 17 17" fill="none" aria-hidden="true"><path d="M3.7 1.6c.7 0 2.1 2.3 2.1 3 0 .8-1.2 1.3-1.2 2s2.5 4.3 3.3 4.3c.8 0 1.3-1.2 2-1.2.8 0 3 1.5 3 2.1 0 1.6-1.6 2.8-3.1 2.8C6 14.6 1.4 8.9 1.4 5.1c0-1.5 1.3-3.5 2.3-3.5z" stroke="#007AFF" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+                </div>
+              </div>
+              <div style="flex: 1; padding: 12px 14px; display: flex; flex-direction: column; gap: 9px; overflow: hidden; justify-content: flex-end;">
+                <div style="align-self: center; background: #FFFFFF; color: #54656F; font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 8px; box-shadow: 0 1px 1px rgba(10,18,32,.08);">TODAY</div>
+                <div style="align-self: center; text-align: center; max-width: 88%; background: #FFF3C2; color: #54656F; font-size: 11px; line-height: 1.45; padding: 6px 12px; border-radius: 8px; box-shadow: 0 1px 1px rgba(10,18,32,.08);">🔒 Messages are end-to-end encrypted. No one outside of this chat can read them.</div>
+                <div data-bot-msg="0" style="align-self: flex-end; max-width: 82%; background: #D9FDD3; border-radius: 14px 14px 4px 14px; padding: 9px 12px; font-size: 14px; line-height: 1.45; box-shadow: 0 1px 1px rgba(10,18,32,.06);">Where can I play football today?<span style="float: right; margin: 8px -2px -2px 10px; display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: #667781;">11:39 <svg width="15" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 5.5 3.8 8.3 9 1.8" stroke="#53BDEB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.6 5.5 9.4 8.3 14.6 1.8" stroke="#53BDEB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+                <div data-bot-msg="0" style="align-self: flex-start; max-width: 88%; background: #fff; border-radius: 14px 14px 14px 4px; padding: 10px 12px; font-size: 14px; line-height: 1.45; box-shadow: 0 1px 1px rgba(10,18,32,.06);">
+                  Found 4 venues with slots today ⚽
+                  <div style="margin-top: 8px; display: flex; flex-direction: column; gap: 6px;">
+                    <div style="border: 1px solid rgba(10,18,32,.1); border-radius: 10px; padding: 8px 10px; font-size: 13px; display: flex; justify-content: space-between; gap: 10px;"><span style="font-weight: 600;">Smokey Kickzone</span><span style="color: #8794A8;">7–10pm free</span></div>
+                    <div style="border: 1px solid rgba(10,18,32,.1); border-radius: 10px; padding: 8px 10px; font-size: 13px; display: flex; justify-content: space-between; gap: 10px;"><span style="font-weight: 600;">Astro Park, Wuse</span><span style="color: #8794A8;">6–8pm free</span></div>
+                  </div>
+                  <div style="text-align: right; font-size: 11px; color: #667781; margin: 4px -2px -2px 0;">11:39</div>
+                </div>
+                <div data-bot-msg="1" style="align-self: flex-end; max-width: 82%; background: #D9FDD3; border-radius: 14px 14px 4px 14px; padding: 9px 12px; font-size: 14px; line-height: 1.45; box-shadow: 0 1px 1px rgba(10,18,32,.06);">Book me Smokey Kickzone, 7–8pm<span style="float: right; margin: 8px -2px -2px 10px; display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: #667781;">11:40 <svg width="15" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 5.5 3.8 8.3 9 1.8" stroke="#53BDEB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.6 5.5 9.4 8.3 14.6 1.8" stroke="#53BDEB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+                <div data-bot-msg="1" style="align-self: flex-start; max-width: 88%; background: #fff; border-radius: 14px 14px 14px 4px; padding: 10px 12px; font-size: 14px; line-height: 1.45; box-shadow: 0 1px 1px rgba(10,18,32,.06);">
+                  7–8pm is free ✓ Held for 10 minutes.
+                  <div style="margin-top: 8px; background: #F0F6FF; border: 1px solid rgba(0,122,255,.25); color: #007AFF; font-weight: 600; font-size: 13px; border-radius: 10px; padding: 9px 10px; text-align: center;">Pay ₦25,000 · Secure link</div>
+                  <div style="text-align: right; font-size: 11px; color: #667781; margin: 4px -2px -2px 0;">11:40</div>
+                </div>
+                <div data-bot-msg="2" style="align-self: flex-end; max-width: 82%; background: #D9FDD3; border-radius: 14px 14px 4px 14px; padding: 9px 12px; font-size: 14px; box-shadow: 0 1px 1px rgba(10,18,32,.06);">Paid ✓<span style="float: right; margin: 8px -2px -2px 10px; display: inline-flex; align-items: center; gap: 3px; font-size: 11px; color: #667781;">11:41 <svg width="15" height="10" viewBox="0 0 16 10" fill="none" aria-hidden="true"><path d="M1 5.5 3.8 8.3 9 1.8" stroke="#53BDEB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path><path d="M6.6 5.5 9.4 8.3 14.6 1.8" stroke="#53BDEB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg></span></div>
+                <div data-bot-msg="2" style="align-self: flex-start; max-width: 88%; background: #fff; border-radius: 14px 14px 14px 4px; padding: 10px 12px; font-size: 14px; line-height: 1.45; box-shadow: 0 1px 1px rgba(10,18,32,.06);">🎉 You're booked — <b>Smokey Kickzone, today 7–8pm</b>. Receipt sent. See you on the pitch.<div style="text-align: right; font-size: 11px; color: #667781; margin: 4px -2px -2px 0;">11:42</div></div>
+                <div data-bot-msg="2" style="align-self: center; font-size: 11.5px; color: #8794A8;">Booked in 48 seconds · 11:42pm</div>
+              </div>
+              <div style="padding: 8px 10px 14px; display: flex; gap: 7px; align-items: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#54656F" stroke-width="1.9" stroke-linecap="round"></path></svg>
+                <div style="flex: 1; background: #fff; border-radius: 999px; padding: 8px 13px; font-size: 13.5px; color: #8796A1; display: flex; align-items: center; gap: 8px;"><span style="flex: 1;">Message</span><svg width="18" height="16" viewBox="0 0 20 17" fill="none" aria-hidden="true"><rect x="1" y="3.2" width="18" height="12.6" rx="3.2" stroke="#8796A1" stroke-width="1.4"></rect><circle cx="10" cy="9.5" r="3.4" stroke="#8796A1" stroke-width="1.4"></circle><path d="M6.5 3.2 8 1.2h4l1.5 2" stroke="#8796A1" stroke-width="1.4"></path></svg></div>
+                <div style="width: 38px; height: 38px; border-radius: 50%; background: #00A884; display: grid; place-items: center;"><svg width="15" height="19" viewBox="0 0 16 20" fill="none" aria-hidden="true"><rect x="5" y="1.5" width="6" height="11" rx="3" fill="#fff"></rect><path d="M2.5 9.5a5.5 5.5 0 0 0 11 0M8 15v3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></path></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ APP FEATURES ============ -->
+  <section id="app" data-screen-label="App features" style="border-top: 1px solid rgba(10,18,32,.07); background: #EFF4FB; position: relative; overflow: clip;">
+    <div aria-hidden="true" style="position: absolute; right: -40px; bottom: -60px; font-size: clamp(140px,22vw,320px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(0,122,255,.13); user-select: none; pointer-events: none;">PLAY</div>
+    <!-- Basketball half-court line art, top-left -->
+    <svg aria-hidden="true" viewBox="0 0 520 420" style="position: absolute; left: -80px; top: -60px; width: clamp(280px,34vw,520px); pointer-events: none;">
+      <g fill="none" stroke="#007AFF" stroke-opacity=".11" stroke-width="2">
+        <rect x="20" y="20" width="480" height="380"></rect>
+        <path d="M20 20 L20 400"></path>
+        <rect x="20" y="130" width="190" height="160"></rect>
+        <circle cx="210" cy="210" r="62"></circle>
+        <path d="M20 60 Q 330 60 330 210 Q 330 360 20 360"></path>
+        <circle cx="75" cy="210" r="8"></circle>
+        <line x1="65" y1="180" x2="65" y2="240"></line>
+      </g>
+    </svg>
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(72px,10vh,130px) clamp(20px,4vw,48px); position: relative;">
+      <div style="display: flex; flex-wrap: wrap; gap: clamp(32px,4vw,64px); align-items: flex-start;">
+
+        <!-- Sticky intro rail -->
+        <div style="position: sticky; top: 100px; flex: 1 1 300px; max-width: 420px; display: flex; flex-direction: column; gap: 22px;">
+          <p data-reveal="1" style="margin: 0; display: flex; align-items: center; gap: 12px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #007AFF;">The app <span aria-hidden="true" style="width: 32px; height: 1px; background: rgba(0,122,255,.4);"></span> 6 features</p>
+          <h2 data-split="1" style="margin: 0; font-size: clamp(34px,4vw,54px); font-weight: 800; letter-spacing: -0.04em; line-height: .98; text-wrap: balance;">Built for how people actually play.</h2>
+          <p data-reveal="1" style="margin: 0; font-size: 16px; line-height: 1.65; color: #51607A; text-wrap: pretty;">Every feature comes from how games really happen in Abuja — squads short a player, crews with a standing Tuesday slot, gym days between match days, plans that change an hour before kickoff.</p>
+          <div data-reveal="1" style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <a href="https://apps.apple.com/app/id6758109546" target="_blank" rel="noopener noreferrer" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 8px; background: #0A1220; color: #fff; text-decoration: none; font-size: 14px; font-weight: 600; padding: 12px 20px; border-radius: 999px;" style-hover="background: #1A2536;"> App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.bleumeridiantech.spotts" target="_blank" rel="noopener noreferrer" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 8px; background: #0A1220; color: #fff; text-decoration: none; font-size: 14px; font-weight: 600; padding: 12px 20px; border-radius: 999px;" style-hover="background: #1A2536;">▶ Google Play</a>
+          </div>
+        </div>
+
+        <!-- Cards -->
+        <div style="flex: 999 1 560px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap: 20px;">
+        <div data-reveal="1" style="border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #fff; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 18px; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 44px -22px rgba(10,18,32,.28);">
+          <h3 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.02em;"><span style="color: #007AFF; font-size: 13px; font-weight: 800; letter-spacing: .08em; margin-right: 10px; vertical-align: 3px;">01</span>Open Sessions</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #51607A;">No full squad? Join a game that's already happening — pay for your spot, turn up, play.</p>
+          <div style="border: 1px solid rgba(10,18,32,.08); border-radius: 14px; padding: 16px; margin-top: auto;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; gap: 10px;"><span style="font-size: 14px; font-weight: 700;">5-a-side · Tonight 7pm</span><span style="font-size: 12px; color: #8794A8;">Smokey Kickzone</span></div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <div style="display: flex;">
+                <span style="width: 26px; height: 26px; border-radius: 50%; background: #007AFF; border: 2px solid #fff; display: grid; place-items: center; color: #fff; font-size: 11px; font-weight: 700;">T</span>
+                <span style="width: 26px; height: 26px; border-radius: 50%; background: #0A1220; border: 2px solid #fff; margin-left: -8px; display: grid; place-items: center; color: #fff; font-size: 11px; font-weight: 700;">K</span>
+                <span style="width: 26px; height: 26px; border-radius: 50%; background: #5A8DEE; border: 2px solid #fff; margin-left: -8px; display: grid; place-items: center; color: #fff; font-size: 11px; font-weight: 700;">A</span>
+                <span style="width: 26px; height: 26px; border-radius: 50%; background: #F0F6FF; border: 2px solid #fff; margin-left: -8px; display: grid; place-items: center; color: #007AFF; font-size: 10px; font-weight: 700;">+4</span>
+              </div>
+              <span style="font-size: 13px; color: #51607A; font-weight: 600;"><span data-count-to="7">0</span>/10 joined</span>
+              <span data-magnetic="1" style="margin-left: auto; background: #007AFF; color: #fff; font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 999px; cursor: pointer;">Join · ₦3,500</span>
+            </div>
+            <div style="margin-top: 12px; height: 5px; border-radius: 999px; background: rgba(10,18,32,.07); overflow: hidden;"><div data-grow-bar="1" style="height: 100%; width: 70%; background: #007AFF; border-radius: 999px; transform-origin: left;"></div></div>
+          </div>
+        </div>
+
+        <div data-reveal="1" style="border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #fff; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 18px; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 44px -22px rgba(10,18,32,.28);">
+          <h3 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.02em;"><span style="color: #007AFF; font-size: 13px; font-weight: 800; letter-spacing: .08em; margin-right: 10px; vertical-align: 3px;">02</span>Recurring Bookings</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #51607A;">Same crew, same court, same time. Lock in your slot every week — it's yours before anyone else can take it.</p>
+          <div style="border: 1px solid rgba(10,18,32,.08); border-radius: 14px; padding: 16px; margin-top: auto;">
+            <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; text-align: center;">
+              <span style="font-size: 11px; color: #8794A8; font-weight: 600;">M</span><span style="font-size: 11px; color: #8794A8; font-weight: 600;">T</span><span style="font-size: 11px; color: #8794A8; font-weight: 600;">W</span><span style="font-size: 11px; color: #8794A8; font-weight: 600;">T</span><span style="font-size: 11px; color: #8794A8; font-weight: 600;">F</span><span style="font-size: 11px; color: #8794A8; font-weight: 600;">S</span><span style="font-size: 11px; color: #8794A8; font-weight: 600;">S</span>
+              <span style="height: 30px; border-radius: 8px; background: rgba(10,18,32,.04);"></span>
+              <span data-recur-dot="1" style="height: 30px; border-radius: 8px; background: #007AFF; display: grid; place-items: center; color: #fff; font-size: 11px; font-weight: 700;">8p</span>
+              <span style="height: 30px; border-radius: 8px; background: rgba(10,18,32,.04);"></span>
+              <span style="height: 30px; border-radius: 8px; background: rgba(10,18,32,.04);"></span>
+              <span style="height: 30px; border-radius: 8px; background: rgba(10,18,32,.04);"></span>
+              <span style="height: 30px; border-radius: 8px; background: rgba(10,18,32,.04);"></span>
+              <span style="height: 30px; border-radius: 8px; background: rgba(10,18,32,.04);"></span>
+            </div>
+            <div style="margin-top: 12px; display: flex; align-items: center; justify-content: space-between; gap: 10px;">
+              <span style="font-size: 13px; font-weight: 600; color: #0A1220;">Every Tuesday · 8–9pm</span>
+              <span style="font-size: 12px; font-weight: 700; color: #1FA855;">↻ Repeats weekly</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal="1" style="border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #fff; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 18px; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 44px -22px rgba(10,18,32,.28);">
+          <h3 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.02em;"><span style="color: #007AFF; font-size: 13px; font-weight: 800; letter-spacing: .08em; margin-right: 10px; vertical-align: 3px;">03</span>Gym Passes</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #51607A;">Book gym access the same way you book a pitch. Not only courts — Spotts covers gyms across Abuja too.</p>
+          <div style="border-radius: 14px; padding: 16px; margin-top: auto; background: #0A1220; color: #fff; display: flex; justify-content: space-between; align-items: center; gap: 14px;">
+            <div>
+              <div style="font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 6px;">Day pass</div>
+              <div style="font-size: 16px; font-weight: 700;">TruFit Gym, Maitama</div>
+              <div style="font-size: 12.5px; color: rgba(255,255,255,.6); margin-top: 4px;">Valid today · 6am–10pm</div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 7px); grid-auto-rows: 7px; gap: 3px;">
+              <span style="background: #fff;"></span><span style="background: #fff;"></span><span style="background: rgba(255,255,255,.25);"></span><span style="background: #fff;"></span>
+              <span style="background: rgba(255,255,255,.25);"></span><span style="background: #fff;"></span><span style="background: #fff;"></span><span style="background: rgba(255,255,255,.25);"></span>
+              <span style="background: #fff;"></span><span style="background: rgba(255,255,255,.25);"></span><span style="background: #fff;"></span><span style="background: #fff;"></span>
+              <span style="background: #fff;"></span><span style="background: #fff;"></span><span style="background: rgba(255,255,255,.25);"></span><span style="background: #fff;"></span>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal="1" style="border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #fff; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 18px; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 44px -22px rgba(10,18,32,.28);">
+          <h3 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.02em;"><span style="color: #007AFF; font-size: 13px; font-weight: 800; letter-spacing: .08em; margin-right: 10px; vertical-align: 3px;">04</span>Easy Bookings &amp; Cancellations</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #51607A;">Book or cancel instantly from your phone. Everything managed in a few taps — never a phone call.</p>
+          <div style="border: 1px solid rgba(10,18,32,.08); border-radius: 14px; padding: 14px 16px; margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+            <div>
+              <div style="font-size: 14px; font-weight: 700;">Padel Republic · Court 1</div>
+              <div style="font-size: 12.5px; color: #8794A8; margin-top: 3px;">Sat · 5–6pm · Paid ₦18,000</div>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <span style="font-size: 12.5px; font-weight: 600; color: #51607A; border: 1px solid rgba(10,18,32,.14); padding: 7px 13px; border-radius: 999px; cursor: pointer;" style-hover="border-color: rgba(10,18,32,.4);">Reschedule</span>
+              <span style="font-size: 12.5px; font-weight: 600; color: #C4363B; border: 1px solid rgba(196,54,59,.3); padding: 7px 13px; border-radius: 999px; cursor: pointer;" style-hover="background: rgba(196,54,59,.06);">Cancel</span>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal="1" style="border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #fff; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 18px; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 44px -22px rgba(10,18,32,.28);">
+          <h3 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.02em;"><span style="color: #007AFF; font-size: 13px; font-weight: 800; letter-spacing: .08em; margin-right: 10px; vertical-align: 3px;">05</span>Hassle-free Refunds</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #51607A;">Cancel and the refund goes straight back to your account, automatically. No paperwork, no chasing anyone, no waiting.</p>
+          <div style="border: 1px solid rgba(10,18,32,.08); border-radius: 14px; padding: 18px 14px 14px; margin-top: auto; display: flex; align-items: flex-start;">
+            <div style="flex: 1; text-align: center;">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: #0A1220; color: #fff; display: grid; place-items: center; margin: 0 auto 8px; font-size: 13px;">✕</div>
+              <div style="font-size: 11.5px; font-weight: 600; color: #51607A;">Cancelled</div>
+            </div>
+            <div style="flex: 1; height: 2px; background: rgba(10,18,32,.1); margin-top: 15px; overflow: hidden;"><div data-refund-fill="1" style="height: 100%; width: 100%; background: #007AFF; transform-origin: left; transform: scaleX(0);"></div></div>
+            <div style="flex: 1; text-align: center;">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: #007AFF; color: #fff; display: grid; place-items: center; margin: 0 auto 8px; font-size: 13px;">₦</div>
+              <div style="font-size: 11.5px; font-weight: 600; color: #51607A;">Refunded</div>
+            </div>
+            <div style="flex: 1; height: 2px; background: rgba(10,18,32,.1); margin-top: 15px; overflow: hidden;"><div data-refund-fill="1" style="height: 100%; width: 100%; background: #007AFF; transform-origin: left; transform: scaleX(0);"></div></div>
+            <div style="flex: 1; text-align: center;">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: #1FA855; color: #fff; display: grid; place-items: center; margin: 0 auto 8px; font-size: 13px;">✓</div>
+              <div style="font-size: 11.5px; font-weight: 600; color: #51607A;">In account</div>
+            </div>
+          </div>
+        </div>
+
+        <div data-reveal="1" style="border: 1px solid rgba(31,168,85,.25); border-radius: 20px; background: #F3FBF5; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 18px; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 44px -22px rgba(31,168,85,.3);">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+            <h3 style="margin: 0; font-size: 20px; font-weight: 700; letter-spacing: -0.02em;"><span style="color: #1FA855; font-size: 13px; font-weight: 800; letter-spacing: .08em; margin-right: 10px; vertical-align: 3px;">06</span>Book from WhatsApp</h3>
+            <span style="font-size: 11.5px; font-weight: 700; color: #1FA855; border: 1px solid rgba(31,168,85,.35); padding: 4px 10px; border-radius: 999px; white-space: nowrap;">No app needed</span>
+          </div>
+          <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #51607A;">Everything the app does, the bot does in chat — search, book, pay, cancel. One message and it's handled.</p>
+          <div style="background: #ECE5DD; border-radius: 14px; padding: 12px; margin-top: auto; display: flex; flex-direction: column; gap: 7px;">
+            <div style="align-self: flex-end; max-width: 88%; background: #D9FDD3; border-radius: 12px 12px 4px 12px; padding: 8px 11px; font-size: 13px; box-shadow: 0 1px 1px rgba(10,18,32,.06);">Cancel my Saturday booking</div>
+            <div style="align-self: flex-start; max-width: 88%; background: #fff; border-radius: 12px 12px 12px 4px; padding: 8px 11px; font-size: 13px; box-shadow: 0 1px 1px rgba(10,18,32,.06);">Done ✓ Cancelled — refund of ₦18,000 on its way.</div>
+            <div style="align-self: center; font-size: 11px; color: #8794A8;">Handled by the bot · 3 seconds</div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ HOW BOOKING WORKS ============ -->
+  <section data-screen-label="How booking works" style="border-top: 1px solid rgba(10,18,32,.07); background: #fff; position: relative; overflow: clip;">
+    <div aria-hidden="true" style="position: absolute; left: -30px; bottom: -40px; font-size: clamp(110px,16vw,230px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(0,122,255,.09); user-select: none; pointer-events: none;">KICKOFF</div>
+    <!-- Football pitch centre circle, top-right -->
+    <svg aria-hidden="true" viewBox="0 0 520 360" style="position: absolute; right: -70px; top: -50px; width: clamp(240px,28vw,460px); pointer-events: none;">
+      <g fill="none" stroke="#007AFF" stroke-opacity=".1" stroke-width="2">
+        <rect x="20" y="20" width="480" height="320"></rect>
+        <line x1="260" y1="20" x2="260" y2="340"></line>
+        <circle cx="260" cy="180" r="80"></circle>
+        <circle cx="260" cy="180" r="4" fill="#007AFF" fill-opacity=".1" stroke="none"></circle>
+        <rect x="20" y="100" width="90" height="160"></rect>
+        <rect x="410" y="100" width="90" height="160"></rect>
+      </g>
+    </svg>
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(72px,10vh,130px) clamp(20px,4vw,48px); position: relative;">
+      <p data-reveal="1" style="margin: 0 0 18px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #007AFF;">How it works</p>
+      <h2 data-split="1" style="margin: 0 0 12px; max-width: 20ch; font-size: clamp(32px,4.4vw,56px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; text-wrap: balance;">From "let's play" to playing.</h2>
+      <p data-reveal="1" style="margin: 0 0 64px; max-width: 52ch; font-size: 17px; line-height: 1.6; color: #51607A;">Five stages. Under a minute. Zero phone calls.</p>
+
+      <div style="position: relative;">
+        <div style="position: absolute; left: 22px; right: 22px; top: 21px; height: 2px; background: rgba(10,18,32,.08);"></div>
+        <div data-journey-line="1" style="position: absolute; left: 22px; right: 22px; top: 21px; height: 2px; background: #007AFF; transform-origin: left; transform: scaleX(0);"></div>
+        <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px;">
+          <div data-journey-step="1"><div style="width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 2px solid #007AFF; display: grid; place-items: center; font-weight: 700; color: #007AFF; font-size: 15px;">1</div><h3 style="margin: 16px 0 6px; font-size: 16px; font-weight: 700;">Discover</h3><p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #51607A;">Find pitches, courts and gyms near you.</p></div>
+          <div data-journey-step="1"><div style="width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 2px solid #007AFF; display: grid; place-items: center; font-weight: 700; color: #007AFF; font-size: 15px;">2</div><h3 style="margin: 16px 0 6px; font-size: 16px; font-weight: 700;">Check live slots</h3><p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #51607A;">Real availability, right now — not a callback.</p></div>
+          <div data-journey-step="1"><div style="width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 2px solid #007AFF; display: grid; place-items: center; font-weight: 700; color: #007AFF; font-size: 15px;">3</div><h3 style="margin: 16px 0 6px; font-size: 16px; font-weight: 700;">Book &amp; pay</h3><p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #51607A;">Paid in full, in-app or via a link in chat.</p></div>
+          <div data-journey-step="1"><div style="width: 44px; height: 44px; border-radius: 50%; background: #fff; border: 2px solid #007AFF; display: grid; place-items: center; font-weight: 700; color: #007AFF; font-size: 15px;">4</div><h3 style="margin: 16px 0 6px; font-size: 16px; font-weight: 700;">Confirmed</h3><p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #51607A;">The instant you pay. Any hour of the day.</p></div>
+          <div data-journey-step="1"><div style="width: 44px; height: 44px; border-radius: 50%; background: #007AFF; border: 2px solid #007AFF; display: grid; place-items: center; font-weight: 700; color: #fff; font-size: 15px;">5</div><h3 style="margin: 16px 0 6px; font-size: 16px; font-weight: 700;">Play</h3><p style="margin: 0; font-size: 13.5px; line-height: 1.55; color: #51607A;">Turn up. The court is yours.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOR VENUES (DARK) ============ -->
+  <section id="venues" data-screen-label="For venues" style="background: #071120; color: #fff; position: relative; overflow: clip;">
+    <div aria-hidden="true" style="position: absolute; right: -40px; top: 50px; font-size: clamp(110px,16vw,230px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(90,169,255,.12); user-select: none; pointer-events: none;">COURTS</div>
+    <img src="/premium/icon-white.svg" alt="" aria-hidden="true" style="position: absolute; right: clamp(-220px,-10vw,-90px); bottom: -120px; width: clamp(300px,30vw,520px); opacity: .04; transform: rotate(-12deg); pointer-events: none; user-select: none;">
+    <!-- Tennis court line art, bottom-left -->
+    <svg aria-hidden="true" viewBox="0 0 460 560" style="position: absolute; left: -70px; bottom: -80px; width: clamp(240px,28vw,440px); pointer-events: none;">
+      <g fill="none" stroke="#5AA9FF" stroke-opacity=".1" stroke-width="2">
+        <rect x="20" y="20" width="420" height="520"></rect>
+        <rect x="72" y="20" width="316" height="520"></rect>
+        <line x1="20" y1="280" x2="440" y2="280"></line>
+        <line x1="72" y1="140" x2="388" y2="140"></line>
+        <line x1="72" y1="420" x2="388" y2="420"></line>
+        <line x1="230" y1="140" x2="230" y2="420"></line>
+      </g>
+    </svg>
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(80px,11vh,140px) clamp(20px,4vw,48px); position: relative;">
+      <p data-reveal="1" style="margin: 0 0 18px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #5AA9FF;">For venue owners</p>
+      <h2 data-split="1" style="margin: 0 0 16px; max-width: 20ch; font-size: clamp(32px,4.4vw,56px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; color: #fff; text-wrap: balance;">Run the venue on numbers, not a feeling.</h2>
+      <p data-reveal="1" style="margin: 0 0 56px; max-width: 62ch; font-size: 17px; line-height: 1.65; color: rgba(255,255,255,.62); text-wrap: pretty;">A venue running on paper and memory never sees its own business clearly. The Spotts dashboard puts customers, payments and the full calendar in one place — and shows you exactly where the money comes from.</p>
+
+      <!-- Dashboard mock -->
+      <div data-reveal="1" style="border: 1px solid rgba(255,255,255,.1); border-radius: 20px; background: #0A1728; overflow: hidden;">
+        <div style="padding: 14px 20px; border-bottom: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+          <img src="/premium/icon-white.svg" alt="" style="height: 18px;">
+          <span style="font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,.85);">Smokey Kickzone — Dashboard</span>
+          <span style="margin-left: auto; display: flex; gap: 6px; font-size: 12px; color: rgba(255,255,255,.5);"><span style="padding: 4px 10px; border-radius: 999px; background: rgba(255,255,255,.08); color: #fff;">Week</span><span style="padding: 4px 10px;">Month</span><span style="padding: 4px 10px;">Year</span></span>
+        </div>
+        <div style="padding: clamp(16px,2.5vw,28px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px;">
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;">
+              <div style="border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 14px;"><div style="font-size: 11.5px; color: rgba(255,255,255,.5); margin-bottom: 6px;">Bookings this week</div><div style="font-size: clamp(20px,2vw,26px); font-weight: 800; letter-spacing: -0.02em;"><span data-count-to="47">0</span></div><div style="font-size: 11.5px; color: #6EE7A0; margin-top: 4px;">↑ 12% vs last week</div></div>
+              <div style="border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 14px;"><div style="font-size: 11.5px; color: rgba(255,255,255,.5); margin-bottom: 6px;">Revenue</div><div style="font-size: clamp(20px,2vw,26px); font-weight: 800; letter-spacing: -0.02em;">₦<span data-count-to="1240" data-count-comma="1">0</span>k</div><div style="font-size: 11.5px; color: #6EE7A0; margin-top: 4px;">All paid upfront</div></div>
+              <div style="border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 14px;"><div style="font-size: 11.5px; color: rgba(255,255,255,.5); margin-bottom: 6px;">Occupancy</div><div style="font-size: clamp(20px,2vw,26px); font-weight: 800; letter-spacing: -0.02em;"><span data-count-to="76">0</span>%</div><div style="font-size: 11.5px; color: rgba(255,255,255,.5); margin-top: 4px;">Peak: Tue &amp; Sat</div></div>
+            </div>
+            <div style="border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 16px;">
+              <div style="font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,.7); margin-bottom: 14px;">Revenue by court · this week</div>
+              <div style="display: flex; align-items: flex-end; gap: 10px; height: 110px;">
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 92%; background: #007AFF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Court 1</span></div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 64%; background: #2E8FFF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Court 2</span></div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 78%; background: #5AA9FF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Padel</span></div>
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 6px; align-items: center; height: 100%; justify-content: flex-end;"><div data-bar="1" style="width: 100%; height: 41%; background: #87C1FF; border-radius: 6px 6px 2px 2px; transform-origin: bottom; transform: scaleY(0);"></div><span style="font-size: 10.5px; color: rgba(255,255,255,.5);">Gym</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="border: 1px solid rgba(255,255,255,.09); border-radius: 14px; padding: 16px; display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 10px;">
+              <span style="font-size: 12.5px; font-weight: 600; color: rgba(255,255,255,.7);">Bookings calendar · today</span>
+              <span style="font-size: 11px; color: #5AA9FF; border: 1px solid rgba(90,169,255,.35); padding: 3px 9px; border-radius: 999px; white-space: nowrap;">+ Manual entry</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 44px 1fr 1fr; gap: 6px; flex: 1; font-size: 11px; align-content: stretch;">
+              <span style="color: rgba(255,255,255,.4); align-self: center;">4pm</span>
+              <div data-cal-block="1" style="border-radius: 7px; background: rgba(0,122,255,.85); padding: 6px 8px; color: #fff; font-weight: 600;">App · paid</div>
+              <div style="border-radius: 7px; background: rgba(255,255,255,.05);"></div>
+              <span style="color: rgba(255,255,255,.4); align-self: center;">5pm</span>
+              <div data-cal-block="1" style="border-radius: 7px; background: rgba(0,122,255,.85); padding: 6px 8px; color: #fff; font-weight: 600;">App · paid</div>
+              <div data-cal-block="1" style="border-radius: 7px; background: rgba(31,168,85,.8); padding: 6px 8px; color: #fff; font-weight: 600;">WhatsApp bot</div>
+              <span style="color: rgba(255,255,255,.4); align-self: center;">6pm</span>
+              <div data-cal-block="1" style="border-radius: 7px; background: rgba(255,255,255,.16); padding: 6px 8px; color: #fff; font-weight: 600;">Walk-in · manual</div>
+              <div data-cal-block="1" style="border-radius: 7px; background: rgba(0,122,255,.85); padding: 6px 8px; color: #fff; font-weight: 600;">App · paid</div>
+              <span style="color: rgba(255,255,255,.4); align-self: center;">7pm</span>
+              <div data-cal-block="1" style="border-radius: 7px; background: rgba(31,168,85,.8); padding: 6px 8px; color: #fff; font-weight: 600;">WhatsApp bot</div>
+              <div data-cal-block="1" style="border-radius: 7px; background: rgba(0,122,255,.85); padding: 6px 8px; color: #fff; font-weight: 600;">Recurring</div>
+              <span style="color: rgba(255,255,255,.4); align-self: center;">8pm</span>
+              <div data-cal-block="1" style="border-radius: 7px; background: rgba(0,122,255,.85); padding: 6px 8px; color: #fff; font-weight: 600;">Open session</div>
+              <div style="border-radius: 7px; background: rgba(255,255,255,.05);"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Three venue pillars -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: clamp(24px,3vw,40px); margin-top: 56px;">
+        <div data-reveal="1" style="border-top: 1px solid rgba(255,255,255,.14); padding-top: 22px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em;">Bookings that never close</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.6);">Customers book and pay in full, confirmed instantly at any hour. No court is ever held without payment.</p>
+        </div>
+        <div data-reveal="1" style="border-top: 1px solid rgba(255,255,255,.14); padding-top: 22px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em;">One calendar for everything</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.6);">Day, week, month, year — with manual entry so walk-ins and phone bookings sit alongside app bookings.</p>
+        </div>
+        <div data-reveal="1" style="border-top: 1px solid rgba(255,255,255,.14); padding-top: 22px;">
+          <h3 style="margin: 0 0 10px; font-size: 18px; font-weight: 700; letter-spacing: -0.015em;">Insights, not guesswork</h3>
+          <p style="margin: 0; font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.6);">Which courts earn most, the quietest hours and the busiest — so pricing, staffing and promotion run on real numbers.</p>
+        </div>
+      </div>
+
+      <!-- Venue bot -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: clamp(32px,5vw,72px); align-items: center; margin-top: clamp(72px,10vh,120px);">
+        <div>
+          <p data-reveal="1" style="margin: 0 0 16px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #5AA9FF;">The WhatsApp bot · For venue teams</p>
+          <h3 data-split="1" style="margin: 0 0 18px; font-size: clamp(28px,3.4vw,42px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; color: #fff; text-wrap: balance;">Your team isn't at a desk. Neither is Spotts.</h3>
+          <p data-reveal="1" style="margin: 0 0 28px; font-size: 16px; line-height: 1.65; color: rgba(255,255,255,.62); text-wrap: pretty;">A second bot — separate from the customer one — keeps the whole team in sync from the floor, in real time.</p>
+          <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 18px;">
+            <li data-reveal="1" style="display: flex; gap: 14px; align-items: flex-start;"><span style="flex: none; width: 26px; height: 26px; border-radius: 50%; background: rgba(90,169,255,.15); color: #5AA9FF; display: grid; place-items: center; font-size: 13px; font-weight: 700;">1</span><p style="margin: 0; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.75);"><b style="color: #fff;">Every booking lands with everyone, instantly</b> — app, bot or walk-in. The moment it's booked, everybody knows. That's the end of double-bookings.</p></li>
+            <li data-reveal="1" style="display: flex; gap: 14px; align-items: flex-start;"><span style="flex: none; width: 26px; height: 26px; border-radius: 50%; background: rgba(90,169,255,.15); color: #5AA9FF; display: grid; place-items: center; font-size: 13px; font-weight: 700;">2</span><p style="margin: 0; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.75);"><b style="color: #fff;">Block a slot straight from WhatsApp</b> when a walk-in books on the spot — held everywhere, instantly.</p></li>
+            <li data-reveal="1" style="display: flex; gap: 14px; align-items: flex-start;"><span style="flex: none; width: 26px; height: 26px; border-radius: 50%; background: rgba(90,169,255,.15); color: #5AA9FF; display: grid; place-items: center; font-size: 13px; font-weight: 700;">3</span><p style="margin: 0; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.75);"><b style="color: #fff;">A daily digest every morning</b> — the day's full schedule, delivered before the first customer arrives.</p></li>
+          </ul>
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <div style="width: min(380px, 100%); background: #020305; border-radius: 56px; padding: 10px; box-shadow: 0 0 0 2px #43464E, 0 0 1px 3px rgba(255,255,255,.14);">
+            <div style="background-color: #0B141A; background-image: url('data:image/svg+xml,%3Csvg xmlns=%27http%3A//www.w3.org/2000/svg%27 width=%27160%27 height=%27160%27 viewBox=%270 0 160 160%27%3E%3Cg fill=%27none%27 stroke=%27%23E9EDEF%27 stroke-opacity=%27.05%27 stroke-width=%271.5%27 stroke-linecap=%27round%27%3E%3Ccircle cx=%2728%27 cy=%2726%27 r=%279%27/%3E%3Cpath d=%27M28 17v18M19 26h18%27/%3E%3Cpath d=%27M100 22l5 10m-10-5l10-5%27/%3E%3Ccircle cx=%27128%27 cy=%27106%27 r=%278%27/%3E%3Cpath d=%27M28 112q9-11 18 0t18 0%27/%3E%3Cpath d=%27M78 64l2.7 5.4 6 .9-4.4 4.2 1 6-5.3-2.8-5.3 2.8 1-6-4.4-4.2 6-.9z%27/%3E%3Cpath d=%27M136 40a7 7 0 1 1-7-7%27/%3E%3Cpath d=%27M60 140l4 4m0-4l-4 4%27/%3E%3C/g%3E%3C/svg%3E'); background-size: 160px 160px; border-radius: 46px; overflow: hidden; display: flex; flex-direction: column; height: 570px;">
+              <div style="background: #1F2C34; color: #fff; padding: 14px 28px 6px; display: flex; justify-content: space-between; align-items: center; position: relative;">
+                <span style="font-size: 13.5px; font-weight: 600; letter-spacing: .02em;">9:41</span>
+                <span aria-hidden="true" style="position: absolute; left: 50%; transform: translateX(-50%); top: 11px; width: 90px; height: 25px; background: #000; border-radius: 999px;"></span>
+                <span style="display: inline-flex; gap: 5px; align-items: center;">
+                  <svg width="16" height="11" viewBox="0 0 16 11" fill="#fff" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"></rect><rect x="4.3" y="4.7" width="3" height="6.3" rx="1"></rect><rect x="8.6" y="2.3" width="3" height="8.7" rx="1"></rect><rect x="12.9" y="0" width="3" height="11" rx="1" opacity=".35"></rect></svg>
+                  <svg width="15" height="11" viewBox="0 0 15 11" fill="#fff" aria-hidden="true"><path d="M7.5 8.6a1.5 1.5 0 0 1 1.5 1.5L7.5 11 6 10.1a1.5 1.5 0 0 1 1.5-1.5z"></path><path d="M4.4 7.4a4.4 4.4 0 0 1 6.2 0L9.4 8.9a2.7 2.7 0 0 0-3.8 0L4.4 7.4z" opacity=".85"></path><path d="M1.6 4.9a8.3 8.3 0 0 1 11.8 0l-1.3 1.4a6.4 6.4 0 0 0-9.2 0L1.6 4.9z" opacity=".7"></path></svg>
+                  <svg width="25" height="12" viewBox="0 0 25 12" aria-hidden="true"><rect x=".5" y=".5" width="21" height="11" rx="3.5" stroke="#fff" opacity=".4" fill="none"></rect><rect x="2" y="2" width="18" height="8" rx="2" fill="#fff"></rect><path d="M23 4v4c1.1-.2 1.7-1 1.7-2S24.1 4.2 23 4z" fill="#fff" opacity=".4"></path></svg>
+                </span>
+              </div>
+              <div style="background: #1F2C34; color: #fff; padding: 10px 16px 13px; display: flex; align-items: center; gap: 11px; border-bottom: 1px solid rgba(255,255,255,.06);">
+                <div style="width: 34px; height: 34px; border-radius: 50%; background: #007AFF; display: grid; place-items: center;"><img src="/premium/icon-white.svg" alt="" style="width: 20px; height: 20px;"></div>
+                <div style="line-height: 1.25;">
+                  <div style="font-size: 15px; font-weight: 600;">Spotts · Venue Team</div>
+                  <div style="font-size: 12px; color: rgba(255,255,255,.5);">Ade, Chidi, Musa +2</div>
+                </div>
+                <div style="margin-left: auto; font-size: 11px; color: rgba(255,255,255,.55); border: 1px solid rgba(255,255,255,.2); padding: 3px 8px; border-radius: 999px;">Team bot</div>
+              </div>
+              <div style="flex: 1; padding: 16px 14px; display: flex; flex-direction: column; gap: 9px; overflow: hidden; justify-content: flex-end;">
+                <div data-vmsg="1" style="align-self: center; font-size: 11px; color: rgba(255,255,255,.4);">7:00 AM</div>
+                <div data-vmsg="1" style="align-self: flex-start; max-width: 90%; background: #1F2C34; color: #E9EDEF; border-radius: 14px 14px 14px 4px; padding: 10px 12px; font-size: 13.5px; line-height: 1.5;">☀️ <b>Today at Smokey Kickzone</b><br>9 bookings · first at 10am<br>Court 1 fully booked 5–9pm<br>2 open sessions filling: 7/10 and 4/10</div>
+                <div data-vmsg="1" style="align-self: center; font-size: 11px; color: rgba(255,255,255,.4);">2:14 PM</div>
+                <div data-vmsg="1" style="align-self: flex-start; max-width: 90%; background: #1F2C34; color: #E9EDEF; border-radius: 14px 14px 14px 4px; padding: 10px 12px; font-size: 13.5px; line-height: 1.5;">⚡ <b>New booking</b> — Court 2, 6–7pm<br>Paid ₦25,000 · via customer bot<br><span style="color: rgba(220,235,255,.55); font-size: 12px;">Seen by Ade, Chidi, Musa</span></div>
+                <div data-vmsg="1" style="align-self: flex-end; max-width: 82%; background: #005C4B; color: #E9EDEF; border-radius: 14px 14px 4px 14px; padding: 9px 12px; font-size: 13.5px; line-height: 1.5;">Block Court 1 today 3–4pm — walk-in just paid cash</div>
+                <div data-vmsg="1" style="align-self: flex-start; max-width: 90%; background: #1F2C34; color: #E9EDEF; border-radius: 14px 14px 14px 4px; padding: 10px 12px; font-size: 13.5px; line-height: 1.5;">Done ✓ Court 1 blocked 3–4pm.<br><span style="color: rgba(232,242,234,.55); font-size: 12px;">Held on the app, the bot and the dashboard.</span></div>
+              </div>
+              <div style="padding: 8px 10px 14px; display: flex; gap: 7px; align-items: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12h14" stroke="#8696A0" stroke-width="1.9" stroke-linecap="round"></path></svg>
+                <div style="flex: 1; background: #2A3942; border-radius: 999px; padding: 8px 13px; font-size: 13.5px; color: #8696A0; display: flex; align-items: center; gap: 8px;"><span style="flex: 1;">Message team</span><svg width="18" height="16" viewBox="0 0 20 17" fill="none" aria-hidden="true"><rect x="1" y="3.2" width="18" height="12.6" rx="3.2" stroke="#8696A0" stroke-width="1.4"></rect><circle cx="10" cy="9.5" r="3.4" stroke="#8696A0" stroke-width="1.4"></circle><path d="M6.5 3.2 8 1.2h4l1.5 2" stroke="#8696A0" stroke-width="1.4"></path></svg></div>
+                <div style="width: 38px; height: 38px; border-radius: 50%; background: #00A884; display: grid; place-items: center;"><svg width="15" height="19" viewBox="0 0 16 20" fill="none" aria-hidden="true"><rect x="5" y="1.5" width="6" height="11" rx="3" fill="#fff"></rect><path d="M2.5 9.5a5.5 5.5 0 0 0 11 0M8 15v3.5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"></path></svg></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRUST / STATS ============ -->
+  <section data-screen-label="Trust" style="border-top: 1px solid rgba(10,18,32,.07); background: #FAFBFD; position: relative; overflow: clip;">
+    <div aria-hidden="true" style="position: absolute; right: -30px; bottom: -50px; font-size: clamp(120px,18vw,260px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(0,122,255,.10); user-select: none; pointer-events: none;">ABUJA</div>
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(72px,10vh,120px) clamp(20px,4vw,48px);">
+      <h2 data-split="1" style="margin: 0 0 56px; max-width: 24ch; font-size: clamp(28px,3.6vw,44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; text-wrap: balance;">A real product, live today — growing venue by venue.</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: clamp(24px,3vw,40px);">
+        <div data-reveal="1" style="border-top: 2px solid #007AFF; padding-top: 20px;">
+          <div style="font-size: clamp(40px,4.5vw,60px); font-weight: 800; letter-spacing: -0.04em; line-height: 1;">&lt;<span data-count-to="60">0</span>s</div>
+          <p style="margin: 12px 0 0; font-size: 14.5px; line-height: 1.55; color: #51607A;">From first message to confirmed booking on WhatsApp.</p>
+        </div>
+        <div data-reveal="1" style="border-top: 2px solid #007AFF; padding-top: 20px;">
+          <div style="font-size: clamp(40px,4.5vw,60px); font-weight: 800; letter-spacing: -0.04em; line-height: 1;"><span data-count-to="24">0</span>/7</div>
+          <p style="margin: 12px 0 0; font-size: 14.5px; line-height: 1.55; color: #51607A;">Bookings and payments accepted — the front desk never closes.</p>
+        </div>
+        <div data-reveal="1" style="border-top: 2px solid #007AFF; padding-top: 20px;">
+          <div style="font-size: clamp(40px,4.5vw,60px); font-weight: 800; letter-spacing: -0.04em; line-height: 1;"><span data-count-to="100">0</span>%</div>
+          <p style="margin: 12px 0 0; font-size: 14.5px; line-height: 1.55; color: #51607A;">Of bookings paid upfront — no slot is ever held without payment.</p>
+        </div>
+        <div data-reveal="1" style="border-top: 2px solid #007AFF; padding-top: 20px;">
+          <div style="font-size: clamp(40px,4.5vw,60px); font-weight: 800; letter-spacing: -0.04em; line-height: 1;"><span data-count-to="200">0</span>+</div>
+          <p style="margin: 12px 0 0; font-size: 14.5px; line-height: 1.55; color: #51607A;">Players already booking on Spotts — and growing every week.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ EVENTS TEASER ============ -->
+  <section data-screen-label="Events teaser" style="border-top: 1px solid rgba(10,18,32,.07); background: #fff; position: relative; overflow: clip;">
+    <svg aria-hidden="true" viewBox="0 0 400 400" style="position: absolute; right: -90px; top: -90px; width: clamp(200px,22vw,340px); pointer-events: none;">
+      <g fill="none" stroke="#007AFF" stroke-opacity=".1" stroke-width="2">
+        <circle cx="200" cy="200" r="170"></circle>
+        <path d="M78 80 Q 200 200 78 320"></path>
+        <path d="M322 80 Q 200 200 322 320"></path>
+      </g>
+    </svg>
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px,8vh,96px) clamp(20px,4vw,48px); display: flex; flex-wrap: wrap; gap: clamp(28px,4vw,56px); align-items: center; justify-content: space-between; position: relative;">
+      <div style="max-width: 560px;">
+        <p data-reveal="1" style="margin: 0 0 16px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #007AFF;">New · Spotts Events</p>
+        <h2 data-split="1" style="margin: 0 0 14px; font-size: clamp(28px,3.6vw,46px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; text-wrap: balance;">Tournaments and game nights, ticketed by Spotts.</h2>
+        <p data-reveal="1" style="margin: 0 0 26px; font-size: 16px; line-height: 1.6; color: #51607A; text-wrap: pretty;">Buy tickets from the home screen and get your QR code instantly. Organisers get a live event dashboard — sales, revenue and gate check-ins in one place.</p>
+        <a href="/events" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; background: #0A1220; color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; padding: 13px 24px; border-radius: 999px;" style-hover="background: #1A2536;">Explore Spotts Events <span aria-hidden="true">→</span></a>
+      </div>
+      <div data-reveal="1" style="flex: none; width: min(320px, 100%); background: #0A1220; color: #fff; border-radius: 18px; box-shadow: 0 30px 64px -28px rgba(10,18,32,.5); transform: rotate(2deg);">
+        <div style="padding: 20px 22px 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 14px;">
+            <img src="/premium/logo-blue-white.svg" alt="Spotts" style="height: 15px;">
+            <span style="font-size: 10px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.5);">E-Ticket</span>
+          </div>
+          <div style="font-size: 11px; letter-spacing: .13em; text-transform: uppercase; color: #5AA9FF; font-weight: 700; margin-bottom: 6px;">Padel · Tournament final</div>
+          <div style="font-size: 18px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.15;">Abuja Padel Open — Finals Night</div>
+        </div>
+        <div style="position: relative; display: flex; align-items: center; padding: 0 6px;">
+          <span aria-hidden="true" style="position: absolute; left: -9px; width: 18px; height: 18px; border-radius: 50%; background: #fff;"></span>
+          <span aria-hidden="true" style="flex: 1; border-top: 2px dashed rgba(255,255,255,.22); margin: 0 14px;"></span>
+          <span aria-hidden="true" style="position: absolute; right: -9px; width: 18px; height: 18px; border-radius: 50%; background: #fff;"></span>
+        </div>
+        <div style="padding: 16px 22px 20px; display: flex; align-items: center; gap: 16px;">
+          <div style="background: #fff; border-radius: 9px; padding: 7px;">
+            <div style="display: grid; grid-template-columns: repeat(5, 7px); grid-auto-rows: 7px; gap: 2.5px;">
+              <span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span>
+              <span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span>
+              <span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span>
+              <span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span>
+              <span style="background: #0A1220;"></span><span style="background: #0A1220;"></span><span style="background: rgba(10,18,32,.15);"></span><span style="background: #0A1220;"></span><span style="background: #0A1220;"></span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 14px; font-weight: 700;">₦7,500 · Paid ✓</div>
+            <div style="font-size: 11.5px; color: #9FE870; margin-top: 4px;">Delivered instantly</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section id="cta" data-screen-label="CTA" style="background: #007AFF; position: relative; overflow: clip;">
+    <img src="/premium/icon-white.svg" alt="" aria-hidden="true" style="position: absolute; right: -90px; top: -70px; width: clamp(280px,32vw,460px); opacity: .1; transform: rotate(-12deg); pointer-events: none;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(80px,11vh,140px) clamp(20px,4vw,48px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: clamp(32px,5vw,64px); align-items: center;">
+      <div>
+        <h2 data-split="1" style="margin: 0 0 18px; font-size: clamp(34px,4.6vw,60px); font-weight: 800; letter-spacing: -0.04em; line-height: 1; color: #fff; text-wrap: balance;">Your next game is one message away.</h2>
+        <p data-reveal="1" style="margin: 0 0 32px; font-size: 17px; line-height: 1.6; color: rgba(255,255,255,.85); max-width: 46ch;">Download the app, or just message the bot on WhatsApp. Either way, you're playing today.</p>
+        <div data-reveal="1" style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="https://apps.apple.com/app/id6758109546" target="_blank" rel="noopener noreferrer" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #007AFF; text-decoration: none; font-size: 16px; font-weight: 700; padding: 15px 26px; border-radius: 999px;" style-hover="background: #EAF3FF;"> App Store</a>
+          <a href="https://play.google.com/store/apps/details?id=com.bleumeridiantech.spotts" target="_blank" rel="noopener noreferrer" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; background: #fff; color: #007AFF; text-decoration: none; font-size: 16px; font-weight: 700; padding: 15px 26px; border-radius: 999px;" style-hover="background: #EAF3FF;">▶ Google Play</a>
+          <a href="https://wa.me/2347058888348" target="_blank" rel="noopener noreferrer" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; color: #fff; text-decoration: none; font-size: 16px; font-weight: 600; padding: 15px 26px; border-radius: 999px; border: 1px solid rgba(255,255,255,.4); white-space: nowrap;" style-hover="border-color: #fff;">💬 Message the bot</a>
+        </div>
+      </div>
+      <div data-reveal="1" style="background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.22); border-radius: 20px; padding: clamp(28px,3vw,40px); color: #fff;">
+        <p style="margin: 0 0 8px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7);">Run a venue?</p>
+        <h3 style="margin: 0 0 14px; font-size: clamp(22px,2.4vw,30px); font-weight: 700; letter-spacing: -0.025em; line-height: 1.1;">Put your courts on Spotts.</h3>
+        <p style="margin: 0 0 24px; font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.8);">Bookings paid upfront, a dashboard that shows where the money comes from, and a team bot that ends double-bookings.</p>
+        <a href="/contact#venue" data-magnetic="1" style="display: inline-flex; align-items: center; gap: 10px; background: #071120; color: #fff; text-decoration: none; font-size: 15px; font-weight: 600; padding: 13px 24px; border-radius: 999px;" style-hover="background: #0A1220;">Become a partner venue <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer data-screen-label="Footer" style="background: #071120; color: #fff;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(48px,7vh,80px) clamp(20px,4vw,48px) 40px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: flex-start; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1);">
+        <div style="max-width: 320px;">
+          <img src="/premium/logo-blue-white.svg" alt="Spotts" style="height: 26px; display: block; margin-bottom: 16px;">
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.55);">Sports venues and gyms, booked in seconds. Live in Abuja on iOS, Android and WhatsApp.</p>
+        </div>
+        <div style="display: flex; gap: clamp(28px,4.5vw,64px); flex-wrap: wrap;">
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">Product</span>
+            <a href="#bot" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">WhatsApp bot</a>
+            <a href="#app" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">The app</a>
+            <a href="#venues" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">For venues</a>
+            <a href="/events" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Spotts Events</a>
+            <a href="/book" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Book a court</a>
+            <a href="/partner-api" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Partner API</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">Get Spotts</span>
+            <a href="https://apps.apple.com/app/id6758109546" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">iOS App Store</a>
+            <a href="https://play.google.com/store/apps/details?id=com.bleumeridiantech.spotts" target="_blank" rel="noopener noreferrer" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Google Play</a>
+            <a href="#cta" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">WhatsApp</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">Support</span>
+            <a href="/support" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Help &amp; support</a>
+            <a href="/contact" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Contact us</a>
+            <a href="/contact#venue" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">List your venue</a>
+            <a href="/contact#event" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Host an event</a>
+            <a href="/support#delete-account" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Delete account</a>
+            <a href="mailto:info@spottsapp.com" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">info@spottsapp.com</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">Legal</span>
+            <a href="/terms" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Terms &amp; Conditions</a>
+            <a href="/privacy" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Privacy Policy</a>
+            <a href="/refund" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Refund Policy</a>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top: 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,.4);">
+        <span>© 2026 Spotts. Made in Abuja.</span>
+        <span>Football · Padel · Tennis · Gyms — booked in seconds.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>

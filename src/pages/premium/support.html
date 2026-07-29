@@ -1,0 +1,194 @@
+<div style="font-family: 'Inter Display', 'Helvetica Neue', sans-serif; color: #0A1220; background: #FAFBFD; overflow-x: clip;">
+
+  <!-- ============ NAV ============ -->
+  <header data-screen-label="Nav" style="position: sticky; top: 0; z-index: 60; background: rgba(250,251,253,.88); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(10,18,32,.07);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 clamp(20px,4vw,48px); height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 24px;">
+      <a href="/" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+        <img src="/premium/logo-blue-black.svg" alt="Spotts" style="height: 26px; display: block;">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #51607A; border: 1px solid rgba(10,18,32,.14); padding: 4px 10px; border-radius: 999px;">Support</span>
+      </a>
+      <nav aria-label="Primary" data-mm="nav" style="display: flex; align-items: center; gap: clamp(16px,2.5vw,32px); font-size: 14.5px; font-weight: 500;">
+        <a href="#contact" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Contact</a>
+        <a href="#topics" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Common topics</a>
+        <a href="#delete-account" style="color: #51607A; text-decoration: none;" style-hover="color: #0A1220;">Delete account</a>
+      </nav>
+      <a href="/#cta" data-mm="cta" style="font-size: 14px; font-weight: 600; color: #fff; background: #007AFF; text-decoration: none; padding: 10px 18px; border-radius: 999px; white-space: nowrap;" style-hover="background: #0069DE;">Get the app</a>
+      <button type="button" data-mm="burger" aria-label="Open menu" style="display: none; align-items: center; justify-content: center; width: 42px; height: 42px; border: 1px solid rgba(10,18,32,.14); border-radius: 12px; background: #fff; color: #0A1220; font-size: 20px; line-height: 1; cursor: pointer; padding: 0;">☰</button>
+    </div>
+    <div data-mm="panel" style="display: none; border-top: 1px solid rgba(10,18,32,.08); background: rgba(250,251,253,.98); padding: 10px clamp(20px,4vw,48px) 22px;">
+      <nav aria-label="Mobile" style="display: flex; flex-direction: column;">
+        <a href="#contact" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">Contact</a>
+        <a href="#topics" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">Common topics</a>
+        <a href="#delete-account" data-mm-close="1" style="color: #0A1220; text-decoration: none; font-size: 16px; font-weight: 600; padding: 13px 0; border-bottom: 1px solid rgba(10,18,32,.07);">Delete account</a>
+        <a href="/#cta" data-mm-close="1" style="text-align: center; font-size: 15px; font-weight: 600; color: #fff; background: #007AFF; text-decoration: none; padding: 14px 16px; border-radius: 12px; margin-top: 14px;">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ============ HERO ============ -->
+  <section data-screen-label="Support hero" style="position: relative; overflow: clip; background: #fff; border-bottom: 1px solid rgba(10,18,32,.07);">
+    <div aria-hidden="true" style="position: absolute; right: -30px; bottom: -50px; font-size: clamp(110px,16vw,220px); font-weight: 800; letter-spacing: -0.05em; line-height: 1; color: transparent; -webkit-text-stroke: 1.5px rgba(0,122,255,.09); user-select: none; pointer-events: none;">HELP</div>
+    <!-- Tennis court corner line art -->
+    <svg aria-hidden="true" viewBox="0 0 460 300" style="position: absolute; left: -70px; top: -40px; width: clamp(220px,26vw,420px); pointer-events: none;">
+      <g fill="none" stroke="#007AFF" stroke-opacity=".1" stroke-width="2">
+        <rect x="20" y="20" width="420" height="260"></rect>
+        <rect x="72" y="20" width="316" height="260"></rect>
+        <line x1="72" y1="150" x2="388" y2="150"></line>
+        <line x1="230" y1="150" x2="230" y2="280"></line>
+      </g>
+    </svg>
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(64px,9vh,110px) clamp(20px,4vw,48px); position: relative;">
+      <p style="margin: 0 0 18px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #007AFF;">Spotts Support</p>
+      <h1 style="margin: 0 0 20px; max-width: 16ch; font-size: clamp(40px,5.6vw,76px); font-weight: 800; letter-spacing: -0.05em; line-height: .98; text-wrap: balance;">How can we help?</h1>
+      <p style="margin: 0; max-width: 54ch; font-size: clamp(16px,1.4vw,19px); line-height: 1.6; color: #51607A; text-wrap: pretty;">Booking issues, refunds, payments, your account — most things resolve in a few taps in the app, and a real person is one email away for everything else.</p>
+    </div>
+  </section>
+
+  <!-- ============ CONTACT CHANNELS ============ -->
+  <section id="contact" data-screen-label="Contact channels" style="max-width: 1200px; margin: 0 auto; padding: clamp(56px,8vh,100px) clamp(20px,4vw,48px);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 20px;">
+      <a href="mailto:info@spottsapp.com" style="text-decoration: none; color: #0A1220; border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #fff; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 12px; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 44px -22px rgba(10,18,32,.28);">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #007AFF;">Email us</span>
+        <span style="font-size: clamp(19px,1.8vw,23px); font-weight: 700; letter-spacing: -0.02em;">info@spottsapp.com</span>
+        <span style="font-size: 14.5px; line-height: 1.6; color: #51607A;">For booking issues, refunds, data requests and anything else. Include your booking reference if you have one.</span>
+        <span style="margin-top: auto; font-size: 14px; font-weight: 700; color: #007AFF;">Write to support →</span>
+      </a>
+      <div style="border: 1px solid rgba(10,18,32,.09); border-radius: 20px; background: #fff; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 12px;">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #007AFF;">In the app</span>
+        <span style="font-size: clamp(19px,1.8vw,23px); font-weight: 700; letter-spacing: -0.02em;">Manage it yourself</span>
+        <span style="font-size: 14.5px; line-height: 1.6; color: #51607A;">Cancel or reschedule bookings, track refunds and report reviews or messages — straight from your bookings screen, no email needed.</span>
+        <span style="margin-top: auto; font-size: 13.5px; color: #8794A8;">Spotts app → Bookings</span>
+      </div>
+      <a href="https://wa.me/2347058888348" target="_blank" rel="noopener noreferrer" style-hover="transform: translateY(-4px); box-shadow: 0 20px 44px -24px rgba(31,168,85,.3);" style="text-decoration: none; color: inherit; border: 1px solid rgba(31,168,85,.25); border-radius: 20px; background: #F3FBF5; padding: clamp(24px,3vw,32px); display: flex; flex-direction: column; gap: 12px; transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s;">
+        <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #1FA855;">On WhatsApp</span>
+        <span style="font-size: clamp(19px,1.8vw,23px); font-weight: 700; letter-spacing: -0.02em;">Ask the bot</span>
+        <span style="font-size: 14.5px; line-height: 1.6; color: #51607A;">The bot handles cancellations and booking changes in chat, any hour. If it can't fix something, it hands you to the team.</span>
+        <span style="margin-top: auto; font-size: 13.5px; color: #1FA855; font-weight: 600; display: inline-flex; align-items: center; gap: 7px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #1FA855; animation: spotts-pulse 2s ease-in-out infinite;"></span>Always online</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ COMMON TOPICS ============ -->
+  <section id="topics" data-screen-label="Common topics" style="border-top: 1px solid rgba(10,18,32,.07); background: #fff;">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(56px,8vh,100px) clamp(20px,4vw,48px);">
+      <h2 style="margin: 0 0 40px; max-width: 22ch; font-size: clamp(28px,3.6vw,44px); font-weight: 700; letter-spacing: -0.03em; line-height: 1.05; text-wrap: balance;">Common topics, answered fast.</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 0; border-top: 1px solid rgba(10,18,32,.08);">
+        <div style="padding: 28px clamp(0px,2vw,28px) 28px 0; border-bottom: 1px solid rgba(10,18,32,.08);">
+          <h3 style="margin: 0 0 10px; font-size: 17px; font-weight: 700; letter-spacing: -0.015em;">Cancelling a booking</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.65; color: #51607A;">Open your booking in the app and tap <b style="color: #0A1220;">Cancel Booking</b>. You'll see the exact refund amount — based on the venue's policy you accepted at booking — before you confirm. Refunds process automatically.</p>
+        </div>
+        <div style="padding: 28px clamp(0px,2vw,28px) 28px 0; border-bottom: 1px solid rgba(10,18,32,.08);">
+          <h3 style="margin: 0 0 10px; font-size: 17px; font-weight: 700; letter-spacing: -0.015em;">Where's my refund?</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.65; color: #51607A;">Approved refunds go back to your original payment method in <b style="color: #0A1220;">3–10 working days</b>, depending on your bank. Past 10 days, check with your bank first, then email us. Full details in the <a href="/refund" style="color: #007AFF; text-decoration: none; font-weight: 600;">Refund Policy</a>.</p>
+        </div>
+        <div style="padding: 28px clamp(0px,2vw,28px) 28px 0; border-bottom: 1px solid rgba(10,18,32,.08);">
+          <h3 style="margin: 0 0 10px; font-size: 17px; font-weight: 700; letter-spacing: -0.015em;">The venue cancelled on me</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.65; color: #51607A;">You get a <b style="color: #0A1220;">full 100% refund, including processing fees</b> — automatically, no matter how close to your slot the cancellation happened.</p>
+        </div>
+        <div style="padding: 28px clamp(0px,2vw,28px) 28px 0; border-bottom: 1px solid rgba(10,18,32,.08);">
+          <h3 style="margin: 0 0 10px; font-size: 17px; font-weight: 700; letter-spacing: -0.015em;">Payment issues</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.65; color: #51607A;">Payments run through Paystack's secure checkout — Spotts never stores your card number or CVV. If a payment was charged but a booking didn't confirm, email us with the transaction reference and we'll trace it.</p>
+        </div>
+        <div style="padding: 28px clamp(0px,2vw,28px) 28px 0; border-bottom: 1px solid rgba(10,18,32,.08);">
+          <h3 style="margin: 0 0 10px; font-size: 17px; font-weight: 700; letter-spacing: -0.015em;">Reporting a review or message</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.65; color: #51607A;">Use the in-app report button on any review or open-session message that breaks the rules. Reported content is reviewed by Spotts staff and removed if it violates our policies.</p>
+        </div>
+        <div style="padding: 28px clamp(0px,2vw,28px) 28px 0; border-bottom: 1px solid rgba(10,18,32,.08);">
+          <h3 style="margin: 0 0 10px; font-size: 17px; font-weight: 700; letter-spacing: -0.015em;">Your data, your rights</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.65; color: #51607A;">You can access, correct or request a copy of your personal data any time — email <a href="mailto:info@spottsapp.com" style="color: #007AFF; text-decoration: none; font-weight: 600;">info@spottsapp.com</a>. Requests are processed within 7 business days. See the <a href="/privacy" style="color: #007AFF; text-decoration: none; font-weight: 600;">Privacy Policy</a>.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DELETE ACCOUNT (DARK) ============ -->
+  <section id="delete-account" data-screen-label="Delete account" style="background: #071120; color: #fff; position: relative; overflow: clip;">
+    <svg aria-hidden="true" viewBox="0 0 480 320" style="position: absolute; right: -60px; bottom: -50px; width: clamp(220px,24vw,400px); pointer-events: none;">
+      <g fill="none" stroke="#5AA9FF" stroke-opacity=".1" stroke-width="2">
+        <rect x="20" y="20" width="440" height="280"></rect>
+        <line x1="240" y1="20" x2="240" y2="300"></line>
+        <line x1="20" y1="160" x2="460" y2="160"></line>
+        <line x1="130" y1="20" x2="130" y2="300" stroke-dasharray="7 7"></line>
+        <line x1="350" y1="20" x2="350" y2="300" stroke-dasharray="7 7"></line>
+      </g>
+    </svg>
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(64px,9vh,110px) clamp(20px,4vw,48px); position: relative;">
+      <p style="margin: 0 0 18px; font-size: 12.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #5AA9FF;">Your account</p>
+      <h2 style="margin: 0 0 16px; max-width: 20ch; font-size: clamp(30px,4vw,50px); font-weight: 700; letter-spacing: -0.035em; line-height: 1.02; color: #fff; text-wrap: balance;">Deleting your account.</h2>
+      <p style="margin: 0 0 48px; max-width: 60ch; font-size: 16.5px; line-height: 1.65; color: rgba(255,255,255,.62); text-wrap: pretty;">Your account is yours to close, any time. Deletion is immediate, permanent, and handled entirely by you — no phone call, no retention team.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: clamp(24px,3vw,40px);">
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div style="border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 22px 24px; background: rgba(255,255,255,.03);">
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 10px;">In the app</div>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 15px; font-weight: 600;">
+              <span style="background: rgba(255,255,255,.08); border-radius: 8px; padding: 7px 13px;">Settings</span>
+              <span aria-hidden="true" style="color: rgba(255,255,255,.4);">→</span>
+              <span style="background: rgba(255,255,255,.08); border-radius: 8px; padding: 7px 13px;">Account</span>
+              <span aria-hidden="true" style="color: rgba(255,255,255,.4);">→</span>
+              <span style="background: rgba(196,54,59,.25); color: #FF9A9E; border-radius: 8px; padding: 7px 13px;">Delete Account</span>
+            </div>
+          </div>
+          <div style="border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 22px 24px; background: rgba(255,255,255,.03);">
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 10px;">On the web</div>
+            <div style="font-size: 15px; font-weight: 600;">spottsapp.com/delete-account</div>
+            <div style="font-size: 13.5px; color: rgba(255,255,255,.5); margin-top: 6px;">Same result, without opening the app.</div>
+          </div>
+          <div style="border: 1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 22px 24px; background: rgba(255,255,255,.03);">
+            <div style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 10px;">Just some of your data?</div>
+            <div style="font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.7);">You can request deletion of specific data without closing your account — email <a href="mailto:info@spottsapp.com" style="color: #5AA9FF; text-decoration: none; font-weight: 600;">info@spottsapp.com</a>. Processed within 7 business days.</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45); margin-bottom: 18px;">What happens when you delete</div>
+          <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 16px;">
+            <li style="display: flex; gap: 13px; align-items: flex-start;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(90,169,255,.15); color: #5AA9FF; display: grid; place-items: center; font-size: 12px; font-weight: 700; margin-top: 1px;">✓</span><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.75);">Your name, email and phone number are <b style="color: #fff;">permanently deleted</b>.</p></li>
+            <li style="display: flex; gap: 13px; align-items: flex-start;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(90,169,255,.15); color: #5AA9FF; display: grid; place-items: center; font-size: 12px; font-weight: 700; margin-top: 1px;">✓</span><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.75);">All active bookings are cancelled — refunds follow each venue's cancellation policy where applicable.</p></li>
+            <li style="display: flex; gap: 13px; align-items: flex-start;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(90,169,255,.15); color: #5AA9FF; display: grid; place-items: center; font-size: 12px; font-weight: 700; margin-top: 1px;">✓</span><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.75);">Booking history, preferences and any earned rewards are gone with the account.</p></li>
+            <li style="display: flex; gap: 13px; align-items: flex-start;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(90,169,255,.15); color: #5AA9FF; display: grid; place-items: center; font-size: 12px; font-weight: 700; margin-top: 1px;">✓</span><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.75);">Financial records are anonymised ("Deleted User") and kept 7 years, as Nigerian financial regulations require — then securely deleted.</p></li>
+            <li style="display: flex; gap: 13px; align-items: flex-start;"><span style="flex: none; width: 24px; height: 24px; border-radius: 50%; background: rgba(90,169,255,.15); color: #5AA9FF; display: grid; place-items: center; font-size: 12px; font-weight: 700; margin-top: 1px;">✓</span><p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.75);">You get a confirmation email once deletion is complete.</p></li>
+          </ul>
+          <div style="margin-top: 24px; border: 1px solid rgba(196,54,59,.4); background: rgba(196,54,59,.1); border-radius: 14px; padding: 16px 20px; font-size: 14px; line-height: 1.6; color: #FFB4B7;"><b>This can't be undone.</b> Once deleted, your account and its data can't be recovered.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer data-screen-label="Footer" style="background: #071120; color: #fff; border-top: 1px solid rgba(255,255,255,.08);">
+    <div style="max-width: 1200px; margin: 0 auto; padding: clamp(48px,7vh,80px) clamp(20px,4vw,48px) 40px;">
+      <div style="display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between; align-items: flex-start; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,.1);">
+        <div style="max-width: 320px;">
+          <img src="/premium/logo-blue-white.svg" alt="Spotts" style="height: 26px; display: block; margin-bottom: 16px;">
+          <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.55);">Sports venues, gyms and event tickets, booked in seconds. Live in Abuja on iOS, Android and WhatsApp.</p>
+        </div>
+        <div style="display: flex; gap: clamp(32px,5vw,64px); flex-wrap: wrap;">
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">Product</span>
+            <a href="/#bot" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">WhatsApp bot</a>
+            <a href="/#app" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">The app</a>
+            <a href="/#venues" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">For venues</a>
+            <a href="/events" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Spotts Events</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">Support</span>
+            <a href="/support" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Help &amp; support</a>
+            <a href="/support#delete-account" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Delete account</a>
+            <a href="mailto:info@spottsapp.com" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">info@spottsapp.com</a>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.45);">Legal</span>
+            <a href="/terms" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Terms &amp; Conditions</a>
+            <a href="/privacy" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Privacy Policy</a>
+            <a href="/refund" style="font-size: 14px; color: rgba(255,255,255,.75); text-decoration: none;" style-hover="color: #fff;">Refund Policy</a>
+          </div>
+        </div>
+      </div>
+      <div style="padding-top: 24px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,.4);">
+        <span>© 2026 Spotts. Made in Abuja.</span>
+        <span>Football · Padel · Tennis · Gyms · Events — booked in seconds.</span>
+      </div>
+    </div>
+  </footer>
+
+</div>

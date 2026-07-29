@@ -1,0 +1,25 @@
+/* Ported 1:1 from the Spotts Premium export helmet (Spotts Website.dc.html) */
+
+@font-face { font-family: 'Inter Display'; src: url('/premium/fonts/InterDisplay-Regular.otf') format('opentype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Inter Display'; src: url('/premium/fonts/InterDisplay-Medium.otf') format('opentype'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Inter Display'; src: url('/premium/fonts/InterDisplay-SemiBold.otf') format('opentype'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Inter Display'; src: url('/premium/fonts/InterDisplay-Bold.otf') format('opentype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Inter Display'; src: url('/premium/fonts/InterDisplay-ExtraBold.otf') format('opentype'); font-weight: 800; font-display: swap; }
+
+@keyframes spotts-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes spotts-dot { 0%, 60%, 100% { transform: translateY(0); opacity: .35; } 30% { transform: translateY(-4px); opacity: 1; } }
+@keyframes spotts-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+@keyframes spotts-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+/* Equivalent of the export's body rules, scoped to this page */
+.premium-root {
+  margin: 0;
+  background: #FAFBFD;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* The export renders without Tailwind's preflight; undo the resets that would
+   change its layout (the design sizes images via inline styles only). */
+.premium-root img { max-width: none; }
