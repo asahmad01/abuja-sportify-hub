@@ -1,0 +1,56 @@
+{
+  "siteUrl": "https://spottsapp.com",
+  "defaultOgImage": "https://spottsapp.com/hero-sports.jpg",
+  "twitterHandle": "@spottsapp",
+  "organization": {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Spotts",
+    "url": "https://spottsapp.com",
+    "logo": "https://spottsapp.com/favicon.png",
+    "description": "Book sports venues and gyms across Abuja in seconds. Available on iOS and Android.",
+    "sameAs": [
+      "https://instagram.com/spottsapp",
+      "https://tiktok.com/@spottsapp",
+      "https://twitter.com/spottsapp"
+    ]
+  },
+  "routes": {
+    "/": {
+      "title": "Spotts — Book Sports Venues & Gyms in Abuja, Instantly",
+      "description": "Book football pitches, padel & tennis courts, basketball & gyms across Abuja in seconds. Join tournaments. iOS & Android."
+    },
+    "/events": {
+      "title": "Sports Events & Tournaments in Abuja | Spotts",
+      "description": "Discover and join padel, football and sports tournaments across Abuja. Secure your spot and pay in seconds on Spotts."
+    },
+    "/partner-api": {
+      "title": "Spotts Partner API — Venue Calendar Sync",
+      "description": "Integrate your venue's availability and bookings with Spotts. Real-time calendar sync for partners."
+    },
+    "/venue-onboarding": {
+      "title": "List Your Venue on Spotts | Grow Bookings in Abuja",
+      "description": "Put your facility or gym in front of thousands of players in Abuja. Manage bookings, payments and payouts in one place."
+    },
+    "/contact": {
+      "title": "Contact Spotts | Get in Touch",
+      "description": "Questions, venue listings or event partnerships — reach the Spotts team."
+    },
+    "/support": {
+      "title": "Spotts Support & Help Centre",
+      "description": "Get help with bookings, payments, memberships and your Spotts account."
+    },
+    "/privacy": {
+      "title": "Privacy Policy | Spotts",
+      "description": "How Spotts collects, uses and protects your data."
+    },
+    "/terms": {
+      "title": "Terms & Conditions | Spotts",
+      "description": "The terms governing your use of Spotts."
+    },
+    "/refund": {
+      "title": "Refund & Cancellation Policy | Spotts",
+      "description": "How refunds and cancellations work on Spotts."
+    }
+  }
+}

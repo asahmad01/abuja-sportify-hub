@@ -4,23 +4,26 @@
 import { useEffect, useRef } from "react";
 import homeHtml from "./premium/home.html?raw";
 import { setupPremiumPage } from "./premium/setup";
+import Seo from "../seo/Seo";
 import "./premium/premium.css";
 
 const PremiumHome = () => {
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    document.title = "Spotts — Book sports venues and gyms in Abuja, instantly";
     if (!rootRef.current) return;
     return setupPremiumPage(rootRef.current);
   }, []);
 
   return (
-    <div
-      ref={rootRef}
-      className="premium-root"
-      dangerouslySetInnerHTML={{ __html: homeHtml }}
-    />
+    <>
+      <Seo route="/" />
+      <div
+        ref={rootRef}
+        className="premium-root"
+        dangerouslySetInnerHTML={{ __html: homeHtml }}
+      />
+    </>
   );
 };
 

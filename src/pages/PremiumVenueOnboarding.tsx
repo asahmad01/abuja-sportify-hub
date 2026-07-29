@@ -7,6 +7,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { setupPremiumPage } from "./premium/setup";
+import Seo from "../seo/Seo";
 import "./premium/premium.css";
 
 const FORMSPREE_VENUE_ONBOARDING_ENDPOINT = "https://formspree.io/f/mjgeynko";
@@ -59,10 +60,6 @@ const PremiumVenueOnboarding = () => {
   const [submitted, setSubmitted] = useState(false);
   const [venueName, setVenueName] = useState("");
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    document.title = "Spotts — Venue Onboarding";
-  }, []);
 
   useEffect(() => {
     if (!rootRef.current) return;
@@ -147,6 +144,7 @@ const PremiumVenueOnboarding = () => {
 
   return (
     <div ref={rootRef} className="premium-root" style={{ fontFamily: "'Inter Display', 'Helvetica Neue', sans-serif", color: "#0A1220", background: "#FAFBFD", overflowX: "clip" }}>
+      <Seo route="/venue-onboarding" />
       {/* NAV */}
       <header style={{ position: "sticky", top: 0, zIndex: 60, background: "rgba(250,251,253,.88)", backdropFilter: "blur(14px)", borderBottom: "1px solid rgba(10,18,32,.07)" }}>
         <div style={{ maxWidth: 980, margin: "0 auto", padding: "0 clamp(20px,4vw,48px)", height: 68, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>

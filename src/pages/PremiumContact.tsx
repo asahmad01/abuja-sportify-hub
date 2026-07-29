@@ -5,6 +5,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 import { setupPremiumPage } from "./premium/setup";
+import Seo from "../seo/Seo";
 import "./premium/premium.css";
 
 // All three contact forms post to one Formspree inbox; each submission carries
@@ -38,7 +39,6 @@ const PremiumContact = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.title = "Spotts — Get in touch";
     const applyHash = () => {
       const h = (location.hash || "").replace("#", "").toLowerCase();
       if (h === "venue" || h === "event" || h === "general") {
@@ -102,6 +102,7 @@ const PremiumContact = () => {
 
   return (
     <div ref={rootRef} className="premium-root" style={{ fontFamily: "'Inter Display', 'Helvetica Neue', sans-serif", color: "#0A1220", background: "#FAFBFD", overflowX: "clip" }}>
+      <Seo route="/contact" />
       {/* NAV */}
       <header style={{ position: "sticky", top: 0, zIndex: 60, background: "rgba(250,251,253,.88)", backdropFilter: "blur(14px)", borderBottom: "1px solid rgba(10,18,32,.07)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(20px,4vw,48px)", height: 68, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
