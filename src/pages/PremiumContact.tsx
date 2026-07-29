@@ -7,13 +7,13 @@ import { useToast } from "@/hooks/use-toast";
 import { setupPremiumPage } from "./premium/setup";
 import "./premium/premium.css";
 
-// TODO: create Formspree forms for these and paste the endpoints (formspree.io).
-// Until set, submissions show the success screen locally but nothing is sent —
-// same "guard, don't fake a network call" pattern used in the current
-// Support/DeleteAccount pages.
-const FORMSPREE_GENERAL_ENDPOINT = "";
-const FORMSPREE_VENUE_ENDPOINT = "";
-const FORMSPREE_EVENT_ENDPOINT = "";
+// All three contact forms post to one Formspree inbox; each submission carries
+// a `formType` field ("General enquiry" / "List your venue" / "Host an event")
+// so they stay distinguishable in the one inbox.
+const FORMSPREE_CONTACT_ENDPOINT = "https://formspree.io/f/mojgbpeb";
+const FORMSPREE_GENERAL_ENDPOINT = FORMSPREE_CONTACT_ENDPOINT;
+const FORMSPREE_VENUE_ENDPOINT = FORMSPREE_CONTACT_ENDPOINT;
+const FORMSPREE_EVENT_ENDPOINT = FORMSPREE_CONTACT_ENDPOINT;
 
 type Tab = "general" | "venue" | "event";
 
