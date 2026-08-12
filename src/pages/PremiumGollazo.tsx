@@ -32,6 +32,23 @@ import {
 // Which event group this page sells. Resolved to live cards at runtime so card
 // IDs never need hardcoding or a re-deploy when a card is recreated.
 const GOLLAZO_GROUP = "gollazo";
+
+// The teams section background. The ticket's perforation notches are punched
+// using this exact value — if they ever diverge the notches show as discs.
+const SECTION_BG = "#071120";
+
+// Event details shown on the ticket. Placeholders until the card carries real
+// event_date / event_time / venue — swap these for teamCard fields then.
+const EVENT_DATE = "Sat, 20 Aug";
+const EVENT_TIME = "12:00 PM";
+const EVENT_VENUE = "SOHO, Abuja";
+
+// Decorative QR block, copied from the /events ticket. 7x7, purely visual —
+// the real scannable code is emailed after payment.
+const QR_PATTERN = [
+  1,1,1,0,1,1,1, 1,0,1,1,0,0,1, 1,1,0,1,1,0,1, 0,1,1,0,1,1,0,
+  1,0,1,1,0,1,1, 1,1,0,1,1,0,1, 1,0,1,1,0,1,1,
+].map(Boolean);
 /** Which product the buyer is filling in — drives one shared form. */
 type Product = "team" | "vendor";
 
@@ -53,7 +70,9 @@ const PremiumGollazo = () => {
   const [loadError, setLoadError] = useState(false);
   const [submitting, setSubmitting] = useState<Product | null>(null);
   const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
-  const [confirmed, setConfirmed] = useState<{ product: Product; name: string } | null>(null);
+  const [confirmed, setConfirmed] = useState<{ reference: string } | null>(null);
+  // Typed live so the ticket on the right fills in as the captain types.
+  const [teamNamePreview, setTeamNamePreview] = useState("");
 
   const teamCard = cards?.find((c) => c.type !== "vendor") ?? null;
   const vendorCard = cards?.find((c) => c.type === "vendor") ?? null;
@@ -78,7 +97,7 @@ const PremiumGollazo = () => {
 
     verifyPayment(pending.reference, pending.token)
       .then(() => {
-        setConfirmed({ product: "team", name: "" });
+        setConfirmed({ reference: pending.reference });
         toast({ title: "Payment confirmed", description: "Your confirmation email is on the way." });
       })
       .catch((err) => {
@@ -119,7 +138,7 @@ const PremiumGollazo = () => {
     setFieldErrors({});
 
     try {
-      await registerAndPay(card.id, {
+      await registerAndPay(card.id, "/gollazo/confirmed", {
         participant_name: get("name"),
         participant_email: get("email"),
         participant_phone: get("phone") || undefined,
@@ -166,7 +185,7 @@ const PremiumGollazo = () => {
             <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#51607A", border: "1px solid rgba(10,18,32,.14)", padding: "4px 10px", borderRadius: 999 }}>Gollazo</span>
           </a>
           <nav data-mm="nav" style={{ display: "flex", alignItems: "center", gap: "clamp(12px,2vw,24px)", fontSize: 14.5, fontWeight: 500 }}>
-            <a href="#festival" style-hover="color: #0A1220;" style={{ color: "#51607A", textDecoration: "none" }}>The festival</a>
+            <a href="#teams" style-hover="color: #0A1220;" style={{ color: "#51607A", textDecoration: "none" }}>The festival</a>
             <a href="#vendors" style-hover="color: #0A1220;" style={{ color: "#51607A", textDecoration: "none" }}>Vendors</a>
           </nav>
           <a href="#teams" data-mm="cta" style-hover="background: #0069DE;" style={{ fontSize: 14, fontWeight: 600, color: "#fff", background: "#007AFF", textDecoration: "none", padding: "10px 18px", borderRadius: 999, whiteSpace: "nowrap" }}>Enter a team</a>
@@ -174,7 +193,7 @@ const PremiumGollazo = () => {
         </div>
         <div data-mm="panel" style={{ display: "none", borderTop: "1px solid rgba(10,18,32,.08)", background: "rgba(250,251,253,.98)", padding: "10px clamp(20px,4vw,48px) 22px" }}>
           <nav aria-label="Mobile" style={{ display: "flex", flexDirection: "column" }}>
-            <a href="#festival" data-mm-close="1" style={{ color: "#0A1220", textDecoration: "none", fontSize: 16, fontWeight: 600, padding: "13px 0", borderBottom: "1px solid rgba(10,18,32,.07)" }}>The festival</a>
+            <a href="#teams" data-mm-close="1" style={{ color: "#0A1220", textDecoration: "none", fontSize: 16, fontWeight: 600, padding: "13px 0", borderBottom: "1px solid rgba(10,18,32,.07)" }}>The festival</a>
             <a href="#vendors" data-mm-close="1" style={{ color: "#0A1220", textDecoration: "none", fontSize: 16, fontWeight: 600, padding: "13px 0", borderBottom: "1px solid rgba(10,18,32,.07)" }}>Vendors</a>
             <a href="#teams" data-mm-close="1" style={{ textAlign: "center", fontSize: 15, fontWeight: 600, color: "#fff", background: "#007AFF", textDecoration: "none", padding: "14px 16px", borderRadius: 12, marginTop: 14 }}>Enter a team</a>
           </nav>
@@ -211,91 +230,113 @@ const PremiumGollazo = () => {
       </section>
 
       {/* THE FESTIVAL */}
-      <section id="festival" style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(56px,8vh,100px) clamp(20px,4vw,48px)" }}>
-        <p style={{ margin: "0 0 16px", fontSize: 12.5, fontWeight: 600, letterSpacing: ".14em", textTransform: "uppercase", color: "#007AFF" }}>One day. Three worlds.</p>
-        <h2 style={{ margin: "0 0 40px", maxWidth: "22ch", fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.05, textWrap: "balance" }}>More than a tournament.</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(min(100%,280px), 1fr))", gap: 18 }}>
-          <div style={{ border: "1px solid rgba(10,18,32,.09)", borderRadius: 20, background: "#fff", padding: "clamp(24px,3vw,32px)", display: "flex", flexDirection: "column", gap: 12 }}>
-            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#007AFF" }}>By day</span>
-            <h3 style={{ margin: 0, fontSize: "clamp(19px,1.9vw,24px)", fontWeight: 700, letterSpacing: "-0.025em" }}>The tournament</h3>
-            <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "#51607A" }}>Knockout football and padel brackets running side by side. Teams register on Spotts, fixtures and live scores run in the app.</p>
-          </div>
-          <div style={{ border: "1px solid rgba(31,168,85,.25)", borderRadius: 20, background: "#F3FBF5", padding: "clamp(24px,3vw,32px)", display: "flex", flexDirection: "column", gap: 12 }}>
-            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#1FA855" }}>By night</span>
-            <h3 style={{ margin: 0, fontSize: "clamp(19px,1.9vw,24px)", fontWeight: 700, letterSpacing: "-0.025em" }}>Seyi Vibez, live</h3>
-            <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "#51607A" }}>When the finals wrap, the stage takes over. Headline performance under the lights — tables sit front and centre.</p>
-          </div>
-          <div style={{ border: "1px solid rgba(10,18,32,.09)", borderRadius: 20, background: "#fff", padding: "clamp(24px,3vw,32px)", display: "flex", flexDirection: "column", gap: 12 }}>
-            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#007AFF" }}>All day</span>
-            <h3 style={{ margin: 0, fontSize: "clamp(19px,1.9vw,24px)", fontWeight: 700, letterSpacing: "-0.025em" }}>The village</h3>
-            <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "#51607A" }}>A vendor village of food, drinks and lifestyle stands wrapped around the pitches. Merch drop coming soon.</p>
-          </div>
-        </div>
-      </section>
+      <section id="teams" style={{ background: SECTION_BG, color: "#fff", position: "relative", overflow: "clip" }}>
+        <div aria-hidden style={{ position: "absolute", right: "-2%", top: "-4%", fontSize: "clamp(120px,18vw,260px)", fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1, color: "transparent", WebkitTextStroke: "1.5px rgba(255,255,255,.07)", pointerEvents: "none", userSelect: "none" }}>TEAMS</div>
 
-      {/* TABLES */}
-      {/* ============ ENTER A TEAM ============ */}
-      <section id="teams" style={{ background: "#fff", borderTop: "1px solid rgba(10,18,32,.07)", borderBottom: "1px solid rgba(10,18,32,.07)", position: "relative", overflow: "clip" }}>
-        <div aria-hidden style={{ position: "absolute", left: -30, top: 20, fontSize: "clamp(100px,14vw,190px)", fontWeight: 800, letterSpacing: "-0.06em", color: "rgba(10,18,32,.035)", lineHeight: 1, pointerEvents: "none", userSelect: "none" }}>TEAMS</div>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(56px,8vh,100px) clamp(20px,4vw,48px)", position: "relative" }}>
-          <p style={{ margin: "0 0 16px", fontSize: 12.5, fontWeight: 600, letterSpacing: ".14em", textTransform: "uppercase", color: "#007AFF" }}>The tournament</p>
-          <h2 style={{ margin: "0 0 14px", maxWidth: "22ch", fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.08 }}>Enter your team</h2>
-          <p style={{ margin: "0 0 36px", maxWidth: "58ch", fontSize: 16, lineHeight: 1.6, color: "#51607A" }}>
-            5-a-side, knockout format, one price per team. Pay online and your slot is confirmed instantly —
-            no calls, no back and forth.
+          <p style={{ margin: "0 0 14px", fontSize: 12.5, fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF" }}>The tournament</p>
+          <h2 style={{ margin: "0 0 12px", maxWidth: "20ch", fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.08 }}>Enter your team</h2>
+          <p style={{ margin: "0 0 44px", maxWidth: "52ch", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.6)" }}>
+            Pay online and your slot is confirmed the moment payment clears. Your QR entry lands in
+            your inbox instantly — no printouts, no gate lists, no waiting.
           </p>
 
-          {loadError && (
-            <p style={{ fontSize: 14, color: "#B42318" }}>Entries are temporarily unavailable. Please try again shortly.</p>
-          )}
-
-          {!loadError && !teamCard && (
-            <p style={{ fontSize: 14, color: "#8794A8" }}>Loading…</p>
-          )}
+          {loadError && <p style={{ fontSize: 14, color: "#FCA5A5" }}>Entries are temporarily unavailable. Please try again shortly.</p>}
+          {!loadError && !teamCard && <p style={{ fontSize: 14, color: "rgba(255,255,255,.5)" }}>Loading…</p>}
 
           {teamCard && (
-            <div style={{ maxWidth: 640 }}>
-              <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 8, flexWrap: "wrap" }}>
-                <span style={{ fontSize: 28, fontWeight: 800, letterSpacing: "-0.03em" }}>{formatNaira(teamCard.pricing.total)}</span>
-                <span style={{ fontSize: 13.5, color: "#8794A8" }}>per team</span>
-              </div>
-              {teamCard.pricing.fee_passed_on && teamCard.pricing.gateway_fee > 0 && (
-                <p style={{ margin: "0 0 6px", fontSize: 13, color: "#8794A8" }}>
-                  {formatNaira(teamCard.pricing.list_price)} entry + {formatNaira(teamCard.pricing.gateway_fee)} payment fees
-                </p>
-              )}
-              {typeof teamCard.remaining_slots === "number" && (
-                <p style={{ margin: "0 0 22px", fontSize: 13, fontWeight: 600, color: teamCard.remaining_slots > 0 ? "#1FA855" : "#B42318" }}>
-                  {teamCard.remaining_slots > 0 ? `${teamCard.remaining_slots} slots left` : "Sold out"}
-                </p>
-              )}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "clamp(28px,4vw,56px)", alignItems: "flex-start" }}>
 
-              <form onSubmit={(e) => submitPurchase(e, "team", teamCard)} style={{ border: "1px solid rgba(10,18,32,.09)", borderRadius: 22, background: "#fff", padding: "clamp(24px,3vw,36px)", boxShadow: "0 24px 54px -34px rgba(10,18,32,.3)" }}>
-                <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,220px),1fr))", gap: 16 }}>
-                  <label style={{ display: "flex", flexDirection: "column", gridColumn: "1 / -1" }}>
-                    <span style={labelCaption}>Team name</span>
-                    <input name="team_name" required placeholder="Team Okafor" style={inputStyle} style-focus={focusRing} />
-                  </label>
-                  <label style={{ display: "flex", flexDirection: "column" }}>
-                    <span style={labelCaption}>Captain&rsquo;s name</span>
-                    <input name="name" required placeholder="Chidi Okafor" style={inputStyle} style-focus={focusRing} />
-                    {fieldErrors.participant_name && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_name}</span>}
-                  </label>
-                  <label style={{ display: "flex", flexDirection: "column" }}>
-                    <span style={labelCaption}>Phone</span>
-                    <input name="phone" placeholder="+234 800 000 0000" style={inputStyle} style-focus={focusRing} />
-                  </label>
-                  <label style={{ display: "flex", flexDirection: "column", gridColumn: "1 / -1" }}>
-                    <span style={labelCaption}>Email</span>
-                    <input name="email" type="email" required placeholder="you@email.com" style={inputStyle} style-focus={focusRing} />
-                    {fieldErrors.participant_email && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_email}</span>}
-                    <span style={{ fontSize: 12, color: "#8794A8", marginTop: 6 }}>Your entry confirmation and QR code are sent here.</span>
-                  </label>
+              <div style={{ flex: "1 1 360px", minWidth: 0 }}>
+                {!confirmed ? (
+                  <form onSubmit={(e) => submitPurchase(e, "team", teamCard)} style={{ background: "#fff", color: "#0A1220", borderRadius: 22, padding: "clamp(24px,3vw,34px)", boxShadow: "0 40px 90px -40px rgba(0,0,0,.6)" }}>
+                    <div style={{ display: "grid", gap: 15 }}>
+                      <label style={{ display: "flex", flexDirection: "column" }}>
+                        <span style={labelCaption}>Team name</span>
+                        <input name="team_name" required placeholder="Samba FC" onChange={(e) => setTeamNamePreview(e.target.value)} style={inputStyle} style-focus={focusRing} />
+                      </label>
+                      <label style={{ display: "flex", flexDirection: "column" }}>
+                        <span style={labelCaption}>Captain&rsquo;s name</span>
+                        <input name="name" required placeholder="Chidi Okafor" style={inputStyle} style-focus={focusRing} />
+                        {fieldErrors.participant_name && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_name}</span>}
+                      </label>
+                      <label style={{ display: "flex", flexDirection: "column" }}>
+                        <span style={labelCaption}>Phone</span>
+                        <input name="phone" placeholder="+234 800 000 0000" style={inputStyle} style-focus={focusRing} />
+                      </label>
+                      <label style={{ display: "flex", flexDirection: "column" }}>
+                        <span style={labelCaption}>Email</span>
+                        <input name="email" type="email" required placeholder="you@email.com" style={inputStyle} style-focus={focusRing} />
+                        {fieldErrors.participant_email && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_email}</span>}
+                        <span style={{ fontSize: 12, color: "#8794A8", marginTop: 6 }}>Your entry and QR code are sent here.</span>
+                      </label>
+                    </div>
+                    <button type="submit" disabled={submitting !== null || teamCard.remaining_slots === 0} style-hover="background: #0069DE;" style={{ width: "100%", marginTop: 22, border: "none", cursor: submitting || teamCard.remaining_slots === 0 ? "default" : "pointer", opacity: submitting === "team" || teamCard.remaining_slots === 0 ? 0.6 : 1, fontFamily: "inherit", fontSize: 15, fontWeight: 600, color: "#fff", background: "#007AFF", padding: "15px 28px", borderRadius: 999, transition: "background .2s" }}>
+                      {teamCard.remaining_slots === 0 ? "Sold out" : submitting === "team" ? "Taking you to payment…" : `Pay ${formatNaira(teamCard.pricing.total)} and enter`}
+                    </button>
+                    <p style={{ margin: "12px 0 0", textAlign: "center", fontSize: 12, color: "#8794A8" }}>Secure payment by Paystack</p>
+                  </form>
+                ) : (
+                  <div style={{ background: "#fff", color: "#0A1220", borderRadius: 22, padding: "clamp(26px,3vw,36px)", boxShadow: "0 40px 90px -40px rgba(0,0,0,.6)", display: "flex", flexDirection: "column", gap: 14 }}>
+                    <div style={{ width: 52, height: 52, borderRadius: "50%", background: "#1FA855", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 26 }}>✓</div>
+                    <h3 style={{ margin: 0, fontSize: "clamp(21px,2.2vw,27px)", fontWeight: 800, letterSpacing: "-0.03em" }}>You&rsquo;re in.</h3>
+                    <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "#51607A" }}>Payment confirmed. Your ticket is on its way to your inbox — show the QR code at the gate.</p>
+                    <p style={{ margin: 0, fontSize: 12.5, fontFamily: "SFMono-Regular, Menlo, monospace", color: "#51607A", background: "#F1F5F9", padding: "8px 13px", borderRadius: 8, alignSelf: "flex-start" }}>{confirmed.reference}</p>
+                    <a href="#vendors" style-hover="border-color: rgba(10,18,32,.4);" style={{ marginTop: 4, alignSelf: "flex-start", fontSize: 14, fontWeight: 600, color: "#0A1220", textDecoration: "none", border: "1px solid rgba(10,18,32,.16)", padding: "11px 22px", borderRadius: 999 }}>Also selling at Gollazo?</a>
+                  </div>
+                )}
+              </div>
+
+              <div style={{ flex: "1 1 380px", minWidth: 0, display: "flex", justifyContent: "center" }}>
+                <div style={{ position: "relative", width: "min(400px,100%)", background: "#0A1220", color: "#fff", borderRadius: 22, boxShadow: "0 40px 90px -34px rgba(0,0,0,.7)", border: "1px solid rgba(255,255,255,.08)" }}>
+                  <div style={{ padding: "26px 28px 22px" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, marginBottom: 20 }}>
+                      <img src="/premium/logo-blue-white.svg" alt="Spotts" style={{ height: 18 }} />
+                      <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>E-Ticket</span>
+                    </div>
+                    <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Gollazo · Team entry</div>
+                    <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1, marginBottom: 16 }}>{teamNamePreview.trim() || teamCard.title}</div>
+                    <div style={{ display: "flex", gap: 24, flexWrap: "wrap", fontSize: 13 }}>
+                      <div>
+                        <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Date</div>
+                        <div style={{ fontWeight: 600 }}>{EVENT_DATE}</div>
+                      </div>
+                      <div>
+                        <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Kick-off</div>
+                        <div style={{ fontWeight: 600 }}>{EVENT_TIME}</div>
+                      </div>
+                      <div>
+                        <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Venue</div>
+                        <div style={{ fontWeight: 600 }}>{EVENT_VENUE}</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div style={{ position: "relative", display: "flex", alignItems: "center", padding: "0 8px" }}>
+                    <span aria-hidden style={{ position: "absolute", left: -11, width: 22, height: 22, borderRadius: "50%", background: "#fff" }} />
+                    <span aria-hidden style={{ flex: 1, borderTop: "2px dashed rgba(255,255,255,.22)", margin: "0 16px" }} />
+                    <span aria-hidden style={{ position: "absolute", right: -11, width: 22, height: 22, borderRadius: "50%", background: "#fff" }} />
+                  </div>
+
+                  <div style={{ padding: "22px 28px 26px", display: "flex", alignItems: "center", gap: 20 }}>
+                    <div style={{ background: "#fff", borderRadius: 12, padding: 10 }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 8px)", gridAutoRows: "8px", gap: 3 }}>
+                        {QR_PATTERN.map((on, i) => (<span key={i} style={{ background: on ? "#0A1220" : "rgba(10,18,32,.15)" }} />))}
+                      </div>
+                    </div>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", fontWeight: 700, marginBottom: 5 }}>Admit one team</div>
+                      <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: "-0.02em" }}>
+                        {formatNaira(teamCard.pricing.total)}{confirmed && <span style={{ color: "#4ADE80" }}> · Paid ✓</span>}
+                      </div>
+                      {teamCard.pricing.fee_passed_on && teamCard.pricing.gateway_fee > 0 && !confirmed && (
+                        <div style={{ fontSize: 11.5, color: "rgba(255,255,255,.45)", marginTop: 3 }}>incl. {formatNaira(teamCard.pricing.gateway_fee)} fees</div>
+                      )}
+                      {confirmed && <div style={{ fontSize: 12, color: "#4ADE80", marginTop: 3 }}>Delivered instantly</div>}
+                    </div>
+                  </div>
                 </div>
-                <button type="submit" disabled={submitting !== null} style-hover="background: #0069DE;" style={{ marginTop: 22, border: "none", cursor: submitting ? "default" : "pointer", opacity: submitting === "team" ? 0.7 : 1, fontFamily: "inherit", fontSize: 15, fontWeight: 600, color: "#fff", background: "#007AFF", padding: "14px 28px", borderRadius: 999, transition: "background .2s" }}>
-                  {submitting === "team" ? "Taking you to payment…" : `Pay ${formatNaira(teamCard.pricing.total)} and enter`}
-                </button>
-              </form>
+              </div>
             </div>
           )}
         </div>

@@ -14,6 +14,7 @@ import PremiumVenueOnboarding from "./pages/PremiumVenueOnboarding";
 import PremiumContact from "./pages/PremiumContact";
 import PremiumPartnerApi from "./pages/PremiumPartnerApi";
 import PremiumEvents from "./pages/PremiumEvents";
+import GollazoConfirmed from "./pages/GollazoConfirmed";
 import PremiumGollazo from "./pages/PremiumGollazo";
 import NotFound from "./pages/NotFound";
 
@@ -38,6 +39,7 @@ const App = () => (
           <Route path="/partner-api" element={<PremiumPartnerApi />} />
           <Route path="/events" element={<PremiumEvents />} />
           <Route path="/gollazo" element={<PremiumGollazo />} />
+          <Route path="/gollazo/confirmed" element={<GollazoConfirmed />} />
 
           {/* App deeplink — untouched by the redesign */}
           <Route path="/sessions/:id" element={<SessionDeepLink />} />

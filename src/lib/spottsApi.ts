@@ -164,10 +164,14 @@ export interface PaymentInit {
 export function initializePayment(
   registrationReference: string,
   accessToken: string,
+  returnPath?: string,
 ): Promise<PaymentInit> {
   return request<PaymentInit>(`/v1/featured-cards/registrations/${registrationReference}/pay`, {
     method: "POST",
     headers: { "X-Registration-Token": accessToken },
+    // A PATH only. The backend prepends its own configured host, so this can
+    // never become an open redirect even if tampered with.
+    body: JSON.stringify({ return_path: returnPath ?? "/" }),
   });
 }
 
@@ -191,6 +195,7 @@ export function verifyPayment(
  */
 export async function registerAndPay(
   cardId: number,
+  returnPath: string,
   input: GuestRegistrationInput,
 ): Promise<void> {
   const registration = await registerGuest(cardId, input);
@@ -208,6 +213,7 @@ export async function registerAndPay(
   const payment = await initializePayment(
     registration.registration_reference,
     registration.access_token,
+    returnPath,
   );
 
   sessionStorage.setItem(PENDING_KEY, JSON.stringify({
