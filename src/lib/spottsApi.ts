@@ -31,7 +31,15 @@ export interface CardPricing {
 export interface VendorOption {
   key: string;
   label: string;
+  /** LIST price. Never quote this — quote `pricing.total`, which is charged. */
   price: number;
+  pricing: CardPricing;
+}
+
+export interface EventVenue {
+  id: number | null;
+  name: string;
+  address?: string | null;
 }
 
 export interface EventCard {
@@ -46,6 +54,11 @@ export interface EventCard {
   current_participants?: number | null;
   is_registration_open?: boolean;
   remaining_slots?: number | null;
+  /** "YYYY-MM-DD" — null until the organiser fills it in. */
+  event_date?: string | null;
+  /** "HH:MM:SS" from the backend's TIME column. */
+  event_time?: string | null;
+  venue?: EventVenue | null;
 }
 
 export interface GuestRegistration {
@@ -248,4 +261,30 @@ export function clearPendingRegistration(): void {
 /** Naira, no kobo — matches how the backend formats money for buyers. */
 export function formatNaira(amount: number): string {
   return `₦${Math.round(amount).toLocaleString("en-NG")}`;
+}
+
+/**
+ * "2026-12-19" -> "Sat, 19 Dec".
+ *
+ * Formatted in UTC deliberately: a bare date string parses as UTC midnight, so
+ * rendering it in a negative-offset local zone would show the previous day.
+ */
+export function formatEventDate(date?: string | null): string | null {
+  if (!date) return null;
+  const parsed = new Date(`${date}T00:00:00Z`);
+  if (Number.isNaN(parsed.getTime())) return null;
+  return parsed.toLocaleDateString("en-GB", {
+    weekday: "short", day: "numeric", month: "short", timeZone: "UTC",
+  });
+}
+
+/** "12:00:00" -> "12:00 PM". */
+export function formatEventTime(time?: string | null): string | null {
+  if (!time) return null;
+  const [h, m] = time.split(":");
+  const hour = Number(h);
+  if (!Number.isFinite(hour) || m === undefined) return null;
+  const suffix = hour >= 12 ? "PM" : "AM";
+  const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+  return `${hour12}:${m} ${suffix}`;
 }

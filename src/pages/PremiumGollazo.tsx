@@ -21,6 +21,8 @@ import "./premium/premium.css";
 import {
   ApiValidationError,
   clearPendingRegistration,
+  formatEventDate,
+  formatEventTime,
   formatNaira,
   getEventGroup,
   readPendingRegistration,
@@ -37,11 +39,30 @@ const GOLLAZO_GROUP = "gollazo";
 // using this exact value — if they ever diverge the notches show as discs.
 const SECTION_BG = "#071120";
 
-// Event details shown on the ticket. Placeholders until the card carries real
-// event_date / event_time / venue — swap these for teamCard fields then.
-const EVENT_DATE = "Sat, 20 Aug";
-const EVENT_TIME = "12:00 PM";
-const EVENT_VENUE = "SOHO, Abuja";
+// What a vendor slot actually buys. Every line here is a locked decision from
+// GOLLAZO_PLAN.md §1 — the booth dimensions and tier prices this replaced were
+// invented by the design mock and nothing in the system could honour them.
+const VENDOR_FACTS = [
+  "One slot per purchase — buy more than once if you need the space.",
+  "Confirmed the moment your payment clears. Nothing to wait on, no approval step.",
+  "Your vendor pass and QR code are emailed straight away.",
+  "Slots are limited, and a sold slot doesn't come back.",
+];
+
+// DEMO MODE — placeholder event details for the ticket, front-end only.
+//
+// Nothing needs uncommenting to go live: these are FALLBACKS. The moment
+// event_date / event_time / venue are filled in on the card in super-admin,
+// the backend values take over automatically and these stop rendering.
+//
+// Kept in step with the hero's "(dummy — TBC)" line deliberately — the ticket
+// previously advertised a different fake event (20 Aug, SOHO) to the hero's
+// 19 Dec at Eagle Square, so the same page announced two festivals.
+const DEMO_EVENT = {
+  date: "Sat, 19 Dec",
+  time: "12:00 PM",
+  venue: "Eagle Square, Abuja",
+};
 
 // Decorative QR block, copied from the /events ticket. 7x7, purely visual —
 // the real scannable code is emailed after payment.
@@ -73,9 +94,20 @@ const PremiumGollazo = () => {
   const [confirmed, setConfirmed] = useState<{ reference: string } | null>(null);
   // Typed live so the ticket on the right fills in as the captain types.
   const [teamNamePreview, setTeamNamePreview] = useState("");
+  // Which booth option the vendor picked. Null when the card offers none.
+  const [vendorOptionKey, setVendorOptionKey] = useState<string | null>(null);
 
   const teamCard = cards?.find((c) => c.type !== "vendor") ?? null;
   const vendorCard = cards?.find((c) => c.type === "vendor") ?? null;
+
+  // The price actually on offer: a chosen booth option's, else the card's.
+  // Both come from the backend already grossed-up — see spottsApi.ts rule 1.
+  const selectedVendorOption =
+    vendorCard?.vendor_options.find((o) => o.key === vendorOptionKey) ?? null;
+  const vendorPricing =
+    selectedVendorOption?.pricing ??
+    vendorCard?.pricing ??
+    { list_price: 0, gateway_fee: 0, total: 0, fee_passed_on: false };
 
   useEffect(() => {
     document.title = "Gollazo — by Spotts";
@@ -86,6 +118,13 @@ const PremiumGollazo = () => {
       .then(setCards)
       .catch(() => setLoadError(true));
   }, []);
+
+  // Pre-select the first booth option: the card requires a choice whenever it
+  // has options, so an unselected picker is a guaranteed 422 on submit.
+  useEffect(() => {
+    const first = vendorCard?.vendor_options[0]?.key;
+    if (first) setVendorOptionKey((current) => current ?? first);
+  }, [vendorCard]);
 
   // Coming back from Paystack: confirm the payment we parked before leaving.
   useEffect(() => {
@@ -144,7 +183,11 @@ const PremiumGollazo = () => {
         participant_phone: get("phone") || undefined,
         ...(product === "team"
           ? { team_name: get("team_name") || undefined }
-          : { brand: get("brand") || undefined, vendor_notes: get("about") || undefined }),
+          : {
+              brand: get("brand") || undefined,
+              vendor_notes: get("about") || undefined,
+              vendor_option_key: vendorOptionKey ?? undefined,
+            }),
       });
       // registerAndPay navigates to Paystack; nothing runs after this.
     } catch (err) {
@@ -164,14 +207,12 @@ const PremiumGollazo = () => {
     }
   };
 
-  /** "₦100,000 + ₦1,625 fees" — straight from the API, never recomputed. */
-  const priceLine = (card: EventCard | null) => {
-    if (!card) return "";
-    const p = card.pricing;
-    return p.fee_passed_on && p.gateway_fee > 0
-      ? `${formatNaira(p.list_price)} + ${formatNaira(p.gateway_fee)} fees = ${formatNaira(p.total)}`
-      : formatNaira(p.total);
-  };
+  // Ticket facts: the card's real details once set, DEMO_EVENT until then.
+  const ticketDetails = [
+    { label: "Date", value: formatEventDate(teamCard?.event_date) ?? DEMO_EVENT.date },
+    { label: "Kick-off", value: formatEventTime(teamCard?.event_time) ?? DEMO_EVENT.time },
+    { label: "Venue", value: teamCard?.venue?.name ?? DEMO_EVENT.venue },
+  ];
 
 
 
@@ -231,7 +272,7 @@ const PremiumGollazo = () => {
 
       {/* THE FESTIVAL */}
       <section id="teams" style={{ background: SECTION_BG, color: "#fff", position: "relative", overflow: "clip" }}>
-        <div aria-hidden style={{ position: "absolute", right: "-2%", top: "-4%", fontSize: "clamp(120px,18vw,260px)", fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1, color: "transparent", WebkitTextStroke: "1.5px rgba(255,255,255,.07)", pointerEvents: "none", userSelect: "none" }}>TEAMS</div>
+        <div aria-hidden style={{ position: "absolute", right: "-2%", bottom: "-4%", fontSize: "clamp(120px,18vw,260px)", fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1, color: "transparent", WebkitTextStroke: "1.5px rgba(255,255,255,.07)", pointerEvents: "none", userSelect: "none" }}>TEAMS</div>
 
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(56px,8vh,100px) clamp(20px,4vw,48px)", position: "relative" }}>
           <p style={{ margin: "0 0 14px", fontSize: 12.5, fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF" }}>The tournament</p>
@@ -257,7 +298,7 @@ const PremiumGollazo = () => {
                       </label>
                       <label style={{ display: "flex", flexDirection: "column" }}>
                         <span style={labelCaption}>Captain&rsquo;s name</span>
-                        <input name="name" required placeholder="Chidi Okafor" style={inputStyle} style-focus={focusRing} />
+                        <input name="name" required style={inputStyle} style-focus={focusRing} />
                         {fieldErrors.participant_name && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_name}</span>}
                       </label>
                       <label style={{ display: "flex", flexDirection: "column" }}>
@@ -297,18 +338,12 @@ const PremiumGollazo = () => {
                     <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Gollazo · Team entry</div>
                     <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1, marginBottom: 16 }}>{teamNamePreview.trim() || teamCard.title}</div>
                     <div style={{ display: "flex", gap: 24, flexWrap: "wrap", fontSize: 13 }}>
-                      <div>
-                        <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Date</div>
-                        <div style={{ fontWeight: 600 }}>{EVENT_DATE}</div>
-                      </div>
-                      <div>
-                        <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Kick-off</div>
-                        <div style={{ fontWeight: 600 }}>{EVENT_TIME}</div>
-                      </div>
-                      <div>
-                        <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Venue</div>
-                        <div style={{ fontWeight: 600 }}>{EVENT_VENUE}</div>
-                      </div>
+                      {ticketDetails.map(({ label, value }) => (
+                        <div key={label}>
+                          <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>{label}</div>
+                          <div style={{ fontWeight: 600 }}>{value}</div>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
@@ -342,52 +377,73 @@ const PremiumGollazo = () => {
         </div>
       </section>
 
-      <section id="vendors" style={{ position: "relative", overflow: "clip" }}>
+      {/* VENDORS — light ground on purpose. The teams section owns the one dark
+          moment on this page; a second one would split its emphasis in half. */}
+      <section id="vendors" style={{ position: "relative", overflow: "clip", background: "#F2F6FC", borderTop: "1px solid rgba(10,18,32,.07)" }}>
         <div aria-hidden style={{ position: "absolute", left: -40, bottom: -50, fontSize: "clamp(110px,16vw,220px)", fontWeight: 800, fontStyle: "italic", letterSpacing: "-0.05em", lineHeight: 1, color: "transparent", WebkitTextStroke: "1.8px rgba(0,122,255,.1)", userSelect: "none", pointerEvents: "none", transform: "rotate(-4deg)" }}>VENDORS</div>
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(56px,8vh,100px) clamp(20px,4vw,48px)", position: "relative" }}>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "clamp(28px,4vw,56px)", alignItems: "flex-start" }}>
             <div style={{ flex: "1 1 340px", minWidth: 0 }}>
-              <p style={{ margin: "0 0 16px", fontSize: 12.5, fontWeight: 600, letterSpacing: ".14em", textTransform: "uppercase", color: "#007AFF" }}>Vendor village</p>
+              <p style={{ margin: "0 0 16px", fontSize: 12.5, fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "#007AFF" }}>Vendor village</p>
               <h2 style={{ margin: "0 0 14px", maxWidth: "20ch", fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.05, textWrap: "balance" }}>Sell to a captive crowd.</h2>
-              <p style={{ margin: "0 0 28px", maxWidth: "52ch", fontSize: 16, lineHeight: 1.6, color: "#51607A" }}>Thousands of players, fans and festival-goers on site from morning to midnight. Pick a slot, tell us what you sell, and pay to lock it in.</p>
-              <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                <div style-hover="transform: translateY(-3px); box-shadow: 0 18px 40px -24px rgba(10,18,32,.3);" style={{ border: "1px solid rgba(10,18,32,.09)", borderRadius: 16, background: "#fff", padding: "18px 22px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 14, flexWrap: "wrap", transition: "transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s" }}>
-                  <div><div style={{ fontSize: 15.5, fontWeight: 700 }}>Food stand</div><div style={{ fontSize: 13.5, color: "#8794A8" }}>3m × 3m booth · power · 2 vendor passes</div></div>
-                  <span style={{ fontSize: 16, fontWeight: 800, letterSpacing: "-0.02em" }}>₦350,000</span>
-                </div>
-                <div style-hover="transform: translateY(-3px); box-shadow: 0 18px 40px -24px rgba(10,18,32,.3);" style={{ border: "1px solid rgba(10,18,32,.09)", borderRadius: 16, background: "#fff", padding: "18px 22px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 14, flexWrap: "wrap", transition: "transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s" }}>
-                  <div><div style={{ fontSize: 15.5, fontWeight: 700 }}>Drinks stand</div><div style={{ fontSize: 13.5, color: "#8794A8" }}>3m × 3m booth · power + chiller point · 2 vendor passes</div></div>
-                  <span style={{ fontSize: 16, fontWeight: 800, letterSpacing: "-0.02em" }}>₦400,000</span>
-                </div>
-                <div style-hover="transform: translateY(-3px); box-shadow: 0 18px 40px -24px rgba(10,18,32,.3);" style={{ border: "1px solid rgba(10,18,32,.09)", borderRadius: 16, background: "#fff", padding: "18px 22px", display: "flex", justifyContent: "space-between", alignItems: "center", gap: 14, flexWrap: "wrap", transition: "transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s" }}>
-                  <div><div style={{ fontSize: 15.5, fontWeight: 700 }}>Lifestyle / retail stand</div><div style={{ fontSize: 13.5, color: "#8794A8" }}>2m × 2m booth · 2 vendor passes</div></div>
-                  <span style={{ fontSize: 16, fontWeight: 800, letterSpacing: "-0.02em" }}>₦250,000</span>
-                </div>
-              </div>
-              <p style={{ margin: "18px 0 0", fontSize: 13.5, color: "#8794A8" }}>Placeholder pricing. Slots are limited and confirmed on payment.</p>
+              <p style={{ margin: "0 0 28px", maxWidth: "52ch", fontSize: 16, lineHeight: 1.6, color: "#51607A" }}>
+                Players, fans and festival-goers on site from morning to midnight. Take a slot, tell us
+                what you sell, and pay to lock it in.
+              </p>
+              {/* Facts we can actually stand behind. The three booth tiers that
+                  used to sit here were invented prices nothing could fulfil. */}
+              <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 13 }}>
+                {VENDOR_FACTS.map((fact) => (
+                  <li key={fact} style={{ display: "flex", gap: 12, alignItems: "flex-start", fontSize: 15, lineHeight: 1.5, color: "#51607A" }}>
+                    <span aria-hidden style={{ flex: "none", width: 21, height: 21, borderRadius: "50%", background: "rgba(0,122,255,.1)", color: "#007AFF", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 12, fontWeight: 800, marginTop: 1 }}>✓</span>
+                    <span>{fact}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
             {/* Vendor purchase — LD-D: a straight purchase, not an application */}
             <div style={{ flex: "1 1 380px", minWidth: 0 }}>
               {vendorCard && (
-                <form onSubmit={(e) => submitPurchase(e, "vendor", vendorCard)} style={{ border: "1px solid rgba(10,18,32,.09)", borderRadius: 22, background: "#fff", padding: "clamp(24px,3vw,36px)", boxShadow: "0 24px 54px -34px rgba(10,18,32,.3)" }}>
-                  <h3 style={{ margin: "0 0 6px", fontSize: "clamp(20px,2vw,25px)", fontWeight: 700, letterSpacing: "-0.03em" }}>Book your vendor slot</h3>
+                <form onSubmit={(e) => submitPurchase(e, "vendor", vendorCard)} style={{ border: "1px solid rgba(10,18,32,.08)", borderRadius: 22, background: "#fff", padding: "clamp(24px,3vw,36px)", boxShadow: "0 30px 70px -40px rgba(10,18,32,.45)" }}>
+                  <h3 style={{ margin: "0 0 6px", fontSize: "clamp(20px,2vw,25px)", fontWeight: 800, letterSpacing: "-0.03em" }}>Book your vendor slot</h3>
                   <p style={{ margin: "0 0 6px", fontSize: 14.5, lineHeight: 1.55, color: "#51607A" }}>Pay online and your pitch is confirmed instantly.</p>
                   <div style={{ display: "flex", alignItems: "baseline", gap: 10, margin: "0 0 22px", flexWrap: "wrap" }}>
-                    <span style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.03em" }}>{formatNaira(vendorCard.pricing.total)}</span>
-                    {vendorCard.pricing.fee_passed_on && vendorCard.pricing.gateway_fee > 0 && (
-                      <span style={{ fontSize: 13, color: "#8794A8" }}>{formatNaira(vendorCard.pricing.list_price)} + {formatNaira(vendorCard.pricing.gateway_fee)} payment fees</span>
+                    <span style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.03em" }}>{formatNaira(vendorPricing.total)}</span>
+                    {vendorPricing.fee_passed_on && vendorPricing.gateway_fee > 0 && (
+                      <span style={{ fontSize: 13, color: "#8794A8" }}>{formatNaira(vendorPricing.list_price)} + {formatNaira(vendorPricing.gateway_fee)} payment fees</span>
                     )}
                   </div>
+
+                  {/* Only rendered when the organiser has configured booth
+                      options. Without it, a card that has them 422s on every
+                      submit ("Please choose an option") with nothing to click. */}
+                  {vendorCard.vendor_options.length > 0 && (
+                    <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 20 }}>
+                      <span style={labelCaption}>Choose your slot</span>
+                      {vendorCard.vendor_options.map((option) => {
+                        const selected = option.key === vendorOptionKey;
+                        return (
+                          <label key={option.key} style={{ display: "flex", alignItems: "center", gap: 12, cursor: "pointer", border: `1px solid ${selected ? "#007AFF" : "rgba(10,18,32,.12)"}`, boxShadow: selected ? "0 0 0 3px rgba(0,122,255,.12)" : "none", background: selected ? "rgba(0,122,255,.04)" : "#fff", borderRadius: 14, padding: "13px 16px", transition: "border-color .18s, box-shadow .18s, background .18s" }}>
+                            <input type="radio" name="vendor_option_key" value={option.key} checked={selected} onChange={() => setVendorOptionKey(option.key)} style={{ accentColor: "#007AFF", width: 17, height: 17, flex: "none" }} />
+                            <span style={{ flex: 1, minWidth: 0, fontSize: 15, fontWeight: 600 }}>{option.label}</span>
+                            <span style={{ fontSize: 15, fontWeight: 800, letterSpacing: "-0.02em", whiteSpace: "nowrap" }}>{formatNaira(option.pricing.total)}</span>
+                          </label>
+                        );
+                      })}
+                      {fieldErrors.vendor_option_key && <span style={{ fontSize: 12, color: "#B42318" }}>{fieldErrors.vendor_option_key}</span>}
+                    </div>
+                  )}
+
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,220px),1fr))", gap: 16 }}>
                     <label style={{ display: "flex", flexDirection: "column", gridColumn: "1 / -1" }}>
                       <span style={labelCaption}>Brand / business name</span>
-                      <input name="brand" required placeholder="Suya Republic" style={inputStyle} style-focus={focusRing} />
+                      <input name="brand" required style={inputStyle} style-focus={focusRing} />
                       {fieldErrors.brand && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.brand}</span>}
                     </label>
                     <label style={{ display: "flex", flexDirection: "column" }}>
                       <span style={labelCaption}>Contact name</span>
-                      <input name="name" required placeholder="Aisha Bello" style={inputStyle} style-focus={focusRing} />
+                      <input name="name" required style={inputStyle} style-focus={focusRing} />
                       {fieldErrors.participant_name && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_name}</span>}
                     </label>
                     <label style={{ display: "flex", flexDirection: "column" }}>
@@ -404,28 +460,16 @@ const PremiumGollazo = () => {
                       <textarea name="about" rows={3} placeholder="Menu, products, anything we should know…" style={{ ...inputStyle, lineHeight: 1.55, resize: "vertical" }} style-focus={focusRing} />
                     </label>
                   </div>
-                  <button type="submit" disabled={submitting !== null} style-hover="background: #0069DE;" style={{ marginTop: 22, border: "none", cursor: submitting ? "default" : "pointer", opacity: submitting === "vendor" ? 0.7 : 1, fontFamily: "inherit", fontSize: 15, fontWeight: 600, color: "#fff", background: "#007AFF", padding: "14px 28px", borderRadius: 999, transition: "background .2s" }}>
-                    {submitting === "vendor" ? "Taking you to payment…" : `Pay ${formatNaira(vendorCard.pricing.total)} and book`}
+                  <button type="submit" disabled={submitting !== null || vendorCard.remaining_slots === 0} style-hover="background: #0069DE;" style={{ width: "100%", marginTop: 22, border: "none", cursor: submitting || vendorCard.remaining_slots === 0 ? "default" : "pointer", opacity: submitting === "vendor" || vendorCard.remaining_slots === 0 ? 0.6 : 1, fontFamily: "inherit", fontSize: 15, fontWeight: 600, color: "#fff", background: "#007AFF", padding: "15px 28px", borderRadius: 999, transition: "background .2s" }}>
+                    {vendorCard.remaining_slots === 0 ? "Sold out" : submitting === "vendor" ? "Taking you to payment…" : `Pay ${formatNaira(vendorPricing.total)} and book`}
                   </button>
+                  <p style={{ margin: "12px 0 0", textAlign: "center", fontSize: 12, color: "#8794A8" }}>Secure payment by Paystack</p>
                 </form>
               )}
               {!vendorCard && !loadError && <p style={{ fontSize: 14, color: "#8794A8" }}>Loading…</p>}
               {loadError && <p style={{ fontSize: 14, color: "#B42318" }}>Vendor slots are temporarily unavailable. Please try again shortly.</p>}
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* MERCH TEASER */}
-      <section style={{ background: "#071120", color: "#fff", position: "relative", overflow: "clip" }}>
-        <div aria-hidden style={{ position: "absolute", right: -30, top: -20, fontSize: "clamp(90px,13vw,170px)", fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1, color: "transparent", WebkitTextStroke: "1.5px rgba(255,255,255,.07)", userSelect: "none", pointerEvents: "none" }}>SOON</div>
-        <div style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(48px,7vh,80px) clamp(20px,4vw,48px)", position: "relative", display: "flex", flexWrap: "wrap", gap: 24, alignItems: "center", justifyContent: "space-between" }}>
-          <div>
-            <p style={{ margin: "0 0 10px", fontSize: 12.5, fontWeight: 600, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF" }}>Merch</p>
-            <h2 style={{ margin: "0 0 10px", fontSize: "clamp(24px,2.8vw,36px)", fontWeight: 800, letterSpacing: "-0.035em" }}>The Gollazo drop is coming.</h2>
-            <p style={{ margin: 0, maxWidth: "46ch", fontSize: 15, lineHeight: 1.6, color: "rgba(255,255,255,.6)" }}>Jerseys, tees and caps land closer to the festival. Get the app to be first in line when they drop.</p>
-          </div>
-          <a href="/#cta" style-hover="transform: translateY(-1px);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#fff", color: "#0A1220", textDecoration: "none", fontSize: 15, fontWeight: 600, padding: "14px 28px", borderRadius: 999, whiteSpace: "nowrap", transition: "transform .2s" }}>Get the app</a>
         </div>
       </section>
 
