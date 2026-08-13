@@ -1,11 +1,24 @@
 /**
- * Shared Gollazo page constants.
+ * Shared Golazo page constants.
  *
- * DEMO_EVENT lived in both /gollazo and /gollazo/confirmed, and the two copies
+ * DEMO_EVENT lived in both /golazo and /golazo/confirmed, and the two copies
  * had already drifted to different fake festivals (19 Dec at Eagle Square on
  * one, 20 Aug at SOHO on the other). One buyer could see both in a single
  * session, so it lives here now.
  */
+
+/**
+ * Event group slugs to try, in order, until one returns cards.
+ *
+ * The brand is "Golazo" but the cards were created under `gollazo`, back when
+ * the name was misspelled. Renaming the group in super-admin would otherwise
+ * take the live page down the instant it was saved — the site asks for one
+ * exact slug and 404s on anything else.
+ *
+ * Trying both means the rename can happen whenever, in either order, with no
+ * deploy to match it. Drop `gollazo` once the group has been renamed.
+ */
+export const EVENT_GROUP_SLUGS = ["golazo", "gollazo"];
 
 /**
  * Placeholder event details, front-end only.

@@ -1,6 +1,6 @@
-// Post-payment confirmation for Gollazo entries and vendor slots.
+// Post-payment confirmation for Golazo entries and vendor slots.
 //
-// Its own route rather than an inline state on /gollazo: the buyer arrives here
+// Its own route rather than an inline state on /golazo: the buyer arrives here
 // straight from Paystack, so this page owns one job — verify, then hand them a
 // ticket they can screenshot. It is also shareable and survives a refresh.
 //
@@ -27,7 +27,7 @@ const GollazoConfirmed = () => {
   const [amount, setAmount] = useState<number | null>(null);
 
   useEffect(() => {
-    document.title = "You're in — Gollazo by Spotts";
+    document.title = "You're in — Golazo by Spotts";
 
     const pending = readPendingRegistration();
     if (!pending) {
@@ -53,7 +53,7 @@ const GollazoConfirmed = () => {
 
   return (
     <div style={{ fontFamily: "'Inter Display', 'Helvetica Neue', sans-serif", background: SECTION_BG, color: "#fff", minHeight: "100vh", position: "relative", overflowX: "clip" }}>
-      <div aria-hidden style={{ position: "absolute", right: "-2%", top: "-4%", fontSize: "clamp(120px,18vw,260px)", fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1, color: "transparent", WebkitTextStroke: "1.5px rgba(255,255,255,.07)", pointerEvents: "none", userSelect: "none" }}>GOLLAZO</div>
+      <div aria-hidden style={{ position: "absolute", right: "-2%", top: "-4%", fontSize: "clamp(120px,18vw,260px)", fontWeight: 800, letterSpacing: "-0.05em", lineHeight: 1, color: "transparent", WebkitTextStroke: "1.5px rgba(255,255,255,.07)", pointerEvents: "none", userSelect: "none" }}>GOLAZO</div>
 
       <div style={{ position: "relative", maxWidth: 560, margin: "0 auto", padding: "clamp(48px,9vh,96px) clamp(20px,5vw,32px)", display: "flex", flexDirection: "column", alignItems: "center", gap: 26, textAlign: "center" }}>
         <img src="/premium/logo-blue-white.svg" alt="Spotts" style={{ height: 22 }} />
@@ -94,14 +94,14 @@ const GollazoConfirmed = () => {
               emailed you. Either one gets you in.
             </p>
 
-            {/* Same ticket as /gollazo and /events, in its paid state */}
+            {/* Same ticket as /golazo and /events, in its paid state */}
             <div style={{ width: "min(400px,100%)", background: "#0A1220", borderRadius: 22, boxShadow: "0 40px 90px -34px rgba(0,0,0,.7)", border: "1px solid rgba(255,255,255,.08)", textAlign: "left", marginTop: 6 }}>
               <div style={{ padding: "26px 28px 22px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 12, marginBottom: 20 }}>
                   <img src="/premium/logo-blue-white.svg" alt="Spotts" style={{ height: 18 }} />
                   <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>E-Ticket</span>
                 </div>
-                <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Gollazo · Team entry</div>
+                <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Golazo · Team entry</div>
                 <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1, marginBottom: 16 }}>Confirmed</div>
                 <div style={{ display: "flex", gap: 24, flexWrap: "wrap", fontSize: 13 }}>
                   <div>
@@ -155,8 +155,8 @@ const GollazoConfirmed = () => {
           </>
         )}
 
-        <Link to="/gollazo" style={{ marginTop: 4, fontSize: 14, fontWeight: 600, color: "#fff", textDecoration: "none", border: "1px solid rgba(255,255,255,.25)", padding: "12px 24px", borderRadius: 999 }}>
-          Back to Gollazo
+        <Link to="/golazo" style={{ marginTop: 4, fontSize: 14, fontWeight: 600, color: "#fff", textDecoration: "none", border: "1px solid rgba(255,255,255,.25)", padding: "12px 24px", borderRadius: 999 }}>
+          Back to Golazo
         </Link>
       </div>
     </div>

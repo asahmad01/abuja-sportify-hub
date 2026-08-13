@@ -1,4 +1,7 @@
-// Gollazo Fest — the live commerce page (GOLLAZO_PLAN.md Phase 5).
+// Golazo Fest — the live commerce page (GOLLAZO_PLAN.md Phase 5).
+//
+// The brand is "Golazo", one L. It shipped misspelled as "Gollazo"; the plan
+// document, this filename and the event_group_id slug still carry the typo.
 //
 // Was a faithful port of the design export: mock table checkout, and a vendor
 // form posting to an unset Formspree endpoint. Both are gone. Two real
@@ -12,11 +15,11 @@
 //
 // Prices come from the API, never computed here. The backend publishes
 // {list_price, gateway_fee, total} and the buyer pays `total` — the Paystack
-// fee is added on top so Gollazo receives the round number. Recomputing that
+// fee is added on top so Golazo receives the round number. Recomputing that
 // formula in the browser is how it would drift from what is actually charged.
 import { useEffect, useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { DEMO_EVENT } from "@/lib/gollazo";
+import { DEMO_EVENT, EVENT_GROUP_SLUGS } from "@/lib/gollazo";
 import { setupPremiumPage } from "./premium/setup";
 import "./premium/premium.css";
 import {
@@ -32,9 +35,6 @@ import {
   type EventCard,
 } from "@/lib/spottsApi";
 
-// Which event group this page sells. Resolved to live cards at runtime so card
-// IDs never need hardcoding or a re-deploy when a card is recreated.
-const GOLLAZO_GROUP = "gollazo";
 
 // The teams section background. The ticket's perforation notches are punched
 // using this exact value — if they ever diverge the notches show as discs.
@@ -72,7 +72,6 @@ const PremiumGollazo = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
-  // Cards are resolved from the event group at runtime (see GOLLAZO_GROUP).
   const [cards, setCards] = useState<EventCard[] | null>(null);
   const [loadError, setLoadError] = useState(false);
   const [submitting, setSubmitting] = useState<Product | null>(null);
@@ -96,13 +95,28 @@ const PremiumGollazo = () => {
     { list_price: 0, gateway_fee: 0, total: 0, fee_passed_on: false };
 
   useEffect(() => {
-    document.title = "Gollazo — by Spotts";
+    document.title = "Golazo — by Spotts";
   }, []);
 
+  // Cards resolve at runtime, so card IDs never need hardcoding, and the group
+  // slug is tried against both spellings — see EVENT_GROUP_SLUGS.
   useEffect(() => {
-    getEventGroup(GOLLAZO_GROUP)
-      .then(setCards)
-      .catch(() => setLoadError(true));
+    let cancelled = false;
+
+    (async () => {
+      for (const slug of EVENT_GROUP_SLUGS) {
+        try {
+          const found = await getEventGroup(slug);
+          if (!cancelled) setCards(found);
+          return;
+        } catch {
+          // Wrong slug, or the group does not exist under it. Try the next.
+        }
+      }
+      if (!cancelled) setLoadError(true);
+    })();
+
+    return () => { cancelled = true; };
   }, []);
 
   // Pre-select the first booth option: the card requires a choice whenever it
@@ -163,7 +177,7 @@ const PremiumGollazo = () => {
     setFieldErrors({});
 
     try {
-      await registerAndPay(card.id, "/gollazo/confirmed", {
+      await registerAndPay(card.id, "/golazo/confirmed", {
         participant_name: get("name"),
         participant_email: get("email"),
         participant_phone: get("phone") || undefined,
@@ -209,7 +223,7 @@ const PremiumGollazo = () => {
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 clamp(20px,4vw,48px)", height: 68, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16 }}>
           <a href="/" style={{ display: "flex", alignItems: "center", gap: 12, textDecoration: "none" }}>
             <img src="/premium/logo-blue-black.svg" alt="Spotts" style={{ height: 26, display: "block" }} />
-            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#51607A", border: "1px solid rgba(10,18,32,.14)", padding: "4px 10px", borderRadius: 999 }}>Gollazo</span>
+            <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "#51607A", border: "1px solid rgba(10,18,32,.14)", padding: "4px 10px", borderRadius: 999 }}>Golazo</span>
           </a>
           <nav data-mm="nav" style={{ display: "flex", alignItems: "center", gap: "clamp(12px,2vw,24px)", fontSize: 14.5, fontWeight: 500 }}>
             <a href="#teams" style-hover="color: #0A1220;" style={{ color: "#51607A", textDecoration: "none" }}>The festival</a>
@@ -229,7 +243,7 @@ const PremiumGollazo = () => {
 
       {/* HERO */}
       <section style={{ position: "relative", overflow: "clip", background: "#fff", borderBottom: "1px solid rgba(10,18,32,.07)" }}>
-        <div aria-hidden style={{ position: "absolute", right: -50, bottom: -70, fontSize: "clamp(160px,24vw,340px)", fontWeight: 800, fontStyle: "italic", letterSpacing: "-0.06em", lineHeight: 1, color: "transparent", WebkitTextStroke: "2px rgba(0,122,255,.16)", userSelect: "none", pointerEvents: "none", transform: "rotate(-4deg)" }}>GOL</div>
+        <div aria-hidden style={{ position: "absolute", right: -50, bottom: -70, fontSize: "clamp(160px,24vw,340px)", fontWeight: 800, fontStyle: "italic", letterSpacing: "-0.06em", lineHeight: 1, color: "transparent", WebkitTextStroke: "2px rgba(0,122,255,.16)", userSelect: "none", pointerEvents: "none", transform: "rotate(-4deg)" }}>GO</div>
         <div aria-hidden style={{ position: "absolute", right: 60, top: 30, fontSize: "clamp(60px,8vw,110px)", fontWeight: 800, fontStyle: "italic", letterSpacing: "-0.05em", lineHeight: 1, color: "transparent", WebkitTextStroke: "1.5px rgba(31,168,85,.13)", userSelect: "none", pointerEvents: "none", transform: "rotate(-4deg)" }}>LAZO!</div>
         <svg aria-hidden viewBox="0 0 460 300" style={{ position: "absolute", left: -70, top: -40, width: "clamp(220px,26vw,420px)", pointerEvents: "none" }}>
           <g fill="none" stroke="#007AFF" strokeOpacity=".1" strokeWidth="2">
@@ -246,12 +260,12 @@ const PremiumGollazo = () => {
             <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "#007AFF", border: "1px solid rgba(0,122,255,.3)", padding: "6px 14px", borderRadius: 999 }}>Padel</span>
             <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "#1FA855", border: "1px solid rgba(31,168,85,.35)", padding: "6px 14px", borderRadius: 999 }}>Live music</span>
           </div>
-          <h1 style={{ margin: "0 0 20px", fontSize: "clamp(52px,8.5vw,120px)", fontWeight: 800, fontStyle: "italic", letterSpacing: "-0.055em", lineHeight: .92, transform: "rotate(-2deg)", transformOrigin: "left bottom", display: "inline-block" }}>GOLLAZO<span style={{ color: "#007AFF" }}>!</span></h1>
+          <h1 style={{ margin: "0 0 20px", fontSize: "clamp(52px,8.5vw,120px)", fontWeight: 800, fontStyle: "italic", letterSpacing: "-0.055em", lineHeight: .92, transform: "rotate(-2deg)", transformOrigin: "left bottom", display: "inline-block" }}>GOLAZO<span style={{ color: "#007AFF" }}>!</span></h1>
           <p style={{ margin: "0 0 14px", maxWidth: "56ch", fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.55, color: "#51607A", textWrap: "pretty" }}>A sports tournament wrapped in a festival. Football and padel by day, <b style={{ color: "#0A1220" }}>Seyi Vibez live</b> by night — with food, vendors and tables for the people who want the best seat in the house.</p>
           <p style={{ margin: "0 0 34px", fontSize: 15, fontWeight: 600, color: "#0A1220" }}>Sat, Dec 19 2026 · Eagle Square Grounds, Abuja <span style={{ color: "#A6B0C0", fontWeight: 500 }}>(dummy — TBC)</span></p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, alignItems: "center" }}>
             <a href="#teams" style-hover="background: #0069DE; transform: translateY(-1px);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#007AFF", color: "#fff", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "15px 30px", borderRadius: 999, transition: "background .2s, transform .2s" }}>Enter a team</a>
-            <a href="#vendors" style-hover="border-color: rgba(10,18,32,.4);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#fff", color: "#0A1220", border: "1px solid rgba(10,18,32,.16)", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "14px 28px", borderRadius: 999, transition: "border-color .2s" }}>Sell at Gollazo</a>
+            <a href="#vendors" style-hover="border-color: rgba(10,18,32,.4);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#fff", color: "#0A1220", border: "1px solid rgba(10,18,32,.16)", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "14px 28px", borderRadius: 999, transition: "border-color .2s" }}>Sell at Golazo</a>
           </div>
         </div>
       </section>
@@ -309,7 +323,7 @@ const PremiumGollazo = () => {
                     <h3 style={{ margin: 0, fontSize: "clamp(21px,2.2vw,27px)", fontWeight: 800, letterSpacing: "-0.03em" }}>You&rsquo;re in.</h3>
                     <p style={{ margin: 0, fontSize: 15, lineHeight: 1.6, color: "#51607A" }}>Payment confirmed. Your ticket is on its way to your inbox — show the QR code at the gate.</p>
                     <p style={{ margin: 0, fontSize: 12.5, fontFamily: "SFMono-Regular, Menlo, monospace", color: "#51607A", background: "#F1F5F9", padding: "8px 13px", borderRadius: 8, alignSelf: "flex-start" }}>{confirmed.reference}</p>
-                    <a href="#vendors" style-hover="border-color: rgba(10,18,32,.4);" style={{ marginTop: 4, alignSelf: "flex-start", fontSize: 14, fontWeight: 600, color: "#0A1220", textDecoration: "none", border: "1px solid rgba(10,18,32,.16)", padding: "11px 22px", borderRadius: 999 }}>Also selling at Gollazo?</a>
+                    <a href="#vendors" style-hover="border-color: rgba(10,18,32,.4);" style={{ marginTop: 4, alignSelf: "flex-start", fontSize: 14, fontWeight: 600, color: "#0A1220", textDecoration: "none", border: "1px solid rgba(10,18,32,.16)", padding: "11px 22px", borderRadius: 999 }}>Also selling at Golazo?</a>
                   </div>
                 )}
               </div>
@@ -321,7 +335,7 @@ const PremiumGollazo = () => {
                       <img src="/premium/logo-blue-white.svg" alt="Spotts" style={{ height: 18 }} />
                       <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>E-Ticket</span>
                     </div>
-                    <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Gollazo · Team entry</div>
+                    <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Golazo · Team entry</div>
                     <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1, marginBottom: 16 }}>{teamNamePreview.trim() || teamCard.title}</div>
                     <div style={{ display: "flex", gap: 24, flexWrap: "wrap", fontSize: 13 }}>
                       {ticketDetails.map(({ label, value }) => (
@@ -465,11 +479,11 @@ const PremiumGollazo = () => {
           <div style={{ display: "flex", flexWrap: "wrap", gap: 32, justifyContent: "space-between", alignItems: "flex-start", paddingBottom: 32, borderBottom: "1px solid rgba(255,255,255,.1)" }}>
             <div style={{ maxWidth: 320 }}>
               <img src="/premium/logo-blue-white.svg" alt="Spotts" style={{ height: 26, display: "block", marginBottom: 16 }} />
-              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,.55)" }}>Gollazo is powered by Spotts — tickets, tables and vendor slots, all handled in one place.</p>
+              <p style={{ margin: 0, fontSize: 14, lineHeight: 1.6, color: "rgba(255,255,255,.55)" }}>Golazo is powered by Spotts — tickets, tables and vendor slots, all handled in one place.</p>
             </div>
             <div style={{ display: "flex", gap: "clamp(32px,5vw,64px)", flexWrap: "wrap" }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-                <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.45)" }}>Gollazo</span>
+                <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.45)" }}>Golazo</span>
                 <a href="#teams" style-hover="color: #fff;" style={{ fontSize: 14, color: "rgba(255,255,255,.75)", textDecoration: "none" }}>Enter a team</a>
                 <a href="#vendors" style-hover="color: #fff;" style={{ fontSize: 14, color: "rgba(255,255,255,.75)", textDecoration: "none" }}>Vendor slots</a>
                 <a href="/events" style-hover="color: #fff;" style={{ fontSize: 14, color: "rgba(255,255,255,.75)", textDecoration: "none" }}>Spotts Events</a>
@@ -488,7 +502,7 @@ const PremiumGollazo = () => {
           </div>
           <div style={{ paddingTop: 22, display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", fontSize: 13, color: "rgba(255,255,255,.4)" }}>
             <span>© 2026 Spotts. Made in Abuja.</span>
-            <span>Gollazo — play hard, party harder.</span>
+            <span>Golazo — play hard, party harder.</span>
           </div>
         </div>
       </footer>

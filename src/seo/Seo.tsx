@@ -1,7 +1,7 @@
 // Per-route <head> at runtime. Reads the same seo.routes.json that the
 // build-time injector (scripts/prerender-seo.mjs) uses, so client navigation
 // and the prerendered static HTML never drift. Routes absent from the config
-// (e.g. /gollazo) simply fall back to the defaults in index.html.
+// (e.g. /golazo) simply fall back to the defaults in index.html.
 import { Helmet } from "react-helmet-async";
 import seo from "./seo.routes.json";
 
