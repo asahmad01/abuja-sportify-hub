@@ -16,6 +16,7 @@
 // formula in the browser is how it would drift from what is actually charged.
 import { useEffect, useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { DEMO_EVENT } from "@/lib/gollazo";
 import { setupPremiumPage } from "./premium/setup";
 import "./premium/premium.css";
 import {
@@ -48,21 +49,6 @@ const VENDOR_FACTS = [
   "Your vendor pass and QR code are emailed straight away.",
   "Slots are limited, and a sold slot doesn't come back.",
 ];
-
-// DEMO MODE — placeholder event details for the ticket, front-end only.
-//
-// Nothing needs uncommenting to go live: these are FALLBACKS. The moment
-// event_date / event_time / venue are filled in on the card in super-admin,
-// the backend values take over automatically and these stop rendering.
-//
-// Kept in step with the hero's "(dummy — TBC)" line deliberately — the ticket
-// previously advertised a different fake event (20 Aug, SOHO) to the hero's
-// 19 Dec at Eagle Square, so the same page announced two festivals.
-const DEMO_EVENT = {
-  date: "Sat, 19 Dec",
-  time: "12:00 PM",
-  venue: "Eagle Square, Abuja",
-};
 
 // Decorative QR block, copied from the /events ticket. 7x7, purely visual —
 // the real scannable code is emailed after payment.

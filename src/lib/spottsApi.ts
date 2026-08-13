@@ -258,6 +258,17 @@ export function clearPendingRegistration(): void {
   sessionStorage.removeItem(PENDING_KEY);
 }
 
+/**
+ * The scannable entry QR for a registration.
+ *
+ * A web route, not an API one, so the `/api` suffix comes off the base. Public
+ * by design — an <img> cannot send a token, and the code encodes the same
+ * reference already shown on screen.
+ */
+export function registrationQrUrl(reference: string): string {
+  return `${API_BASE.replace(/\/api\/?$/, "")}/event/qr/${reference}.png`;
+}
+
 /** Naira, no kobo — matches how the backend formats money for buyers. */
 export function formatNaira(amount: number): string {
   return `₦${Math.round(amount).toLocaleString("en-NG")}`;

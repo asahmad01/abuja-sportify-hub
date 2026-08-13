@@ -8,24 +8,16 @@
 // registerAndPay before the gateway redirect (see lib/spottsApi).
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { DEMO_EVENT } from "@/lib/gollazo";
 import {
   clearPendingRegistration,
   formatNaira,
   readPendingRegistration,
+  registrationQrUrl,
   verifyPayment,
 } from "@/lib/spottsApi";
 
 const SECTION_BG = "#071120";
-
-// Decorative only — the scannable code is emailed.
-const QR_PATTERN = [
-  1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0,
-  1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1,
-].map(Boolean);
-
-const EVENT_DATE = "Sat, 20 Aug";
-const EVENT_TIME = "12:00 PM";
-const EVENT_VENUE = "SOHO, Abuja";
 
 type State = "checking" | "confirmed" | "pending" | "missing";
 
@@ -98,8 +90,8 @@ const GollazoConfirmed = () => {
             <div style={{ width: 60, height: 60, borderRadius: "50%", background: "#1FA855", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 30 }}>✓</div>
             <h1 style={{ margin: 0, fontSize: "clamp(28px,3.6vw,40px)", fontWeight: 800, letterSpacing: "-0.035em", lineHeight: 1.1 }}>You&rsquo;re in.</h1>
             <p style={{ margin: 0, maxWidth: "40ch", fontSize: 15.5, lineHeight: 1.6, color: "rgba(255,255,255,.65)" }}>
-              Payment confirmed. Your confirmation email and QR entry are on their way — show the
-              code at the gate on the day.
+              Payment confirmed. Your entry code is below — screenshot it, or use the copy we&rsquo;ve
+              emailed you. Either one gets you in.
             </p>
 
             {/* Same ticket as /gollazo and /events, in its paid state */}
@@ -114,15 +106,15 @@ const GollazoConfirmed = () => {
                 <div style={{ display: "flex", gap: 24, flexWrap: "wrap", fontSize: 13 }}>
                   <div>
                     <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Date</div>
-                    <div style={{ fontWeight: 600 }}>{EVENT_DATE}</div>
+                    <div style={{ fontWeight: 600 }}>{DEMO_EVENT.date}</div>
                   </div>
                   <div>
                     <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Kick-off</div>
-                    <div style={{ fontWeight: 600 }}>{EVENT_TIME}</div>
+                    <div style={{ fontWeight: 600 }}>{DEMO_EVENT.time}</div>
                   </div>
                   <div>
                     <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Venue</div>
-                    <div style={{ fontWeight: 600 }}>{EVENT_VENUE}</div>
+                    <div style={{ fontWeight: 600 }}>{DEMO_EVENT.venue}</div>
                   </div>
                 </div>
               </div>
@@ -134,19 +126,25 @@ const GollazoConfirmed = () => {
               </div>
 
               <div style={{ padding: "22px 28px 26px", display: "flex", alignItems: "center", gap: 20 }}>
-                <div style={{ background: "#fff", borderRadius: 12, padding: 10 }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(7, 8px)", gridAutoRows: "8px", gap: 3 }}>
-                    {QR_PATTERN.slice(0, 49).map((on, i) => (
-                      <span key={i} style={{ background: on ? "#0A1220" : "rgba(10,18,32,.15)" }} />
-                    ))}
-                  </div>
+                {/* The real, scannable code — not the decorative grid this used
+                    to draw while the page promised "your QR entry is on its
+                    way". Same image the confirmation email links and attaches,
+                    so screenshotting this page is a valid ticket. */}
+                <div style={{ background: "#fff", borderRadius: 12, padding: 10, flex: "none" }}>
+                  <img
+                    src={registrationQrUrl(reference)}
+                    alt={`Entry QR code for ${reference}`}
+                    width={88}
+                    height={88}
+                    style={{ display: "block", width: 88, height: 88 }}
+                  />
                 </div>
                 <div style={{ minWidth: 0 }}>
-                  <div style={{ fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", fontWeight: 700, marginBottom: 5 }}>Admit one team</div>
+                  <div style={{ fontSize: 11, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", fontWeight: 700, marginBottom: 5 }}>Show this at the gate</div>
                   <div style={{ fontSize: 17, fontWeight: 800, letterSpacing: "-0.02em" }}>
                     {amount ? formatNaira(amount) : "Paid"} <span style={{ color: "#4ADE80" }}>· Paid ✓</span>
                   </div>
-                  <div style={{ fontSize: 12, color: "#4ADE80", marginTop: 3 }}>Delivered instantly</div>
+                  <div style={{ fontSize: 12, color: "#4ADE80", marginTop: 3 }}>Also sent to your email</div>
                 </div>
               </div>
             </div>
