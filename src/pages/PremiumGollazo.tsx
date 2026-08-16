@@ -29,6 +29,7 @@ import {
   formatEventTime,
   checkDiscountCode,
   formatNaira,
+  getCurrentWebsiteEvent,
   getEventGroup,
   readPendingRegistration,
   registerAndPay,
@@ -67,6 +68,19 @@ const inputStyle: React.CSSProperties = {
   transition: "border-color .18s, box-shadow .18s",
 };
 const focusRing = "border-color: #007AFF; box-shadow: 0 0 0 3px rgba(0,122,255,.12);";
+
+/**
+ * Keep a phone field to digits (plus a leading +, which Nigerian numbers are
+ * routinely written with).
+ *
+ * Filtering as they type beats validating on submit: the field simply cannot
+ * hold a letter, so there is no error state to explain. `inputMode` also gets
+ * the numeric keypad on a phone, which is where most of these are filled in.
+ */
+const digitsOnly = (value: string) => {
+  const plus = value.trimStart().startsWith("+") ? "+" : "";
+  return plus + value.replace(/[^0-9]/g, "");
+};
 const labelCaption: React.CSSProperties = { fontSize: 12.5, fontWeight: 600, color: "#51607A", marginBottom: 7 };
 
 const PremiumGollazo = () => {
@@ -117,21 +131,35 @@ const PremiumGollazo = () => {
     document.title = "Golazo — by Spotts";
   }, []);
 
-  // Cards resolve at runtime, so card IDs never need hardcoding, and the group
-  // slug is tried against both spellings — see EVENT_GROUP_SLUGS.
+  // Which event this page sells is decided in super-admin now, by ticking
+  // "sell this on the Spotts website" on the cards. It used to be a hardcoded
+  // group slug here, which meant every new event needed a code change and a
+  // deploy before anyone could buy anything.
+  //
+  // The old slug lookup stays as a fallback so a backend that predates the
+  // flag — or cards nobody has ticked yet — still renders something.
   useEffect(() => {
     let cancelled = false;
 
     (async () => {
+      try {
+        const found = await getCurrentWebsiteEvent();
+        if (!cancelled) setCards(found);
+        return;
+      } catch {
+        // Nothing flagged yet; fall through to the legacy group lookup.
+      }
+
       for (const slug of EVENT_GROUP_SLUGS) {
         try {
           const found = await getEventGroup(slug);
           if (!cancelled) setCards(found);
           return;
         } catch {
-          // Wrong slug, or the group does not exist under it. Try the next.
+          // Wrong slug, or no group under it. Try the next.
         }
       }
+
       if (!cancelled) setLoadError(true);
     })();
 
@@ -328,15 +356,14 @@ const PremiumGollazo = () => {
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(64px,10vh,120px) clamp(20px,4vw,48px)", position: "relative" }}>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 22 }}>
             <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "#007AFF", border: "1px solid rgba(0,122,255,.3)", padding: "6px 14px", borderRadius: 999 }}>Football</span>
-            <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "#007AFF", border: "1px solid rgba(0,122,255,.3)", padding: "6px 14px", borderRadius: 999 }}>Padel</span>
             <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "#1FA855", border: "1px solid rgba(31,168,85,.35)", padding: "6px 14px", borderRadius: 999 }}>Live music</span>
           </div>
           <h1 style={{ margin: "0 0 20px", fontSize: "clamp(52px,8.5vw,120px)", fontWeight: 800, fontStyle: "italic", letterSpacing: "-0.055em", lineHeight: .92, transform: "rotate(-2deg)", transformOrigin: "left bottom", display: "inline-block" }}>GOLAZO<span style={{ color: "#007AFF" }}>!</span></h1>
-          <p style={{ margin: "0 0 14px", maxWidth: "56ch", fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.55, color: "#51607A", textWrap: "pretty" }}>A sports tournament wrapped in a festival. Football and padel by day, <b style={{ color: "#0A1220" }}>Seyi Vibez live</b> by night — with food, vendors and tables for the people who want the best seat in the house.</p>
-          <p style={{ margin: "0 0 34px", fontSize: 15, fontWeight: 600, color: "#0A1220" }}>Sat, Dec 19 2026 · Eagle Square Grounds, Abuja <span style={{ color: "#A6B0C0", fontWeight: 500 }}>(dummy — TBC)</span></p>
+          <p style={{ margin: "0 0 14px", maxWidth: "56ch", fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.55, color: "#51607A", textWrap: "pretty" }}>Football all day, then <b style={{ color: "#0A1220" }}>the party takes over after dark</b> — live music, food, drinks and vendors, right through the night.</p>
+          <p style={{ margin: "0 0 34px", fontSize: 15, fontWeight: 600, color: "#0A1220" }}>Sat, 29 Aug · 1:00 PM · Harrow Park</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, alignItems: "center" }}>
             <a href="#teams" style-hover="background: #0069DE; transform: translateY(-1px);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#007AFF", color: "#fff", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "15px 30px", borderRadius: 999, transition: "background .2s, transform .2s" }}>Enter a team</a>
-            <a href="#vendors" style-hover="border-color: rgba(10,18,32,.4);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#fff", color: "#0A1220", border: "1px solid rgba(10,18,32,.16)", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "14px 28px", borderRadius: 999, transition: "border-color .2s" }}>Sell at Golazo</a>
+            <a href="#vendors" style-hover="border-color: rgba(10,18,32,.4);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#fff", color: "#0A1220", border: "1px solid rgba(10,18,32,.16)", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "14px 28px", borderRadius: 999, transition: "border-color .2s" }}>Book a vendor slot</a>
           </div>
         </div>
       </section>
@@ -374,7 +401,16 @@ const PremiumGollazo = () => {
                       </label>
                       <label style={{ display: "flex", flexDirection: "column" }}>
                         <span style={labelCaption}>Phone</span>
-                        <input name="phone" placeholder="+234 800 000 0000" style={inputStyle} style-focus={focusRing} />
+                        <input
+                          name="phone"
+                          type="tel"
+                          inputMode="tel"
+                          required
+                          placeholder="+234 800 000 0000"
+                          onInput={(e) => { e.currentTarget.value = digitsOnly(e.currentTarget.value); }}
+                          style={inputStyle}
+                          style-focus={focusRing}
+                        />
                       </label>
                       <label style={{ display: "flex", flexDirection: "column" }}>
                         <span style={labelCaption}>Email</span>
@@ -563,7 +599,16 @@ const PremiumGollazo = () => {
                     </label>
                     <label style={{ display: "flex", flexDirection: "column" }}>
                       <span style={labelCaption}>Phone</span>
-                      <input name="phone" placeholder="+234 800 000 0000" style={inputStyle} style-focus={focusRing} />
+                      <input
+                          name="phone"
+                          type="tel"
+                          inputMode="tel"
+                          required
+                          placeholder="+234 800 000 0000"
+                          onInput={(e) => { e.currentTarget.value = digitsOnly(e.currentTarget.value); }}
+                          style={inputStyle}
+                          style-focus={focusRing}
+                        />
                     </label>
                     <label style={{ display: "flex", flexDirection: "column", gridColumn: "1 / -1" }}>
                       <span style={labelCaption}>Email</span>

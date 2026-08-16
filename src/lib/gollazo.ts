@@ -21,14 +21,18 @@
 export const EVENT_GROUP_SLUGS = ["golazo", "gollazo"];
 
 /**
- * Placeholder event details, front-end only.
+ * Event details shown on the ticket until the card carries its own.
+ *
+ * Still a FALLBACK: set event_date / event_time / venue on the card in
+ * super-admin and those win automatically. Keeping the real details here too
+ * means the ticket is right either way.
  *
  * These are FALLBACKS, not hardcoding: they render only while the card has no
  * event_date / event_time / venue set. Filling those in via super-admin makes
  * the backend values win automatically, with no code change and no deploy.
  */
 export const DEMO_EVENT = {
-  date: "Sat, 19 Dec",
-  time: "12:00 PM",
-  venue: "Eagle Square, Abuja",
+  date: "Sat, 29 Aug",
+  time: "1:00 PM",
+  venue: "Harrow Park",
 };

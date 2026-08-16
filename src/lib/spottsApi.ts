@@ -135,6 +135,18 @@ export async function getEventGroup(group: string): Promise<EventCard[]> {
   return data.cards;
 }
 
+/**
+ * The cards the website is currently selling.
+ *
+ * Driven by a per-card "show on website" flag rather than a group slug, so
+ * launching a new event is a checkbox in super-admin, not a redeploy of this
+ * site. Falls back to the old group lookup for safety — see getWebsiteEvent.
+ */
+export async function getCurrentWebsiteEvent(): Promise<EventCard[]> {
+  const data = await request<{ group: string | null; cards: EventCard[] }>("/v1/website-event");
+  return data.cards;
+}
+
 /** Public card details, including the price breakdown to display. */
 export function getEventCard(cardId: number): Promise<EventCard> {
   return request<EventCard>(`/v1/featured-cards/${cardId}`);
