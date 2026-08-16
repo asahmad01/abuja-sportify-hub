@@ -16,6 +16,7 @@ import PremiumPartnerApi from "./pages/PremiumPartnerApi";
 import PremiumEvents from "./pages/PremiumEvents";
 import GollazoConfirmed from "./pages/GollazoConfirmed";
 import PremiumGollazo from "./pages/PremiumGollazo";
+import GolazoVendorTerms from "./pages/GolazoVendorTerms";
 import NotFound from "./pages/NotFound";
 
 /** Redirect that carries the query string across, unlike a bare <Navigate to>. */
@@ -45,6 +46,7 @@ const App = () => (
           <Route path="/events" element={<PremiumEvents />} />
           <Route path="/golazo" element={<PremiumGollazo />} />
           <Route path="/golazo/confirmed" element={<GollazoConfirmed />} />
+          <Route path="/golazo/vendor-terms" element={<GolazoVendorTerms />} />
           {/* The name shipped misspelled with a double L. These stay for good:
               the old URL is in the sitemap, was already shared, and is the
               return path Paystack has stored against in-flight payments.

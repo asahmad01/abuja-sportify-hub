@@ -83,6 +83,9 @@ const digitsOnly = (value: string) => {
 };
 const labelCaption: React.CSSProperties = { fontSize: 12.5, fontWeight: 600, color: "#51607A", marginBottom: 7 };
 
+/** Every vendor field is required, so the asterisk marks the norm, not the exception. */
+const Required = () => <span style={{ color: "#B42318", marginLeft: 3 }} aria-hidden>*</span>;
+
 const PremiumGollazo = () => {
   const rootRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
@@ -107,6 +110,9 @@ const PremiumGollazo = () => {
   // checkout just failed is still holding their code and should see it as
   // valid rather than being told to wait for the hold to lapse.
   const [vendorEmail, setVendorEmail] = useState("");
+  // Vendor terms. The tick IS the signature — the server timestamps it against
+  // the business name, contact name and phone already captured above.
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   const teamCard = cards?.find((c) => c.type !== "vendor") ?? null;
   // A redeemed code replaces the public vendor card outright, so the price
@@ -255,6 +261,7 @@ const PremiumGollazo = () => {
               // Re-checked server-side inside the locked transaction: a code
               // that previewed fine may have been spent since.
               access_code: unlockedCard ? codeInput.trim() : undefined,
+              terms_accepted: termsAccepted,
             }),
       });
       // registerAndPay navigates to Paystack; nothing runs after this.
@@ -395,16 +402,16 @@ const PremiumGollazo = () => {
                   <form onSubmit={(e) => submitPurchase(e, "team", teamCard)} style={{ background: "#fff", color: "#0A1220", borderRadius: 22, padding: "clamp(24px,3vw,34px)", boxShadow: "0 40px 90px -40px rgba(0,0,0,.6)" }}>
                     <div style={{ display: "grid", gap: 15 }}>
                       <label style={{ display: "flex", flexDirection: "column" }}>
-                        <span style={labelCaption}>Team name</span>
+                        <span style={labelCaption}>Team name<Required /></span>
                         <input name="team_name" required placeholder="Samba FC" onChange={(e) => setTeamNamePreview(e.target.value)} style={inputStyle} style-focus={focusRing} />
                       </label>
                       <label style={{ display: "flex", flexDirection: "column" }}>
-                        <span style={labelCaption}>Captain&rsquo;s name</span>
+                        <span style={labelCaption}>Captain&rsquo;s name<Required /></span>
                         <input name="name" required style={inputStyle} style-focus={focusRing} />
                         {fieldErrors.participant_name && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_name}</span>}
                       </label>
                       <label style={{ display: "flex", flexDirection: "column" }}>
-                        <span style={labelCaption}>Phone</span>
+                        <span style={labelCaption}>Phone<Required /></span>
                         <input
                           name="phone"
                           type="tel"
@@ -417,7 +424,7 @@ const PremiumGollazo = () => {
                         />
                       </label>
                       <label style={{ display: "flex", flexDirection: "column" }}>
-                        <span style={labelCaption}>Email</span>
+                        <span style={labelCaption}>Email<Required /></span>
                         <input name="email" type="email" required placeholder="you@email.com" style={inputStyle} style-focus={focusRing} />
                         {fieldErrors.participant_email && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_email}</span>}
                         <span style={{ fontSize: 12, color: "#8794A8", marginTop: 6 }}>Your entry and QR code are sent here.</span>
@@ -551,17 +558,17 @@ const PremiumGollazo = () => {
 
                   <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,220px),1fr))", gap: 16 }}>
                     <label style={{ display: "flex", flexDirection: "column", gridColumn: "1 / -1" }}>
-                      <span style={labelCaption}>Brand / business name</span>
+                      <span style={labelCaption}>Brand / business name<Required /></span>
                       <input name="brand" required style={inputStyle} style-focus={focusRing} />
                       {fieldErrors.brand && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.brand}</span>}
                     </label>
                     <label style={{ display: "flex", flexDirection: "column" }}>
-                      <span style={labelCaption}>Contact name</span>
+                      <span style={labelCaption}>Contact name<Required /></span>
                       <input name="name" required style={inputStyle} style-focus={focusRing} />
                       {fieldErrors.participant_name && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_name}</span>}
                     </label>
                     <label style={{ display: "flex", flexDirection: "column" }}>
-                      <span style={labelCaption}>Phone</span>
+                      <span style={labelCaption}>Phone<Required /></span>
                       <input
                           name="phone"
                           type="tel"
@@ -574,13 +581,13 @@ const PremiumGollazo = () => {
                         />
                     </label>
                     <label style={{ display: "flex", flexDirection: "column", gridColumn: "1 / -1" }}>
-                      <span style={labelCaption}>Email</span>
+                      <span style={labelCaption}>Email<Required /></span>
                       <input name="email" type="email" required placeholder="you@brand.com" value={vendorEmail} onChange={(e) => setVendorEmail(e.target.value)} style={inputStyle} style-focus={focusRing} />
                       {fieldErrors.participant_email && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_email}</span>}
                     </label>
                     <label style={{ display: "flex", flexDirection: "column", gridColumn: "1 / -1" }}>
-                      <span style={labelCaption}>What do you sell?</span>
-                      <textarea name="about" rows={3} placeholder="Menu, products, anything we should know…" style={{ ...inputStyle, lineHeight: 1.55, resize: "vertical" }} style-focus={focusRing} />
+                      <span style={labelCaption}>What do you sell?<Required /></span>
+                      <textarea name="about" rows={3} required placeholder="Menu, products, anything we should know…" style={{ ...inputStyle, lineHeight: 1.55, resize: "vertical" }} style-focus={focusRing} />
                     </label>
                   </div>
                   {/* Discount code, deliberately BELOW the email field.
@@ -632,6 +639,34 @@ const PremiumGollazo = () => {
                     )}
                   </div>
 
+
+                  {/* The agreement. A tick rather than a signature, but only
+                      because the server records who ticked it and when —
+                      business name, contact, phone and timestamp together are
+                      the declaration block of the paper form. */}
+                  <label style={{ display: "flex", alignItems: "flex-start", gap: 11, marginTop: 22, cursor: "pointer" }}>
+                    <input
+                      type="checkbox"
+                      name="terms_accepted"
+                      required
+                      checked={termsAccepted}
+                      onChange={(e) => setTermsAccepted(e.target.checked)}
+                      style={{ marginTop: 3, width: 17, height: 17, accentColor: "#007AFF", flex: "none", cursor: "pointer" }}
+                    />
+                    <span style={{ fontSize: 13.5, lineHeight: 1.55, color: "#51607A" }}>
+                      I have read and accept the{" "}
+                      <a
+                        href="/golazo/vendor-terms"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        style={{ color: "#007AFF", fontWeight: 600, textDecoration: "underline" }}
+                      >
+                        Vendor Terms &amp; Conditions
+                      </a>
+                      , including that vendor payments are non-refundable.<Required />
+                    </span>
+                  </label>
 
                   {/* Second chance, right where the money is committed. The
                       submit guard already blocks this, but seeing it here
