@@ -36,3 +36,31 @@ export const DEMO_EVENT = {
   time: "1:00 PM",
   venue: "Harrow Park",
 };
+
+/**
+ * Send checkout to one canonical origin.
+ *
+ * spottsapp.com and www.spottsapp.com both serve the site independently, with
+ * no redirect between them — so they are two origins with two separate
+ * sessionStorages. Checkout parks the payment reference in sessionStorage
+ * before handing the buyer to Paystack, and the backend returns them to
+ * FRONTEND_URL, which is the apex. Start on www and you come back to an origin
+ * that has never heard of your payment: the page says "nothing to confirm"
+ * while the money is gone and the email is already sent.
+ *
+ * Normalising before anything is stored is what actually prevents that. Runs
+ * before checkout, so the return trip lands where the reference lives.
+ *
+ * Returns true when a redirect was started, so callers can stop work.
+ */
+export function ensureCanonicalOrigin(): boolean {
+  if (typeof window === "undefined") return false;
+
+  const { hostname, protocol, pathname, search, hash } = window.location;
+  if (!hostname.startsWith("www.")) return false;
+
+  window.location.replace(
+    `${protocol}//${hostname.slice(4)}${pathname}${search}${hash}`,
+  );
+  return true;
+}

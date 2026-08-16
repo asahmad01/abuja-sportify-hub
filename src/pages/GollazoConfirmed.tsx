@@ -8,7 +8,7 @@
 // registerAndPay before the gateway redirect (see lib/spottsApi).
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { DEMO_EVENT } from "@/lib/gollazo";
+import { DEMO_EVENT, ensureCanonicalOrigin } from "@/lib/gollazo";
 import {
   clearPendingRegistration,
   formatNaira,
@@ -19,7 +19,7 @@ import {
 
 const SECTION_BG = "#071120";
 
-type State = "checking" | "confirmed" | "pending" | "missing";
+type State = "checking" | "confirmed" | "pending" | "missing" | "paid_elsewhere";
 
 const GollazoConfirmed = () => {
   const [state, setState] = useState<State>("checking");
@@ -27,10 +27,30 @@ const GollazoConfirmed = () => {
   const [amount, setAmount] = useState<number | null>(null);
 
   useEffect(() => {
+    if (ensureCanonicalOrigin()) return;
     document.title = "You're in — Golazo by Spotts";
 
     const pending = readPendingRegistration();
     if (!pending) {
+      // No record in THIS browser. Usually means checkout began on another
+      // origin (www vs apex) or another device — but Paystack appends its own
+      // reference to the return URL, so we can still tell the difference
+      // between "you just paid" and "you wandered in here".
+      //
+      // Verifying needs the registration token, which lived in that other
+      // origin's storage; the payment was confirmed server-side by the
+      // callback and webhook regardless. So say so honestly rather than
+      // "nothing to confirm", which reads as failure to someone who has just
+      // been charged.
+      const params = new URLSearchParams(window.location.search);
+      const gatewayRef = params.get("reference") || params.get("trxref");
+
+      if (gatewayRef) {
+        setReference(gatewayRef);
+        setState("paid_elsewhere");
+        return;
+      }
+
       setState("missing");
       return;
     }
@@ -69,6 +89,20 @@ const GollazoConfirmed = () => {
               We couldn&rsquo;t find a recent entry in this browser. If you&rsquo;ve paid, your
               confirmation email has everything you need.
             </p>
+          </>
+        )}
+
+        {state === "paid_elsewhere" && (
+          <>
+            <div style={{ width: 60, height: 60, borderRadius: "50%", background: "#1FA855", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 30 }}>✓</div>
+            <h1 style={{ margin: 0, fontSize: "clamp(26px,3.4vw,36px)", fontWeight: 800, letterSpacing: "-0.03em" }}>Payment received</h1>
+            <p style={{ margin: 0, maxWidth: "42ch", fontSize: 15.5, lineHeight: 1.6, color: "rgba(255,255,255,.65)" }}>
+              Your confirmation email has your ticket and QR code — check your inbox, including
+              spam. Quote the reference below if you need us.
+            </p>
+            {reference && (
+              <p style={{ margin: 0, fontSize: 12.5, fontFamily: "SFMono-Regular, Menlo, monospace", color: "rgba(255,255,255,.55)", background: "rgba(255,255,255,.06)", padding: "8px 14px", borderRadius: 8 }}>{reference}</p>
+            )}
           </>
         )}
 

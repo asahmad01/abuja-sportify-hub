@@ -19,7 +19,7 @@
 // formula in the browser is how it would drift from what is actually charged.
 import { useEffect, useRef, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
-import { DEMO_EVENT, EVENT_GROUP_SLUGS } from "@/lib/gollazo";
+import { DEMO_EVENT, EVENT_GROUP_SLUGS, ensureCanonicalOrigin } from "@/lib/gollazo";
 import { setupPremiumPage } from "./premium/setup";
 import "./premium/premium.css";
 import {
@@ -128,6 +128,10 @@ const PremiumGollazo = () => {
   const publicPricing = cards?.find((c) => c.type === "vendor")?.pricing ?? null;
 
   useEffect(() => {
+    // Before anything is stored: checkout parks its payment reference in
+    // sessionStorage, and the gateway returns buyers to the apex domain. On
+    // www that storage would be written to an origin nobody comes back to.
+    if (ensureCanonicalOrigin()) return;
     document.title = "Golazo — by Spotts";
   }, []);
 
