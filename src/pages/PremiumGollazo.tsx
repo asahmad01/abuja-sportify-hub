@@ -27,6 +27,7 @@ import {
   clearPendingRegistration,
   formatEventDate,
   formatEventTime,
+  checkDiscountCode,
   formatNaira,
   getEventGroup,
   readPendingRegistration,
@@ -82,8 +83,21 @@ const PremiumGollazo = () => {
   // Which booth option the vendor picked. Null when the card offers none.
   const [vendorOptionKey, setVendorOptionKey] = useState<string | null>(null);
 
+  // Otech discount (OTECH_DISCOUNT_PLAN.md). A valid code swaps in a whole
+  // different card that is simply cheaper — nothing is discounted here.
+  const [codeInput, setCodeInput] = useState("");
+  const [unlockedCard, setUnlockedCard] = useState<EventCard | null>(null);
+  const [codeError, setCodeError] = useState<string | null>(null);
+  const [checkingCode, setCheckingCode] = useState(false);
+  // Controlled purely so a code check can say who is asking: a buyer whose own
+  // checkout just failed is still holding their code and should see it as
+  // valid rather than being told to wait for the hold to lapse.
+  const [vendorEmail, setVendorEmail] = useState("");
+
   const teamCard = cards?.find((c) => c.type !== "vendor") ?? null;
-  const vendorCard = cards?.find((c) => c.type === "vendor") ?? null;
+  // A redeemed code replaces the public vendor card outright, so the price
+  // shown, the card ID bought and the amount charged all follow from one swap.
+  const vendorCard = unlockedCard ?? cards?.find((c) => c.type === "vendor") ?? null;
 
   // The price actually on offer: a chosen booth option's, else the card's.
   // Both come from the backend already grossed-up — see spottsApi.ts rule 1.
@@ -93,6 +107,11 @@ const PremiumGollazo = () => {
     selectedVendorOption?.pricing ??
     vendorCard?.pricing ??
     { list_price: 0, gateway_fee: 0, total: 0, fee_passed_on: false };
+
+  // The public price, kept so a redeemed code can show what it struck out.
+  // Read from the group rather than the swapped-in card, which no longer
+  // knows the standard price.
+  const publicPricing = cards?.find((c) => c.type === "vendor")?.pricing ?? null;
 
   useEffect(() => {
     document.title = "Golazo — by Spotts";
@@ -170,6 +189,20 @@ const PremiumGollazo = () => {
     e.preventDefault();
     if (!card) return;
 
+    // A typed-but-unapplied code must never fall through to full price. This
+    // happened in testing: the code was entered, Apply was missed, and the
+    // buyer was charged 121,929 instead of 97,564. Stopping here is the only
+    // layer that cannot be missed, whatever the button looks like.
+    if (product === "vendor" && codeInput.trim() && !unlockedCard) {
+      toast({
+        title: "Apply your discount code first",
+        description: "Tap Apply so the partner rate is used — otherwise you'll be charged the full price.",
+        variant: "destructive",
+      });
+      setCodeError("Tap Apply to use this code.");
+      return;
+    }
+
     const fd = new FormData(e.currentTarget);
     const get = (k: string) => (fd.get(k) || "").toString().trim();
 
@@ -187,6 +220,9 @@ const PremiumGollazo = () => {
               brand: get("brand") || undefined,
               vendor_notes: get("about") || undefined,
               vendor_option_key: vendorOptionKey ?? undefined,
+              // Re-checked server-side inside the locked transaction: a code
+              // that previewed fine may have been spent since.
+              access_code: unlockedCard ? codeInput.trim() : undefined,
             }),
       });
       // registerAndPay navigates to Paystack; nothing runs after this.
@@ -205,6 +241,41 @@ const PremiumGollazo = () => {
       }
       setSubmitting(null);
     }
+  };
+
+  /**
+   * Redeem a discount code.
+   *
+   * The response carries the unlocked card whole, pricing included, so the
+   * discount is never computed in the browser. Advisory only: nothing is
+   * reserved until the purchase is submitted and the server checks again.
+   */
+  const applyCode = async () => {
+    const code = codeInput.trim();
+    if (!code || checkingCode) return;
+
+    setCheckingCode(true);
+    setCodeError(null);
+
+    try {
+      const result = await checkDiscountCode(code, vendorEmail.trim() || undefined);
+      setUnlockedCard(result.card);
+      // The unlocked card is a different product — any booth option chosen
+      // against the public card does not exist on it.
+      setVendorOptionKey(null);
+      toast({ title: "Discount applied", description: "Your partner rate is shown below." });
+    } catch (err) {
+      setUnlockedCard(null);
+      setCodeError(err instanceof Error ? err.message : "That code is not valid.");
+    } finally {
+      setCheckingCode(false);
+    }
+  };
+
+  const clearCode = () => {
+    setUnlockedCard(null);
+    setCodeInput("");
+    setCodeError(null);
   };
 
   // Ticket facts: the card's real details once set, DEMO_EVENT until then.
@@ -408,10 +479,54 @@ const PremiumGollazo = () => {
                 <form onSubmit={(e) => submitPurchase(e, "vendor", vendorCard)} style={{ border: "1px solid rgba(10,18,32,.08)", borderRadius: 22, background: "#fff", padding: "clamp(24px,3vw,36px)", boxShadow: "0 30px 70px -40px rgba(10,18,32,.45)" }}>
                   <h3 style={{ margin: "0 0 6px", fontSize: "clamp(20px,2vw,25px)", fontWeight: 800, letterSpacing: "-0.03em" }}>Book your vendor slot</h3>
                   <p style={{ margin: "0 0 6px", fontSize: 14.5, lineHeight: 1.55, color: "#51607A" }}>Pay online and your pitch is confirmed instantly.</p>
-                  <div style={{ display: "flex", alignItems: "baseline", gap: 10, margin: "0 0 22px", flexWrap: "wrap" }}>
+                  <div style={{ display: "flex", alignItems: "baseline", gap: 10, margin: "0 0 6px", flexWrap: "wrap" }}>
                     <span style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.03em" }}>{formatNaira(vendorPricing.total)}</span>
+                    {publicPricing && unlockedCard && (
+                      <span style={{ fontSize: 15, color: "#8794A8", textDecoration: "line-through" }}>{formatNaira(publicPricing.total)}</span>
+                    )}
                     {vendorPricing.fee_passed_on && vendorPricing.gateway_fee > 0 && (
                       <span style={{ fontSize: 13, color: "#8794A8" }}>{formatNaira(vendorPricing.list_price)} + {formatNaira(vendorPricing.gateway_fee)} payment fees</span>
+                    )}
+                  </div>
+
+                  {/* Discount code. Deliberately visible to everyone: a vendor
+                      without one may ask Golazo how to get it, which is the
+                      point of the Otech partnership. */}
+                  <div style={{ margin: "0 0 22px" }}>
+                    {unlockedCard ? (
+                      <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", background: "rgba(31,168,85,.08)", border: "1px solid rgba(31,168,85,.25)", borderRadius: 12, padding: "10px 14px" }}>
+                        <span style={{ fontSize: 13.5, fontWeight: 700, color: "#1B7F45" }}>✓ Partner rate applied</span>
+                        <span style={{ fontSize: 13, color: "#51607A", fontFamily: "SFMono-Regular, Menlo, monospace" }}>{codeInput.trim().toUpperCase()}</span>
+                        <button type="button" onClick={clearCode} style={{ marginLeft: "auto", border: "none", background: "none", padding: 0, cursor: "pointer", fontFamily: "inherit", fontSize: 12.5, color: "#51607A", textDecoration: "underline" }}>Remove</button>
+                      </div>
+                    ) : (
+                      <>
+                        <span style={labelCaption}>
+                          Discount code <span style={{ fontWeight: 400, color: "#8794A8" }}>(optional)</span>
+                        </span>
+                        <div style={{ display: "flex", gap: 8 }}>
+                          <input
+                            value={codeInput}
+                            onChange={(e) => { setCodeInput(e.target.value); setCodeError(null); }}
+                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); applyCode(); } }}
+                            onBlur={() => { if (codeInput.trim() && !unlockedCard) applyCode(); }}
+                            placeholder="OTECH-XXXXXX"
+                            autoCapitalize="characters"
+                            spellCheck={false}
+                            style={{ ...inputStyle, textTransform: "uppercase" }}
+                            style-focus={focusRing}
+                          />
+                          <button
+                            type="button"
+                            onClick={applyCode}
+                            disabled={!codeInput.trim() || checkingCode}
+                            style={{ flex: "none", border: "none", background: codeInput.trim() ? "#0A1220" : "rgba(10,18,32,.12)", color: codeInput.trim() ? "#fff" : "#8794A8", borderRadius: 12, padding: "0 22px", cursor: !codeInput.trim() || checkingCode ? "default" : "pointer", fontFamily: "inherit", fontSize: 14.5, fontWeight: 700, letterSpacing: "-0.01em", transition: "background .18s, color .18s" }}
+                          >
+                            {checkingCode ? "Checking…" : "Apply"}
+                          </button>
+                        </div>
+                        {codeError && <span style={{ display: "block", fontSize: 12.5, color: "#B42318", marginTop: 6 }}>{codeError}</span>}
+                      </>
                     )}
                   </div>
 
@@ -452,7 +567,7 @@ const PremiumGollazo = () => {
                     </label>
                     <label style={{ display: "flex", flexDirection: "column", gridColumn: "1 / -1" }}>
                       <span style={labelCaption}>Email</span>
-                      <input name="email" type="email" required placeholder="you@brand.com" style={inputStyle} style-focus={focusRing} />
+                      <input name="email" type="email" required placeholder="you@brand.com" value={vendorEmail} onChange={(e) => setVendorEmail(e.target.value)} style={inputStyle} style-focus={focusRing} />
                       {fieldErrors.participant_email && <span style={{ fontSize: 12, color: "#B42318", marginTop: 5 }}>{fieldErrors.participant_email}</span>}
                     </label>
                     <label style={{ display: "flex", flexDirection: "column", gridColumn: "1 / -1" }}>
@@ -460,6 +575,15 @@ const PremiumGollazo = () => {
                       <textarea name="about" rows={3} placeholder="Menu, products, anything we should know…" style={{ ...inputStyle, lineHeight: 1.55, resize: "vertical" }} style-focus={focusRing} />
                     </label>
                   </div>
+                  {/* Second chance, right where the money is committed. The
+                      submit guard already blocks this, but seeing it here
+                      beats being stopped after pressing pay. */}
+                  {codeInput.trim() && !unlockedCard && (
+                    <p style={{ margin: "18px 0 -6px", fontSize: 13, fontWeight: 600, color: "#B42318", textAlign: "center" }}>
+                      You&rsquo;ve typed a code but haven&rsquo;t applied it — tap Apply to get the partner rate.
+                    </p>
+                  )}
+
                   <button type="submit" disabled={submitting !== null || vendorCard.remaining_slots === 0} style-hover="background: #0069DE;" style={{ width: "100%", marginTop: 22, border: "none", cursor: submitting || vendorCard.remaining_slots === 0 ? "default" : "pointer", opacity: submitting === "vendor" || vendorCard.remaining_slots === 0 ? 0.6 : 1, fontFamily: "inherit", fontSize: 15, fontWeight: 600, color: "#fff", background: "#007AFF", padding: "15px 28px", borderRadius: 999, transition: "background .2s" }}>
                     {vendorCard.remaining_slots === 0 ? "Sold out" : submitting === "vendor" ? "Taking you to payment…" : `Pay ${formatNaira(vendorPricing.total)} and book`}
                   </button>

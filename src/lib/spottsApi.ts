@@ -148,6 +148,8 @@ export interface GuestRegistrationInput {
   brand?: string;
   vendor_notes?: string;
   vendor_option_key?: string;
+  /** Unlocks a discounted card. Validated server-side at purchase, not here. */
+  access_code?: string;
 }
 
 /** Register without a Spotts account. Returns the one-time access token. */
@@ -256,6 +258,26 @@ export function readPendingRegistration(): PendingRegistration | null {
 
 export function clearPendingRegistration(): void {
   sessionStorage.removeItem(PENDING_KEY);
+}
+
+/**
+ * Preview a discount code without spending it.
+ *
+ * Returns the card the code unlocks, priced. ADVISORY ONLY — the binding
+ * check happens when the purchase is submitted, so this succeeding is not a
+ * promise that the code will still be free a minute later.
+ *
+ * `email` lets a buyer whose own checkout just failed see their code as
+ * valid again instead of being told to wait for the hold to lapse.
+ */
+export async function checkDiscountCode(
+  code: string,
+  email?: string,
+): Promise<{ code: string; card: EventCard }> {
+  return request<{ code: string; card: EventCard }>("/v1/event-codes/check", {
+    method: "POST",
+    body: JSON.stringify({ code, email: email || undefined }),
+  });
 }
 
 /**
