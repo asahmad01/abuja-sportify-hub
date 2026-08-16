@@ -529,47 +529,6 @@ const PremiumGollazo = () => {
                     )}
                   </div>
 
-                  {/* Discount code. Deliberately visible to everyone: a vendor
-                      without one may ask Golazo how to get it, which is the
-                      point of the Otech partnership. */}
-                  <div style={{ margin: "0 0 22px" }}>
-                    {unlockedCard ? (
-                      <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", background: "rgba(31,168,85,.08)", border: "1px solid rgba(31,168,85,.25)", borderRadius: 12, padding: "10px 14px" }}>
-                        <span style={{ fontSize: 13.5, fontWeight: 700, color: "#1B7F45" }}>✓ Partner rate applied</span>
-                        <span style={{ fontSize: 13, color: "#51607A", fontFamily: "SFMono-Regular, Menlo, monospace" }}>{codeInput.trim().toUpperCase()}</span>
-                        <button type="button" onClick={clearCode} style={{ marginLeft: "auto", border: "none", background: "none", padding: 0, cursor: "pointer", fontFamily: "inherit", fontSize: 12.5, color: "#51607A", textDecoration: "underline" }}>Remove</button>
-                      </div>
-                    ) : (
-                      <>
-                        <span style={labelCaption}>
-                          Discount code <span style={{ fontWeight: 400, color: "#8794A8" }}>(optional)</span>
-                        </span>
-                        <div style={{ display: "flex", gap: 8 }}>
-                          <input
-                            value={codeInput}
-                            onChange={(e) => { setCodeInput(e.target.value); setCodeError(null); }}
-                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); applyCode(); } }}
-                            onBlur={() => { if (codeInput.trim() && !unlockedCard) applyCode(); }}
-                            placeholder="OTECH-XXXXXX"
-                            autoCapitalize="characters"
-                            spellCheck={false}
-                            style={{ ...inputStyle, textTransform: "uppercase" }}
-                            style-focus={focusRing}
-                          />
-                          <button
-                            type="button"
-                            onClick={applyCode}
-                            disabled={!codeInput.trim() || checkingCode}
-                            style={{ flex: "none", border: "none", background: codeInput.trim() ? "#0A1220" : "rgba(10,18,32,.12)", color: codeInput.trim() ? "#fff" : "#8794A8", borderRadius: 12, padding: "0 22px", cursor: !codeInput.trim() || checkingCode ? "default" : "pointer", fontFamily: "inherit", fontSize: 14.5, fontWeight: 700, letterSpacing: "-0.01em", transition: "background .18s, color .18s" }}
-                          >
-                            {checkingCode ? "Checking…" : "Apply"}
-                          </button>
-                        </div>
-                        {codeError && <span style={{ display: "block", fontSize: 12.5, color: "#B42318", marginTop: 6 }}>{codeError}</span>}
-                      </>
-                    )}
-                  </div>
-
                   {/* Only rendered when the organiser has configured booth
                       options. Without it, a card that has them 422s on every
                       submit ("Please choose an option") with nothing to click. */}
@@ -624,6 +583,56 @@ const PremiumGollazo = () => {
                       <textarea name="about" rows={3} placeholder="Menu, products, anything we should know…" style={{ ...inputStyle, lineHeight: 1.55, resize: "vertical" }} style-focus={focusRing} />
                     </label>
                   </div>
+                  {/* Discount code, deliberately BELOW the email field.
+
+                      Redeeming a code that is already held checks whether it is
+                      yours, by email. Sitting above the email input meant Apply
+                      was pressed with nothing to match on, so your own held
+                      code came back as "being used right now" — the one person
+                      it should always work for.
+
+                      Visible to everyone on purpose: a vendor without a code
+                      may ask Golazo how to get one, which is the point of the
+                      Otech partnership. */}
+                  <div style={{ margin: "0 0 22px" }}>
+                    {unlockedCard ? (
+                      <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap", background: "rgba(31,168,85,.08)", border: "1px solid rgba(31,168,85,.25)", borderRadius: 12, padding: "10px 14px" }}>
+                        <span style={{ fontSize: 13.5, fontWeight: 700, color: "#1B7F45" }}>✓ Partner rate applied</span>
+                        <span style={{ fontSize: 13, color: "#51607A", fontFamily: "SFMono-Regular, Menlo, monospace" }}>{codeInput.trim().toUpperCase()}</span>
+                        <button type="button" onClick={clearCode} style={{ marginLeft: "auto", border: "none", background: "none", padding: 0, cursor: "pointer", fontFamily: "inherit", fontSize: 12.5, color: "#51607A", textDecoration: "underline" }}>Remove</button>
+                      </div>
+                    ) : (
+                      <>
+                        <span style={labelCaption}>
+                          Discount code <span style={{ fontWeight: 400, color: "#8794A8" }}>(optional)</span>
+                        </span>
+                        <div style={{ display: "flex", gap: 8 }}>
+                          <input
+                            value={codeInput}
+                            onChange={(e) => { setCodeInput(e.target.value); setCodeError(null); }}
+                            onKeyDown={(e) => { if (e.key === "Enter") { e.preventDefault(); applyCode(); } }}
+                            onBlur={() => { if (codeInput.trim() && !unlockedCard) applyCode(); }}
+                            placeholder="OTECH-XXXXXX"
+                            autoCapitalize="characters"
+                            spellCheck={false}
+                            style={{ ...inputStyle, textTransform: "uppercase" }}
+                            style-focus={focusRing}
+                          />
+                          <button
+                            type="button"
+                            onClick={applyCode}
+                            disabled={!codeInput.trim() || checkingCode}
+                            style={{ flex: "none", border: "none", background: codeInput.trim() ? "#0A1220" : "rgba(10,18,32,.12)", color: codeInput.trim() ? "#fff" : "#8794A8", borderRadius: 12, padding: "0 22px", cursor: !codeInput.trim() || checkingCode ? "default" : "pointer", fontFamily: "inherit", fontSize: 14.5, fontWeight: 700, letterSpacing: "-0.01em", transition: "background .18s, color .18s" }}
+                          >
+                            {checkingCode ? "Checking…" : "Apply"}
+                          </button>
+                        </div>
+                        {codeError && <span style={{ display: "block", fontSize: 12.5, color: "#B42318", marginTop: 6 }}>{codeError}</span>}
+                      </>
+                    )}
+                  </div>
+
+
                   {/* Second chance, right where the money is committed. The
                       submit guard already blocks this, but seeing it here
                       beats being stopped after pressing pay. */}
