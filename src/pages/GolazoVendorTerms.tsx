@@ -93,6 +93,15 @@ const CLAUSES: Array<[string, string[]]> = [
   ["14. Amendment of Terms", [
     "Golazo Festival and Inspire Youth Development Foundation (IYDF) reserve the right to amend, modify, or update these Terms and Conditions where necessary. Vendors will be notified of any significant changes.",
   ]],
+  // Appended rather than slotted in beside the product clauses: renumbering
+  // would leave vendors who already accepted holding a differently numbered
+  // agreement. The consequence is emphasised instead, so position costs it
+  // nothing.
+  ["15. Vendor Agreement Note", [
+    "Please note that vendors are expected to bring the specific item(s) listed in their confirmed signup.",
+    "**If a different item is brought on the day of the event, we reserve the right to terminate the agreement. In such cases, no refund will be issued.**",
+    "We appreciate your understanding and cooperation in helping us maintain the quality and consistency of the event.",
+  ]],
 ];
 
 /** Renders **bold** spans without pulling in a markdown dependency. */
