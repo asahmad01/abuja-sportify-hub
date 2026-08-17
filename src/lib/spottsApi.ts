@@ -224,6 +224,7 @@ export async function registerAndPay(
   cardId: number,
   returnPath: string,
   input: GuestRegistrationInput,
+  product?: "team" | "vendor",
 ): Promise<void> {
   const registration = await registerGuest(cardId, input);
 
@@ -232,6 +233,7 @@ export async function registerAndPay(
       reference: registration.registration_reference,
       token: registration.access_token,
       free: true,
+      product,
     }));
     window.location.assign(`${window.location.pathname}?spotts_return=1`);
     return;
@@ -246,6 +248,7 @@ export async function registerAndPay(
   sessionStorage.setItem(PENDING_KEY, JSON.stringify({
     reference: registration.registration_reference,
     token: registration.access_token,
+    product,
   }));
 
   window.location.assign(payment.authorization_url);
@@ -257,6 +260,15 @@ export interface PendingRegistration {
   reference: string;
   token: string;
   free?: boolean;
+  /**
+   * Which product was bought.
+   *
+   * Carried through checkout because the confirmation screen has no other way
+   * to know: verifyPayment returns the payment, not the card, so the ticket
+   * was labelled "Team entry" for everyone — including vendors who had just
+   * bought a stall.
+   */
+  product?: "team" | "vendor";
 }
 
 export function readPendingRegistration(): PendingRegistration | null {

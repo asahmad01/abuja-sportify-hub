@@ -13,7 +13,11 @@ import { ensureCanonicalOrigin } from "@/lib/gollazo";
 
 const SECTION_BG = "#071120";
 
-/** [heading, paragraphs] — bullets are rendered from lines starting "• ". */
+/**
+ * [heading, paragraphs] — bullets are lines starting "• ", and **text** is
+ * emphasised. The water clause is the one vendors most often miss, so it needs
+ * to survive being skim-read.
+ */
 const CLAUSES: Array<[string, string[]]> = [
   ["1. Arrival and Setup", [
     "All vendors must arrive and complete setup before 1:00 PM on the day of the event.",
@@ -48,6 +52,7 @@ const CLAUSES: Array<[string, string[]]> = [
   ]],
   ["7. Prohibited Items", [
     "The sale of the following items is strictly prohibited:",
+    "• **Water — water may not be sold by any vendor, in any form.**",
     "• Alcoholic beverages",
     "• Illegal drugs or narcotics",
     "• Illegal substances",
@@ -90,6 +95,16 @@ const CLAUSES: Array<[string, string[]]> = [
   ]],
 ];
 
+/** Renders **bold** spans without pulling in a markdown dependency. */
+const emphasise = (line: string) =>
+  line.split(/(\*\*[^*]+\*\*)/g).map((part, i) =>
+    part.startsWith("**") && part.endsWith("**") ? (
+      <strong key={i} style={{ color: "#0A1220", fontWeight: 700 }}>{part.slice(2, -2)}</strong>
+    ) : (
+      <span key={i}>{part}</span>
+    ),
+  );
+
 const GolazoVendorTerms = () => {
   useEffect(() => {
     if (ensureCanonicalOrigin()) return;
@@ -122,10 +137,10 @@ const GolazoVendorTerms = () => {
             {paragraphs.map((line, i) =>
               line.startsWith("• ") ? (
                 <p key={i} style={{ margin: "0 0 6px", paddingLeft: 18, fontSize: 15.5, lineHeight: 1.65, color: "#51607A" }}>
-                  <span style={{ color: "#8794A8", marginRight: 8 }}>•</span>{line.slice(2)}
+                  <span style={{ color: "#8794A8", marginRight: 8 }}>•</span>{emphasise(line.slice(2))}
                 </p>
               ) : (
-                <p key={i} style={{ margin: "0 0 10px", fontSize: 15.5, lineHeight: 1.65, color: "#51607A" }}>{line}</p>
+                <p key={i} style={{ margin: "0 0 10px", fontSize: 15.5, lineHeight: 1.65, color: "#51607A" }}>{emphasise(line)}</p>
               ),
             )}
           </section>

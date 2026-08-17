@@ -263,7 +263,7 @@ const PremiumGollazo = () => {
               access_code: unlockedCard ? codeInput.trim() : undefined,
               terms_accepted: termsAccepted,
             }),
-      });
+      }, product);
       // registerAndPay navigates to Paystack; nothing runs after this.
     } catch (err) {
       if (err instanceof ApiValidationError) {

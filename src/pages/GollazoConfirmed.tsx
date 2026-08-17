@@ -25,6 +25,9 @@ const GollazoConfirmed = () => {
   const [state, setState] = useState<State>("checking");
   const [reference, setReference] = useState("");
   const [amount, setAmount] = useState<number | null>(null);
+  // Parked by checkout. Without it the ticket called every buyer a team entry,
+  // vendors included.
+  const [product, setProduct] = useState<"team" | "vendor" | null>(null);
 
   useEffect(() => {
     if (ensureCanonicalOrigin()) return;
@@ -56,6 +59,7 @@ const GollazoConfirmed = () => {
     }
 
     setReference(pending.reference);
+    setProduct(pending.product ?? null);
 
     verifyPayment(pending.reference, pending.token)
       .then((res: any) => {
@@ -135,7 +139,7 @@ const GollazoConfirmed = () => {
                   <img src="/premium/logo-blue-white.svg" alt="Spotts" style={{ height: 18 }} />
                   <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>E-Ticket</span>
                 </div>
-                <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Golazo · Team entry</div>
+                <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Golazo · {product === "vendor" ? "Vendor slot" : product === "team" ? "Team entry" : "Confirmed entry"}</div>
                 <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1, marginBottom: 16 }}>Confirmed</div>
                 <div style={{ display: "flex", gap: 24, flexWrap: "wrap", fontSize: 13 }}>
                   <div>
