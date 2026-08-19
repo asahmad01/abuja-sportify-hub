@@ -234,6 +234,7 @@ export async function registerAndPay(
       token: registration.access_token,
       free: true,
       product,
+      cardId,
     }));
     window.location.assign(`${window.location.pathname}?spotts_return=1`);
     return;
@@ -249,6 +250,7 @@ export async function registerAndPay(
     reference: registration.registration_reference,
     token: registration.access_token,
     product,
+    cardId,
   }));
 
   window.location.assign(payment.authorization_url);
@@ -269,6 +271,15 @@ export interface PendingRegistration {
    * bought a stall.
    */
   product?: "team" | "vendor";
+  /**
+   * Which card was bought.
+   *
+   * The confirmation ticket used fixed placeholder details, which was
+   * survivable while one event had one date and one venue. With football and
+   * padel on their own dates and venues — and the vendor day elsewhere again —
+   * a fixed ticket tells some buyers to turn up at the wrong place.
+   */
+  cardId?: number;
 }
 
 export function readPendingRegistration(): PendingRegistration | null {

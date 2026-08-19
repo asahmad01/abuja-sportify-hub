@@ -97,6 +97,9 @@ const PremiumGollazo = () => {
   const [confirmed, setConfirmed] = useState<{ reference: string } | null>(null);
   // Typed live so the ticket on the right fills in as the captain types.
   const [teamNamePreview, setTeamNamePreview] = useState("");
+  // Which sport the captain is entering. Null until the cards load, then the
+  // first one; a single-sport event never sees a picker at all.
+  const [teamCardId, setTeamCardId] = useState<number | null>(null);
   // Which booth option the vendor picked. Null when the card offers none.
   const [vendorOptionKey, setVendorOptionKey] = useState<string | null>(null);
 
@@ -114,7 +117,16 @@ const PremiumGollazo = () => {
   // the business name, contact name and phone already captured above.
   const [termsAccepted, setTermsAccepted] = useState(false);
 
-  const teamCard = cards?.find((c) => c.type !== "vendor") ?? null;
+  // Every non-vendor card on sale — football and padel are separate cards, not
+  // options on one, because each sport caps its own number of teams and
+  // max_participants lives on the card. Sharing a card would let padel signups
+  // close football.
+  const teamCards = cards?.filter((c) => c.type !== "vendor") ?? [];
+  const teamCard =
+    teamCards.find((c) => c.id === teamCardId) ??
+    teamCards.find((c) => c.remaining_slots !== 0) ??
+    teamCards[0] ??
+    null;
   // A redeemed code replaces the public vendor card outright, so the price
   // shown, the card ID bought and the amount charged all follow from one swap.
   const vendorCard = unlockedCard ?? cards?.find((c) => c.type === "vendor") ?? null;
@@ -317,6 +329,38 @@ const PremiumGollazo = () => {
     setCodeError(null);
   };
 
+  /**
+   * The hero's date line, built from whatever is actually on sale.
+   *
+   * It used to be one hardcoded string, and it has already drifted from the
+   * truth twice — once announcing a different festival than the ticket showed.
+   * Now the sports weekend and the main day are different dates at different
+   * venues, so any single fixed line is wrong for somebody however it is
+   * written.
+   *
+   * One date across everything reads as before. Several and it names the
+   * dates only, because the venues differ and cramming them in helps nobody —
+   * each section's ticket carries its own.
+   */
+  const eventSummary = (() => {
+    const dated = (cards ?? []).filter((c) => c.event_date);
+
+    if (dated.length === 0) {
+      return `${DEMO_EVENT.date} · ${DEMO_EVENT.time} · ${DEMO_EVENT.venue}`;
+    }
+
+    const distinct = [...new Set(dated.map((c) => c.event_date))].sort();
+
+    if (distinct.length === 1) {
+      const first = dated[0];
+      return [formatEventDate(first.event_date), formatEventTime(first.event_time), first.venue?.name]
+        .filter(Boolean)
+        .join(" · ");
+    }
+
+    return distinct.map((d) => formatEventDate(d)).filter(Boolean).join("  ·  ");
+  })();
+
   // Ticket facts: the card's real details once set, DEMO_EVENT until then.
   const ticketDetails = [
     { label: "Date", value: formatEventDate(teamCard?.event_date) ?? DEMO_EVENT.date },
@@ -371,7 +415,7 @@ const PremiumGollazo = () => {
           </div>
           <h1 style={{ margin: "0 0 20px", fontSize: "clamp(52px,8.5vw,120px)", fontWeight: 800, fontStyle: "italic", letterSpacing: "-0.055em", lineHeight: .92, transform: "rotate(-2deg)", transformOrigin: "left bottom", display: "inline-block" }}>GOLAZO<span style={{ color: "#007AFF" }}>!</span></h1>
           <p style={{ margin: "0 0 14px", maxWidth: "56ch", fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.55, color: "#51607A", textWrap: "pretty" }}>Football all day, then <b style={{ color: "#0A1220" }}>the party takes over after dark</b> — live music, food, drinks and vendors, right through the night.</p>
-          <p style={{ margin: "0 0 34px", fontSize: 15, fontWeight: 600, color: "#0A1220" }}>Sat, 29 Aug · 1:00 PM · Harrow Park</p>
+          <p style={{ margin: "0 0 34px", fontSize: 15, fontWeight: 600, color: "#0A1220" }}>{eventSummary}</p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, alignItems: "center" }}>
             <a href="#teams" style-hover="background: #0069DE; transform: translateY(-1px);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#007AFF", color: "#fff", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "15px 30px", borderRadius: 999, transition: "background .2s, transform .2s" }}>Enter a team</a>
             <a href="#vendors" style-hover="border-color: rgba(10,18,32,.4);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#fff", color: "#0A1220", border: "1px solid rgba(10,18,32,.16)", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "14px 28px", borderRadius: 999, transition: "border-color .2s" }}>Book a vendor slot</a>
@@ -400,6 +444,56 @@ const PremiumGollazo = () => {
               <div style={{ flex: "1 1 360px", minWidth: 0 }}>
                 {!confirmed ? (
                   <form onSubmit={(e) => submitPurchase(e, "team", teamCard)} style={{ background: "#fff", color: "#0A1220", borderRadius: 22, padding: "clamp(24px,3vw,34px)", boxShadow: "0 40px 90px -40px rgba(0,0,0,.6)" }}>
+                    {/* Sport picker. Only when there is a choice to make — a
+                        single-sport event should not be asked to pick one.
+                        Each sport is its own card, so it carries its own price
+                        and its own cap; selling out padel leaves football
+                        untouched. */}
+                    {teamCards.length > 1 && (
+                      <div style={{ display: "grid", gap: 8, marginBottom: 18 }}>
+                        <span style={labelCaption}>Which tournament?<Required /></span>
+                        {teamCards.map((sport) => {
+                          const selected = sport.id === teamCard?.id;
+                          const soldOut = sport.remaining_slots === 0;
+                          return (
+                            <label
+                              key={sport.id}
+                              style={{
+                                display: "flex", alignItems: "center", gap: 12,
+                                cursor: soldOut ? "not-allowed" : "pointer",
+                                opacity: soldOut ? 0.5 : 1,
+                                border: `1px solid ${selected ? "#007AFF" : "rgba(10,18,32,.14)"}`,
+                                background: selected ? "rgba(0,122,255,.05)" : "#fff",
+                                borderRadius: 12, padding: "12px 14px",
+                                transition: "border-color .18s, background .18s",
+                              }}
+                            >
+                              <input
+                                type="radio"
+                                name="team_card_id"
+                                value={sport.id}
+                                checked={selected}
+                                disabled={soldOut}
+                                onChange={() => setTeamCardId(sport.id)}
+                                style={{ accentColor: "#007AFF", width: 16, height: 16, flex: "none" }}
+                              />
+                              <span style={{ flex: 1, minWidth: 0, fontSize: 15, fontWeight: 600 }}>
+                                {sport.title}
+                                {typeof sport.remaining_slots === "number" && !soldOut && (
+                                  <span style={{ display: "block", fontSize: 12, fontWeight: 500, color: "#8794A8", marginTop: 2 }}>
+                                    {sport.remaining_slots} {sport.remaining_slots === 1 ? "place" : "places"} left
+                                  </span>
+                                )}
+                              </span>
+                              <span style={{ fontSize: 15, fontWeight: 800, letterSpacing: "-0.02em", whiteSpace: "nowrap" }}>
+                                {soldOut ? "Sold out" : formatNaira(sport.pricing.total)}
+                              </span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    )}
+
                     <div style={{ display: "grid", gap: 15 }}>
                       <label style={{ display: "flex", flexDirection: "column" }}>
                         <span style={labelCaption}>Team name<Required /></span>
@@ -453,7 +547,7 @@ const PremiumGollazo = () => {
                       <img src="/premium/logo-blue-white.svg" alt="Spotts" style={{ height: 18 }} />
                       <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>E-Ticket</span>
                     </div>
-                    <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Golazo · Team entry</div>
+                    <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Golazo · {teamCards.length > 1 && teamCard ? teamCard.title : "Team entry"}</div>
                     <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1, marginBottom: 16 }}>{teamNamePreview.trim() || teamCard.title}</div>
                     <div style={{ display: "flex", gap: 24, flexWrap: "wrap", fontSize: 13 }}>
                       {ticketDetails.map(({ label, value }) => (
@@ -526,6 +620,17 @@ const PremiumGollazo = () => {
                 <form onSubmit={(e) => submitPurchase(e, "vendor", vendorCard)} style={{ border: "1px solid rgba(10,18,32,.08)", borderRadius: 22, background: "#fff", padding: "clamp(24px,3vw,36px)", boxShadow: "0 30px 70px -40px rgba(10,18,32,.45)" }}>
                   <h3 style={{ margin: "0 0 6px", fontSize: "clamp(20px,2vw,25px)", fontWeight: 800, letterSpacing: "-0.03em" }}>Book your vendor slot</h3>
                   <p style={{ margin: "0 0 6px", fontSize: 14.5, lineHeight: 1.55, color: "#51607A" }}>Pay online and your pitch is confirmed instantly.</p>
+                  {/* Vendors had no date anywhere on this page — the teams
+                      section at least has a ticket showing one. The vendor day
+                      is not the sports weekend, so saying which day they are
+                      buying matters before they pay, not after. */}
+                  {(vendorCard?.event_date || vendorCard?.venue?.name) && (
+                    <p style={{ margin: "0 0 14px", fontSize: 13.5, fontWeight: 600, color: "#0A1220" }}>
+                      {[formatEventDate(vendorCard.event_date), formatEventTime(vendorCard.event_time), vendorCard.venue?.name]
+                        .filter(Boolean)
+                        .join(" · ")}
+                    </p>
+                  )}
                   <div style={{ display: "flex", alignItems: "baseline", gap: 10, margin: "0 0 6px", flexWrap: "wrap" }}>
                     <span style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.03em" }}>{formatNaira(vendorPricing.total)}</span>
                     {publicPricing && unlockedCard && (

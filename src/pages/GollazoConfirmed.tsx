@@ -11,10 +11,14 @@ import { Link } from "react-router-dom";
 import { DEMO_EVENT, ensureCanonicalOrigin } from "@/lib/gollazo";
 import {
   clearPendingRegistration,
+  formatEventDate,
+  formatEventTime,
   formatNaira,
+  getEventCard,
   readPendingRegistration,
   registrationQrUrl,
   verifyPayment,
+  type EventCard,
 } from "@/lib/spottsApi";
 
 const SECTION_BG = "#071120";
@@ -28,6 +32,10 @@ const GollazoConfirmed = () => {
   // Parked by checkout. Without it the ticket called every buyer a team entry,
   // vendors included.
   const [product, setProduct] = useState<"team" | "vendor" | null>(null);
+  // The card actually bought. Fetched rather than carried, so the ticket shows
+  // whatever the organiser has since set — football, padel and the vendor day
+  // each have their own date and venue.
+  const [card, setCard] = useState<EventCard | null>(null);
 
   useEffect(() => {
     if (ensureCanonicalOrigin()) return;
@@ -60,6 +68,12 @@ const GollazoConfirmed = () => {
 
     setReference(pending.reference);
     setProduct(pending.product ?? null);
+
+    if (pending.cardId) {
+      // Best effort: a ticket without it still renders, just on the fallback
+      // details, so a failure here must never block the confirmation.
+      getEventCard(pending.cardId).then(setCard).catch(() => {});
+    }
 
     verifyPayment(pending.reference, pending.token)
       .then((res: any) => {
@@ -139,20 +153,20 @@ const GollazoConfirmed = () => {
                   <img src="/premium/logo-blue-white.svg" alt="Spotts" style={{ height: 18 }} />
                   <span style={{ fontSize: 10.5, fontWeight: 700, letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>E-Ticket</span>
                 </div>
-                <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Golazo · {product === "vendor" ? "Vendor slot" : product === "team" ? "Team entry" : "Confirmed entry"}</div>
+                <div style={{ fontSize: 11.5, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF", fontWeight: 700, marginBottom: 8 }}>Golazo · {card?.title ?? (product === "vendor" ? "Vendor slot" : product === "team" ? "Team entry" : "Confirmed entry")}</div>
                 <div style={{ fontSize: 24, fontWeight: 800, letterSpacing: "-0.02em", lineHeight: 1.1, marginBottom: 16 }}>Confirmed</div>
                 <div style={{ display: "flex", gap: 24, flexWrap: "wrap", fontSize: 13 }}>
                   <div>
                     <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Date</div>
-                    <div style={{ fontWeight: 600 }}>{DEMO_EVENT.date}</div>
+                    <div style={{ fontWeight: 600 }}>{formatEventDate(card?.event_date) ?? DEMO_EVENT.date}</div>
                   </div>
                   <div>
                     <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Kick-off</div>
-                    <div style={{ fontWeight: 600 }}>{DEMO_EVENT.time}</div>
+                    <div style={{ fontWeight: 600 }}>{formatEventTime(card?.event_time) ?? DEMO_EVENT.time}</div>
                   </div>
                   <div>
                     <div style={{ color: "rgba(255,255,255,.45)", fontSize: 11, marginBottom: 3 }}>Venue</div>
-                    <div style={{ fontWeight: 600 }}>{DEMO_EVENT.venue}</div>
+                    <div style={{ fontWeight: 600 }}>{card?.venue?.name ?? DEMO_EVENT.venue}</div>
                   </div>
                 </div>
               </div>
