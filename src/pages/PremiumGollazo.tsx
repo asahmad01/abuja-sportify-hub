@@ -330,35 +330,49 @@ const PremiumGollazo = () => {
   };
 
   /**
-   * The hero's date line, built from whatever is actually on sale.
+   * The hero's date lines, built from whatever is actually on sale.
    *
-   * It used to be one hardcoded string, and it has already drifted from the
-   * truth twice — once announcing a different festival than the ticket showed.
-   * Now the sports weekend and the main day are different dates at different
-   * venues, so any single fixed line is wrong for somebody however it is
-   * written.
+   * This was one hardcoded string and drifted from the truth twice, once
+   * announcing a different festival than the ticket showed. It is now derived,
+   * because the tournaments and the festival day are different dates at
+   * different venues and no single fixed line can be right for both.
    *
-   * One date across everything reads as before. Several and it names the
-   * dates only, because the venues differ and cramming them in helps nobody —
-   * each section's ticket carries its own.
+   * One line per date, labelled by what happens on it, so a captain and a
+   * vendor each find their own day instead of decoding a bare date range.
+   * Dates with nothing set yet simply do not appear — a card missing its date
+   * is silent rather than inheriting somebody else's.
    */
-  const eventSummary = (() => {
+  const eventDays = (() => {
     const dated = (cards ?? []).filter((c) => c.event_date);
 
     if (dated.length === 0) {
-      return `${DEMO_EVENT.date} · ${DEMO_EVENT.time} · ${DEMO_EVENT.venue}`;
+      return [{ label: null as string | null, text: `${DEMO_EVENT.date} · ${DEMO_EVENT.time} · ${DEMO_EVENT.venue}` }];
     }
 
-    const distinct = [...new Set(dated.map((c) => c.event_date))].sort();
+    const byDate = new Map<string, EventCard[]>();
+    dated.forEach((c) => {
+      const key = c.event_date as string;
+      byDate.set(key, [...(byDate.get(key) ?? []), c]);
+    });
 
-    if (distinct.length === 1) {
-      const first = dated[0];
-      return [formatEventDate(first.event_date), formatEventTime(first.event_time), first.venue?.name]
-        .filter(Boolean)
-        .join(" · ");
-    }
+    const single = byDate.size === 1;
 
-    return distinct.map((d) => formatEventDate(d)).filter(Boolean).join("  ·  ");
+    return [...byDate.entries()]
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([date, onThatDay]) => {
+        const first = onThatDay[0];
+        const allVendor = onThatDay.every((c) => c.type === "vendor");
+        const allTeams = onThatDay.every((c) => c.type !== "vendor");
+
+        return {
+          // No label when there is only one day — the old single line reads
+          // better without one.
+          label: single ? null : allVendor ? "Festival day" : allTeams ? "Tournaments" : null,
+          text: [formatEventDate(date), formatEventTime(first.event_time), first.venue?.name]
+            .filter(Boolean)
+            .join(" · "),
+        };
+      });
   })();
 
   // Ticket facts: the card's real details once set, DEMO_EVENT until then.
@@ -383,14 +397,14 @@ const PremiumGollazo = () => {
             <a href="#teams" style-hover="color: #0A1220;" style={{ color: "#51607A", textDecoration: "none" }}>The festival</a>
             <a href="#vendors" style-hover="color: #0A1220;" style={{ color: "#51607A", textDecoration: "none" }}>Vendors</a>
           </nav>
-          <a href="#teams" data-mm="cta" style-hover="background: #0069DE;" style={{ fontSize: 14, fontWeight: 600, color: "#fff", background: "#007AFF", textDecoration: "none", padding: "10px 18px", borderRadius: 999, whiteSpace: "nowrap" }}>Enter a team</a>
+          <a href="#teams" data-mm="cta" style-hover="background: #0069DE;" style={{ fontSize: 14, fontWeight: 600, color: "#fff", background: "#007AFF", textDecoration: "none", padding: "10px 18px", borderRadius: 999, whiteSpace: "nowrap" }}>Register a team</a>
           <button type="button" data-mm="burger" aria-label="Open menu" style={{ display: "none", alignItems: "center", justifyContent: "center", width: 42, height: 42, border: "1px solid rgba(10,18,32,.14)", borderRadius: 12, background: "#fff", color: "#0A1220", fontSize: 20, lineHeight: 1, cursor: "pointer", padding: 0 }}>☰</button>
         </div>
         <div data-mm="panel" style={{ display: "none", borderTop: "1px solid rgba(10,18,32,.08)", background: "rgba(250,251,253,.98)", padding: "10px clamp(20px,4vw,48px) 22px" }}>
           <nav aria-label="Mobile" style={{ display: "flex", flexDirection: "column" }}>
             <a href="#teams" data-mm-close="1" style={{ color: "#0A1220", textDecoration: "none", fontSize: 16, fontWeight: 600, padding: "13px 0", borderBottom: "1px solid rgba(10,18,32,.07)" }}>The festival</a>
             <a href="#vendors" data-mm-close="1" style={{ color: "#0A1220", textDecoration: "none", fontSize: 16, fontWeight: 600, padding: "13px 0", borderBottom: "1px solid rgba(10,18,32,.07)" }}>Vendors</a>
-            <a href="#teams" data-mm-close="1" style={{ textAlign: "center", fontSize: 15, fontWeight: 600, color: "#fff", background: "#007AFF", textDecoration: "none", padding: "14px 16px", borderRadius: 12, marginTop: 14 }}>Enter a team</a>
+            <a href="#teams" data-mm-close="1" style={{ textAlign: "center", fontSize: 15, fontWeight: 600, color: "#fff", background: "#007AFF", textDecoration: "none", padding: "14px 16px", borderRadius: 12, marginTop: 14 }}>Register a team</a>
           </nav>
         </div>
       </header>
@@ -411,13 +425,23 @@ const PremiumGollazo = () => {
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(64px,10vh,120px) clamp(20px,4vw,48px)", position: "relative" }}>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 22 }}>
             <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "#007AFF", border: "1px solid rgba(0,122,255,.3)", padding: "6px 14px", borderRadius: 999 }}>Football</span>
+            <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "#007AFF", border: "1px solid rgba(0,122,255,.3)", padding: "6px 14px", borderRadius: 999 }}>Padel</span>
             <span style={{ fontSize: 12.5, fontWeight: 700, letterSpacing: ".1em", textTransform: "uppercase", color: "#1FA855", border: "1px solid rgba(31,168,85,.35)", padding: "6px 14px", borderRadius: 999 }}>Live music</span>
           </div>
           <h1 style={{ margin: "0 0 20px", fontSize: "clamp(52px,8.5vw,120px)", fontWeight: 800, fontStyle: "italic", letterSpacing: "-0.055em", lineHeight: .92, transform: "rotate(-2deg)", transformOrigin: "left bottom", display: "inline-block" }}>GOLAZO<span style={{ color: "#007AFF" }}>!</span></h1>
-          <p style={{ margin: "0 0 14px", maxWidth: "56ch", fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.55, color: "#51607A", textWrap: "pretty" }}>Football all day, then <b style={{ color: "#0A1220" }}>the party takes over after dark</b> — live music, food, drinks and vendors, right through the night.</p>
-          <p style={{ margin: "0 0 34px", fontSize: 15, fontWeight: 600, color: "#0A1220" }}>{eventSummary}</p>
+          <p style={{ margin: "0 0 14px", maxWidth: "56ch", fontSize: "clamp(17px,1.6vw,21px)", lineHeight: 1.55, color: "#51607A", textWrap: "pretty" }}>Football and padel all day, then <b style={{ color: "#0A1220" }}>the party takes over after dark</b> — live music, food, drinks and vendors, right through the night.</p>
+          <p style={{ margin: "0 0 34px", fontSize: 15, fontWeight: 600, color: "#0A1220" }}>
+            {eventDays.map((day) => (
+              <span key={day.text} style={{ display: "block", marginBottom: 3 }}>
+                {day.label && (
+                  <span style={{ color: "#8794A8", fontWeight: 600 }}>{day.label} · </span>
+                )}
+                {day.text}
+              </span>
+            ))}
+          </p>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, alignItems: "center" }}>
-            <a href="#teams" style-hover="background: #0069DE; transform: translateY(-1px);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#007AFF", color: "#fff", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "15px 30px", borderRadius: 999, transition: "background .2s, transform .2s" }}>Enter a team</a>
+            <a href="#teams" style-hover="background: #0069DE; transform: translateY(-1px);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#007AFF", color: "#fff", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "15px 30px", borderRadius: 999, transition: "background .2s, transform .2s" }}>Register a team</a>
             <a href="#vendors" style-hover="border-color: rgba(10,18,32,.4);" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#fff", color: "#0A1220", border: "1px solid rgba(10,18,32,.16)", textDecoration: "none", fontSize: 15.5, fontWeight: 600, padding: "14px 28px", borderRadius: 999, transition: "border-color .2s" }}>Book a vendor slot</a>
           </div>
         </div>
@@ -429,7 +453,7 @@ const PremiumGollazo = () => {
 
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "clamp(56px,8vh,100px) clamp(20px,4vw,48px)", position: "relative" }}>
           <p style={{ margin: "0 0 14px", fontSize: 12.5, fontWeight: 700, letterSpacing: ".14em", textTransform: "uppercase", color: "#5AA9FF" }}>The tournament</p>
-          <h2 style={{ margin: "0 0 12px", maxWidth: "20ch", fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.08 }}>Enter your team</h2>
+          <h2 style={{ margin: "0 0 12px", maxWidth: "20ch", fontSize: "clamp(28px,3.4vw,44px)", fontWeight: 800, letterSpacing: "-0.04em", lineHeight: 1.08 }}>Register a team</h2>
           <p style={{ margin: "0 0 44px", maxWidth: "52ch", fontSize: 16, lineHeight: 1.6, color: "rgba(255,255,255,.6)" }}>
             Pay online and your slot is confirmed the moment payment clears. Your QR entry lands in
             your inbox instantly — no printouts, no gate lists, no waiting.
@@ -806,7 +830,7 @@ const PremiumGollazo = () => {
             <div style={{ display: "flex", gap: "clamp(32px,5vw,64px)", flexWrap: "wrap" }}>
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                 <span style={{ fontSize: 12, fontWeight: 700, letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.45)" }}>Golazo</span>
-                <a href="#teams" style-hover="color: #fff;" style={{ fontSize: 14, color: "rgba(255,255,255,.75)", textDecoration: "none" }}>Enter a team</a>
+                <a href="#teams" style-hover="color: #fff;" style={{ fontSize: 14, color: "rgba(255,255,255,.75)", textDecoration: "none" }}>Register a team</a>
                 <a href="#vendors" style-hover="color: #fff;" style={{ fontSize: 14, color: "rgba(255,255,255,.75)", textDecoration: "none" }}>Vendor slots</a>
                 <a href="/events" style-hover="color: #fff;" style={{ fontSize: 14, color: "rgba(255,255,255,.75)", textDecoration: "none" }}>Spotts Events</a>
               </div>
