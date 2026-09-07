@@ -5,11 +5,11 @@
   <!-- Homepage -->
   <url>
     <loc>https://spottsapp.com/</loc>
-    <lastmod>2026-07-11</lastmod>
+    <lastmod>2026-09-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://spottsapp.com/hero-sports.jpg</image:loc>
+      <image:loc>https://spottsapp.com/og-spotts.jpg</image:loc>
       <image:title>Spotts - Book Sports Facilities in Abuja</image:title>
     </image:image>
   </url>

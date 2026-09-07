@@ -1,6 +1,6 @@
 {
   "siteUrl": "https://spottsapp.com",
-  "defaultOgImage": "https://spottsapp.com/hero-sports.jpg",
+  "defaultOgImage": "https://spottsapp.com/og-spotts.jpg",
   "twitterHandle": "@spottsapp",
   "organization": {
     "@context": "https://schema.org",
